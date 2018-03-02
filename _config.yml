@@ -17,7 +17,7 @@ github_username:  WenYuanGG
 comments :
   provider : disqus
   disqus :
-    short_name : wcc723demo    # 將內容替換成剛剛在disqus上申請的s
+    short_name : wenyuangg
 
 # Build settings
 markdown: kramdown

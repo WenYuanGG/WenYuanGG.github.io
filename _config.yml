@@ -14,5 +14,10 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "http://wenyuangg.github.io/" # the base hostname & protocol for your site
 github_username:  WenYuanGG
 
+comments :
+  provider : disqus
+  disqus :
+    short_name : wcc723demo    # 將內容替換成剛剛在disqus上申請的s
+
 # Build settings
 markdown: kramdown

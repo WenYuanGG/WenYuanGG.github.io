@@ -3,6 +3,7 @@ layout: post
 title:  "在 Ubuntu 安裝 OpenCV 與建置 C++ 編譯環境"
 date:   2017-12-25 19:58:18 +0800
 categories: opencv installation
+comments: true
 ---
 跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境
 

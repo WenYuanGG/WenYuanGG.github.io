@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wychen</title>
+    <description>Thanks for watching.
+</description>
+    <link>http://wenyuangg.github.io//</link>
+    <atom:link href="http://wenyuangg.github.io//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 02 Mar 2018 21:11:23 +0800</pubDate>
+    <lastBuildDate>Fri, 02 Mar 2018 21:11:23 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Welcome to Jekyll!</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;Tom&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints &#39;Hi, Tom&#39; to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 02 Mar 2018 19:58:18 +0800</pubDate>
+        <link>http://wenyuangg.github.io//jekyll/update/2018/03/02/welcome-to-jekyll.html</link>
+        <guid isPermaLink="true">http://wenyuangg.github.io//jekyll/update/2018/03/02/welcome-to-jekyll.html</guid>
+        
+        
+        <category>jekyll</category>
+        
+        <category>update</category>
+        
+      </item>
+    
+      <item>
+        <title>在 Ubuntu 安裝 OpenCV 與建置 C++ 編譯環境</title>
+        <description>&lt;p&gt;跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section&quot;&gt;1. 更新系統&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get update
+sudo apt-get upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;opencv-&quot;&gt;2. 下載 OpenCV 的相依套件&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+sudo apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
+sudo apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;opencv&quot;&gt;3. 下載 OpenCV&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo su
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /opt
+git clone https://github.com/Itseez/opencv.git
+git clone https://github.com/Itseez/opencv_contrib.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;opencv-1&quot;&gt;4. 編譯與安裝 OpenCV&lt;/h4&gt;
+
+&lt;p&gt;因為要編譯 OpenCV 以及建置環境, 所以這個環節需要一點時間&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv
+mkdir release
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;release
+cmake -D &lt;span class=&quot;nv&quot;&gt;BUILD_TIFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON -D &lt;span class=&quot;nv&quot;&gt;WITH_CUDA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;ENABLE_AVX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_OPENGL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_OPENCL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_IPP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON -D &lt;span class=&quot;nv&quot;&gt;BUILD_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON -D &lt;span class=&quot;nv&quot;&gt;WITH_EIGEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_V4L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;WITH_VTK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;BUILD_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;BUILD_PERF_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF -D &lt;span class=&quot;nv&quot;&gt;CMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;RELEASE -D &lt;span class=&quot;nv&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local -D &lt;span class=&quot;nv&quot;&gt;OPENCV_EXTRA_MODULES_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/opencv_contrib/modules /opt/opencv/
+make -j4
+make install
+ldconfig
+&lt;span class=&quot;nb&quot;&gt;exit
+cd&lt;/span&gt; ~&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;opencv--1&quot;&gt;5. 查看你的 OpenCV 版本&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pkg-config --modversion opencv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section-1&quot;&gt;6. 寫個簡單的程式來編譯看看&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;opencv2/opencv.hpp&quot;
+&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;Mat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;srcImg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;picture.jpg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;srcImg&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;srcImg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;waitKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;編譯與執行&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 編譯
+&lt;/span&gt;
+g++ main.cpp -o output &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;pkg-config --cflags --libs opencv&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 執行
+&lt;/span&gt;
+./output&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;上面的 main.cpp 請改成你自己程式的名稱&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/&quot;&gt;How to Install OpenCV in Ubuntu 16.04 LTS for C / C++&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Mon, 25 Dec 2017 19:58:18 +0800</pubDate>
+        <link>http://wenyuangg.github.io//opencv/installation/2017/12/25/opencv-installation.html</link>
+        <guid isPermaLink="true">http://wenyuangg.github.io//opencv/installation/2017/12/25/opencv-installation.html</guid>
+        
+        
+        <category>opencv</category>
+        
+        <category>installation</category>
+        
+      </item>
+    
+  </channel>
+</rss>

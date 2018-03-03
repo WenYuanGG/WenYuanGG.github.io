@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  	<meta charset="utf-8">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  	<title>[python] 練習通用的機器學習法</title>
+  	<meta name="description" content="1. 蒐集數據在這裡我們直接使用 sklearn 函數庫中已有的數據來做練習因為 sklearn 函數庫中提供了一些數據集供新手來練習用，想知道裡面提供那些數據可以看這裡  我們在這裡使用的是鳶尾花 (iris) 的數據集2. 載入鳶尾花數據from sklearn import datasetsfrom skl...">
+
+  	<link rel="stylesheet" href="/css/main.css">
+  	<link rel="canonical" href="http://wenyuangg.github.io//python/2018/03/04/python-knn.html">
+  	<link rel="alternate" type="application/rss+xml" title="wychen" href="http://wenyuangg.github.io//feed.xml">
+    <link rel="shortcut icon" href="/favicon.png">
+
+  	<!--The following informations are for my bootstrap4-->
+	  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+
+  <body>
+
+    <script id="dsq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+
+  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+    <a class="navbar-brand" href="/">wychen</a>
+    <ul class="navbar-nav">
+      
+        
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">About</a>
+          </li>
+        
+      
+        
+      
+        
+      
+        
+      
+    </ul>
+  </nav>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h2 itemprop="name headline" style="color:#556B2F">[python] 練習通用的機器學習法</h2>
+    <p class="post-meta"><time datetime="2018-03-04T03:04:15+08:00" itemprop="datePublished">Mar 4, 2018</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h4 style="color:#3498DB;" id="section">1. 蒐集數據</h4>
+
+<p>在這裡我們直接使用 <code class="highlighter-rouge">sklearn 函數庫</code>中已有的數據來做練習</p>
+
+<p>因為 <code class="highlighter-rouge">sklearn 函數庫</code>中提供了一些數據集供新手來練習用，想知道裡面提供那些數據可以看<a href="http://scikit-learn.org/stable/datasets/index.html">這裡</a></p>
+
+<blockquote>
+  <p>我們在這裡使用的是<strong>鳶尾花 (iris)</strong> 的數據集</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:#3498DB;" id="section-1">2. 載入鳶尾花數據</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iris_X</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:])</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iris_Y</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>執行程式後你會看到這樣的結果</li>
+</ul>
+
+<p><img src="https://i.imgur.com/zZ4iFRd.png" alt="" /></p>
+
+<ul>
+  <li>結果中的 <strong>5 個陣列</strong>代表的便如下表所示</li>
+</ul>
+
+<table class="mbtablestyle">
+  <thead>
+    <tr>
+      <th>花萼长度</th>
+      <th>花萼宽度</th>
+      <th>花瓣长度</th>
+      <th>花瓣寬度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<ul>
+  <li>結果中的 0 1 2 則代表 3 種花</li>
+</ul>
+
+<blockquote>
+  <p>但這些數據代表甚麼在這並不重要，重要的是後面的機器學習</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:#3498DB;" id="section-2">3. 機器學習</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="c"># print(iris_X[:5, :])
+</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="c"># print(iris_Y)
+</span>
+
+<span class="c"># 將鳶尾花數據切割成訓練集和測試集，0.3 代表測試集的數據占總數據的 3 成
+</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_X</span><span class="p">,</span> <span class="n">iris_Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c"># 使用 KNN 的分類器
+</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="c"># 將訓練集丟進去 knn 做訓練
+</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="c"># 觀看預測數據以及真實數據的差別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"預測數據: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"真實數據: "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>輸出結果如下</li>
+</ul>
+
+<p><img src="https://i.imgur.com/bq8ZTnM.png" alt="" /></p>
+
+<blockquote>
+  <p>最後預測出那筆數據可能屬於哪一類的鳶尾花</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:#3498DB;" id="section-3">4. 討論</h4>
+
+<p>從結果中可以看到，預測出來的數據<strong>仍可能錯誤</strong>，因為不管再精良的機器學習演算法都不可能做到 100% 正確率</p>
+
+<p>此外，在這裡我們使用的是 <code class="highlighter-rouge">KNN 演算法</code>，但是不管你換成甚麼演算法，其做法都<strong>大同小異</strong></p>
+
+<p><br /></p>
+
+<hr />
+
+  </div>
+
+</article>
+
+
+	<div id="disqus_thread"></div>
+	<script>
+
+	/**
+	*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+	*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+	/*
+	var disqus_config = function () {
+	this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+	this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+	};
+	*/
+	(function() { // DON'T EDIT BELOW THIS LINE
+	var d = document, s = d.createElement('script');
+	s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+	s.setAttribute('data-timestamp', +new Date());
+	(d.head || d.body).appendChild(s);
+	})();
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">wychen</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li><a href="mailto:chenwy0806@gmail.com">chenwy0806@gmail.com</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/WenYuanGG"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
+</span><span class="username">WenYuanGG</span></a>
+
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="footer-col footer-col-3">
+        <p>Thanks for watching.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

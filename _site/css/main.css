@@ -315,6 +315,12 @@ pre {
       .post-content h4 {
         font-size: 18px; } }
 
+/* markdown table */
+.mbtablestyle {
+  border-collapse: collapse; }
+  .mbtablestyle > table, .mbtablestyle td, .mbtablestyle th {
+    border: 1px solid gray; }
+
 /**
  * Syntax highlighting styles
  */

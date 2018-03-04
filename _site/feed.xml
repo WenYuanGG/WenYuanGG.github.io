@@ -6,8 +6,8 @@
 </description>
     <link>http://wenyuangg.github.io//</link>
     <atom:link href="http://wenyuangg.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Mar 2018 03:18:32 +0800</pubDate>
-    <lastBuildDate>Sun, 04 Mar 2018 03:18:32 +0800</lastBuildDate>
+    <pubDate>Sun, 04 Mar 2018 16:17:29 +0800</pubDate>
+    <lastBuildDate>Sun, 04 Mar 2018 16:17:29 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -60,7 +60,7 @@
   &lt;li&gt;結果中的 &lt;strong&gt;5 個陣列&lt;/strong&gt;代表的便如下表所示&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;table class=&quot;mbtablestyle&quot;&gt;
+&lt;table class=&quot;table&quot;&gt;
   &lt;thead&gt;
     &lt;tr&gt;
       &lt;th&gt;花萼长度&lt;/th&gt;

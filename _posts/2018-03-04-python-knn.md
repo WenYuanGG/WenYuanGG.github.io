@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[python] 練習通用的機器學習法"
+title:  "[Python] 練習通用的機器學習法"
 date:   2018-03-04 03:04:15 +0800
 categories: python
 comments: true

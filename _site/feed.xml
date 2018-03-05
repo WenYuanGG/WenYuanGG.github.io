@@ -6,12 +6,71 @@
 </description>
     <link>http://wenyuangg.github.io//</link>
     <atom:link href="http://wenyuangg.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 04 Mar 2018 16:17:29 +0800</pubDate>
-    <lastBuildDate>Sun, 04 Mar 2018 16:17:29 +0800</lastBuildDate>
+    <pubDate>Mon, 05 Mar 2018 10:38:50 +0800</pubDate>
+    <lastBuildDate>Mon, 05 Mar 2018 10:38:50 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
-        <title>[python] 練習通用的機器學習法</title>
+        <title>[Python] datasets 建立自己的數據集</title>
+        <description>&lt;p&gt;我在之前的&lt;a href=&quot;https://wenyuangg.github.io/python/2018/03/04/python-knn.html&quot;&gt;文章&lt;/a&gt;中有示範過如何&lt;strong&gt;載入 datasets 中已有的數據&lt;/strong&gt;來練習使用機器學習, 而在這篇文章中要練習的是如何&lt;code class=&quot;highlighter-rouge&quot;&gt;建立自己的數據&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;此外, 你可以在官方的 sklearn API 的介紹中看到他提供的所有可建立的數據類型： &lt;a href=&quot;http://scikit-learn.org/stable/modules/classes.html#module-sklearn.datasets&quot;&gt;sklearn API 請點我&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section&quot;&gt;建立自己的數據&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;我們示範使用了 &lt;code class=&quot;highlighter-rouge&quot;&gt;make_regression()&lt;/code&gt;來建立一筆線性迴歸數據
+    &lt;ul&gt;
+      &lt;li&gt;sample： 100&lt;/li&gt;
+      &lt;li&gt;feature： 1&lt;/li&gt;
+      &lt;li&gt;target： 1&lt;/li&gt;
+      &lt;li&gt;noise： 1&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;不明白甚麼是&lt;strong&gt;線性回歸&lt;/strong&gt;可以&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8&quot;&gt;看這裡&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;plt&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 建立自己的數據 (線性迴歸數據)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make_regression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_samples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_features&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_targets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 畫點&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# show 出圖&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;執行結果&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/R6mREqS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;每次執行看到不一樣的圖是正常的, 因為他是按照我們的要求來隨機建立 100 個線性回歸樣本&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+</description>
+        <pubDate>Mon, 05 Mar 2018 10:38:00 +0800</pubDate>
+        <link>http://wenyuangg.github.io//python/2018/03/05/python-datasets-make.html</link>
+        <guid isPermaLink="true">http://wenyuangg.github.io//python/2018/03/05/python-datasets-make.html</guid>
+        
+        
+        <category>python</category>
+        
+      </item>
+    
+      <item>
+        <title>[Python] 練習通用的機器學習法</title>
         <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section&quot;&gt;1. 蒐集數據&lt;/h4&gt;
 
 &lt;p&gt;在這裡我們直接使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;sklearn 函數庫&lt;/code&gt;中已有的數據來做練習&lt;/p&gt;

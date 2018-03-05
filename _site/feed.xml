@@ -6,8 +6,8 @@
 </description>
     <link>http://wenyuangg.github.io//</link>
     <atom:link href="http://wenyuangg.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 05 Mar 2018 12:24:19 +0800</pubDate>
-    <lastBuildDate>Mon, 05 Mar 2018 12:24:19 +0800</lastBuildDate>
+    <pubDate>Mon, 05 Mar 2018 23:03:14 +0800</pubDate>
+    <lastBuildDate>Mon, 05 Mar 2018 23:03:14 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -777,6 +777,309 @@ dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
         <pubDate>Thu, 04 May 2017 10:00:00 +0800</pubDate>
         <link>http://wenyuangg.github.io//linux/2017/05/04/simple-linux-kernel-module.html</link>
         <guid isPermaLink="true">http://wenyuangg.github.io//linux/2017/05/04/simple-linux-kernel-module.html</guid>
+        
+        
+        <category>linux</category>
+        
+      </item>
+    
+      <item>
+        <title>增加一個 System Call 到 Linux Kernel (v4.x)</title>
+        <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section&quot;&gt;我的系統環境&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;作業系統：&lt;/strong&gt; Lubuntu 16.04&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Kernel 版本：&lt;/strong&gt; 4.8.0-49-generic&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section-1&quot;&gt;更新系統&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;更新&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get update
+sudo apt-get upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查看你當前的 &lt;strong&gt;Kernel 版本&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;uname -r&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://2.bp.blogspot.com/-0k5fdklzdWQ/WQs1A8MV9cI/AAAAAAAAAKM/jGcdqvzht78HSXmFJFVNPMqjbZwHouTyQCLcB/s1600/1.JPG&quot; alt=&quot;picture01&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;kernel-source&quot;&gt;下載 Kernel Source&lt;/h4&gt;
+
+&lt;p&gt;到 &lt;a href=&quot;https://www.kernel.org/&quot;&gt;Kernel Archive&lt;/a&gt; 下載 kernel source
+我下載的是當時較為穩定的 “ 4.10.14 “ kernel
+你可以選擇你自己要的 kernel , 不一定要跟我一樣&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://3.bp.blogspot.com/-TUBrR9gACv8/WQs2XHirWdI/AAAAAAAAAKY/6pKH6joaK50n7fg62POYuE44oS3RqzIIwCLcB/s1600/2.JPG&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;下載完後請進行&lt;strong&gt;解壓縮&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 進入 root 模式
+&lt;/span&gt;
+sudo su
+
+&lt;span class=&quot;c&quot;&gt;# 把檔案解壓縮到 /usr/src 目錄底下
+&lt;/span&gt;
+tar -xvf linux-4.10.5.tar.xz -C /usr/src&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;建立資料夾&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 把目錄轉到剛剛下載下來的 kernel 檔案夾
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/linux-4.10.14
+
+&lt;span class=&quot;c&quot;&gt;# 在裡面創建一個名叫 hello 的資料夾
+&lt;/span&gt;
+mkdir hello
+
+&lt;span class=&quot;c&quot;&gt;# 把目錄轉到 hello 資料夾
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;hello&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;建立一個 &lt;code class=&quot;highlighter-rouge&quot;&gt;hello.c&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vim hello.c&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hello.c 的內容&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* hello.c */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#inlcude &amp;lt;linux/kernel.h&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;asmlinkage&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys_hello&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printk&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello world!&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;於同一個下再建立一個 &lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vim Makefile&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Makefile&lt;/code&gt; 的內容&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;obj-y :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; hello.o&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著在 linux-4.10.14 目錄下改 Makefile
+告訴你的 compiler ，新的 system call 可以在 hello 目錄中找到&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 把目錄轉回去
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/linux-4.10.14
+
+&lt;span class=&quot;c&quot;&gt;# 打開此目錄下的 Makefile
+&lt;/span&gt;
+vim Makefile&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;你可以在裡面找到一行, 如下&lt;strong&gt;我括起來的地方&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://3.bp.blogspot.com/-4r1MUjs4py8/WQs976nVflI/AAAAAAAAALA/t0-N0ymHUiU-pHWQubTA0y0UjjhdwfbcQCLcB/s1600/3.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;請你在&lt;strong&gt;後面補上 hello&lt;/strong&gt;
+這樣 kernel 在編譯時才會到你的 hello 目錄
+改成下面這樣&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;core-y +&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ block/ hello/&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著因為我的系統是 &lt;strong&gt;64 位元&lt;/strong&gt;的 ((我想大部分的人都是))
+所以我要&lt;strong&gt;去修改 syscall_64.tbl 檔&lt;/strong&gt;&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;arch/x86/entry/syscalls
+vim syscall_64.tbl&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;請你在最後一行添加上你的 system call
+然後請把編號記住, 等一下會用&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;註：你會發現下面突然跳到500多號，那是放x32的東西，我們要擺在300多號那邊&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://4.bp.blogspot.com/-n-VtlCq7hdQ/WQtASqkGWrI/AAAAAAAAALY/mjNroCyqaeAKNXvu39fJViYxiWuxCCPMgCLcB/s1600/4.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;接著編輯 syscalls.h 檔
+將我們 syscall 的原型添加進檔案的最後一行 (#endif之前)&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 把目錄轉回去
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/linux-4.10.14
+
+&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;include/linux
+vim syscalls.h&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://2.bp.blogspot.com/-1RLBFOHlSdg/WQtCSGXBBgI/AAAAAAAAALo/GZ6fhFQlQLUBzWbZq28QndS7lk8TlYPcQCLcB/s1600/5.JPG&quot; alt=&quot;image&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;kernel&quot;&gt;編譯 kernel&lt;/h4&gt;
+
+&lt;p&gt;先把會用到的套件安裝好&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 這個套件可以幫我們 build 出 kernel-pakage
+&lt;/span&gt;
+sudo apt-get install fakeroot build-essential kernel-package libncurses5 libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://1.bp.blogspot.com/-Ba1CeFDl218/WQtG0alzuvI/AAAAAAAAAMM/Fl7zWf7UCXsxGK9tCx26x34RXV9wxz2NQCLcB/s1600/6.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;選擇第二個，&lt;strong&gt;保持本地版本&lt;/strong&gt;就好&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;把 kernel 的 config &lt;strong&gt;複製&lt;/strong&gt;出來&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 把目錄轉回去
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/linux-4.10.14
+
+cp /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;uname -r&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; ./.config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;然後用 &lt;code class=&quot;highlighter-rouge&quot;&gt;make menuconfig&lt;/code&gt; 來設定組態&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;make menuconfig&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;會跑出以下畫面讓你&lt;strong&gt;設定 configuration&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://2.bp.blogspot.com/-xHRva45jLmY/WQtg0SyLZnI/AAAAAAAAAM4/gQ0CKYKYCDgMYnQervk1JXuP51s8knvWACLcB/s1600/7.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;但是我的目的只是要加一個 system call
+所以我直接 &lt;strong&gt;“按兩下 ESC 離開”&lt;/strong&gt;
+如果你有要做其他設定再自行添加&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;然後就可以 compile 你的 kernel 了&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 清理殘留的 pakage
+&lt;/span&gt;
+make-kpkg clean
+
+&lt;span class=&quot;c&quot;&gt;# 編譯 kernel
+&lt;/span&gt;
+fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers
+&lt;span class=&quot;c&quot;&gt;# 等編譯完後會產生 kernel 的 image 和 headers&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果你在編譯的時候出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;fatal error: openssl/opensslv.h: No such file or directory&quot;&lt;/code&gt; 錯誤訊息的話，表示你的 &lt;strong&gt;SSL 庫有缺失&lt;/strong&gt;，請你先安裝下面套件後再重新編譯&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;sudo apt-get install python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
+
+&lt;span class=&quot;c&quot;&gt;# 再重新下指令編譯
+&lt;/span&gt;
+fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;section-2&quot;&gt;編譯完成&lt;/h4&gt;
+
+&lt;p&gt;編譯完成後會在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/src&lt;/code&gt; 路徑下產生了這個 kernel 的 &lt;strong&gt;image 和 headers&lt;/strong&gt; ，我們要用指令安裝他們&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 轉目錄
+&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src
+
+&lt;span class=&quot;c&quot;&gt;# 安裝 kernel image
+&lt;/span&gt;
+sudo dpkg -i linux-image-4.10.14_4.10.14-10.00.Custom_amd64.deb
+
+&lt;span class=&quot;c&quot;&gt;# 安裝 kernel headers
+&lt;/span&gt;
+sudo dpkg -i linux-headers-4.10.14_4.10.14-10.00.Custom_amd64.deb
+
+&lt;span class=&quot;c&quot;&gt;# 安裝完後就重開機
+&lt;/span&gt;
+reboot&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;重開機後再看看你的 kernel 版本有沒有變新&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 查看 kernel version
+&lt;/span&gt;
+uname -r&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://1.bp.blogspot.com/-s7kDQlzSFxQ/WQt1e60FoGI/AAAAAAAAANU/jnLPgz2DcacW4HUTfUAr8yJl-K01BDv5gCLcB/s1600/9.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;system-call&quot;&gt;測試 system call&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 建一個 hello.c
+&lt;/span&gt;
+vim hello.c&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;hello.c&lt;/code&gt; 的內容如下&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* hello.c */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;linux/kernel.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/syscall.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;cm&quot;&gt;/* 使用我們剛剛新增的 system call */&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;syscall&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;332&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;cm&quot;&gt;/* print 出 syscall 的回傳值, 若為 0 則代表成功 */&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sys_hello returned %ld&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;n&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 編譯 hello.c
+&lt;/span&gt;
+gcc -g -Wall hello.c -o hello
+
+&lt;span class=&quot;c&quot;&gt;# 執行
+&lt;/span&gt;
+./hello&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://4.bp.blogspot.com/-TjO-uSiLoVo/WQt22_g8seI/AAAAAAAAANg/OVEZLlaFIHQSubkd_K8tXjh6eLr1aXxTQCLcB/s1600/10.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;看到&lt;strong&gt;回傳 0&lt;/strong&gt; 則代表成功囉&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;dmesg&lt;/code&gt; 來查看 kernel 內的訊息&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://4.bp.blogspot.com/-aXj7BIZrkf4/WQt3V0sPMTI/AAAAAAAAANk/0ji34DBmIQYI6GvlUQfYRoXFx_YSx8OxgCLcB/s1600/11.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;你會看到 kernel 裡面成功 printk 出了 Hello World! 字串&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+</description>
+        <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
+        <link>http://wenyuangg.github.io//linux/2017/05/04/linux-add-system-call.html</link>
+        <guid isPermaLink="true">http://wenyuangg.github.io//linux/2017/05/04/linux-add-system-call.html</guid>
         
         
         <category>linux</category>

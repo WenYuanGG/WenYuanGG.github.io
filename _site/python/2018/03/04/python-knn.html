@@ -231,6 +231,77 @@
 
 <p><br /></p>
 
+<h4 style="color:#3498DB;" id="model-">4. Model 屬性</h4>
+
+<p>此外, sklearn 還提供一些用法供使用者查詢相關資訊</p>
+
+<p>這裡舉兩個例子為例</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># 印出此 model 的相關參數設定
+</span>
+<span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+
+<span class="c"># 印出此訓練模型的準確率
+</span>
+<span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span></code></pre></figure>
+
+<p>把它加進程式中使用</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="c"># print(iris_X[:5, :])
+</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="c"># print(iris_Y)
+</span>
+
+<span class="c"># 將鳶尾花數據切割成訓練集和測試集，0.3 代表測試集的數據占總數據的 3 成
+</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_X</span><span class="p">,</span> <span class="n">iris_Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c"># 使用 KNN 的分類器
+</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="c"># 將訓練集丟進去 knn 做訓練
+</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="c"># 觀看預測數據以及真實數據的差別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"預測數據: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"真實數據: "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="c"># 印出此訓練模型的相關參數設定
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"參數: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+
+<span class="c"># 印出其準確率
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"準確率: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span></code></pre></figure>
+
+<p><img src="https://i.imgur.com/QDqgqQC.png" alt="" /></p>
+
+<p><br /></p>
+
 <h4 style="color:#3498DB;" id="section-3">4. 討論</h4>
 
 <p>從結果中可以看到，預測出來的數據<strong>仍可能錯誤</strong>，因為不管再精良的機器學習演算法都不可能做到 100% 正確率</p>

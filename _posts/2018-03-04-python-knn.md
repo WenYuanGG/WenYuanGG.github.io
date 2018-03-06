@@ -108,6 +108,67 @@ print("真實數據: ", Y_test)
 
 <br/>
 
+#### 4. Model 屬性
+{: style="color:#3498DB;"}
+
+此外, sklearn 還提供一些用法供使用者查詢相關資訊
+
+這裡舉兩個例子為例
+
+{% highlight python %}
+# 印出此 model 的相關參數設定
+.get_params()
+
+# 印出此訓練模型的準確率
+.score(X_test, Y_test)
+{% endhighlight %}
+
+把它加進程式中使用
+
+{% highlight python %}
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+# Load 鳶尾花的數據集
+iris = datasets.load_iris()
+
+# 取得鳶尾花的屬性
+iris_X = iris.data 
+
+# 取得鳶尾花的類別
+iris_Y = iris.target
+
+# 印出 5 筆鳶尾花的屬性
+# print(iris_X[:5, :])
+
+# 印出鳶尾花的類別
+# print(iris_Y)
+
+# 將鳶尾花數據切割成訓練集和測試集，0.3 代表測試集的數據占總數據的 3 成
+X_train, X_test, Y_train, Y_test = train_test_split(iris_X, iris_Y, test_size=0.3)
+
+# 使用 KNN 的分類器
+knn = KNeighborsClassifier()
+
+# 將訓練集丟進去 knn 做訓練
+knn.fit(X_train, Y_train)
+
+# 觀看預測數據以及真實數據的差別
+print("預測數據: ", knn.predict(X_test))
+print("真實數據: ", Y_test)
+
+# 印出此訓練模型的相關參數設定
+print("參數: ", knn.get_params())
+
+# 印出其準確率
+print("準確率: ", knn.score(X_test, Y_test))
+{% endhighlight %}
+
+![](https://i.imgur.com/QDqgqQC.png)
+
+<br/>
+
 #### 4. 討論
 {: style="color:#3498DB;"}
 

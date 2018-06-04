@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[OpenCV]臉部偵測 (FaceDetection)"
+title:  "[OpenCV] 臉部偵測 (FaceDetection)"
 date:   2017-11-20 19:58:18 +0800
 categories: opencv
 comments: true

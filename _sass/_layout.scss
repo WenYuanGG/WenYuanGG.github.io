@@ -1,182 +1,119 @@
 /**
+ * Layout
+ */
+
+::selection {
+    color: #fff;
+    background-color: $teal-accent;
+}
+::-moz-selection {
+    color: #fff;
+    background-color: $teal-accent;
+}
+
+/* Check */
+.notice-warning {
+    background-color: #E91E63;
+    color: #fff;
+    font-size: 120%;
+    font-weight: bold;
+    left: 0;
+    padding: 7px 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Helper */
+.lower-case { text-transform: lowercase; }
+.upper-case { text-transform: uppercase; }
+.capitalize { text-transform: capitalize; }
+
+
+/**
+ * Container and width
+ */
+
+@media only screen and (max-width : 992px) {
+    header, .home, .post-container, .page-container, footer {
+        padding-left: 0;
+    }
+}
+
+@media only screen and (min-width: 993px) {
+    .home { width: 68%; }
+    .post-container { width: 72%; }
+    .page-container { width: 72%; }
+}
+
+.post-container,
+.page-container {
+    @media #{$small-and-down} {
+        width: 100%;
+    }
+}
+
+
+/**
  * Site header
  */
-.site-header {
-    border-top: 5px solid $grey-color-dark;
-    border-bottom: 1px solid $grey-color-light;
-    min-height: 56px;
-
-    // Positioning context for the mobile navigation icon
-    position: relative;
-}
-
 .site-title {
-    font-size: 26px;
-    font-weight: 300;
-    line-height: 56px;
+    font-family: $site-title-font;
     letter-spacing: -1px;
     margin-bottom: 0;
-    float: left;
-
-    &,
-    &:visited {
-        color: $grey-color-dark;
-    }
-}
-
-.site-nav {
-    float: right;
-    line-height: 56px;
-
-    .menu-icon {
-        display: none;
-    }
-
-    .page-link {
-        color: $text-color;
-        line-height: $base-line-height;
-
-        // Gaps between nav items, but not on the last one
-        &:not(:last-child) {
-            margin-right: 20px;
-        }
-    }
-
-    @include media-query($on-palm) {
-        position: absolute;
-        top: 9px;
-        right: $spacing-unit / 2;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
-        border-radius: 5px;
-        text-align: right;
-
-        .menu-icon {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 26px;
-            line-height: 0;
-            padding-top: 10px;
-            text-align: center;
-
-            > svg {
-                width: 18px;
-                height: 15px;
-
-                path {
-                    fill: $grey-color-dark;
-                }
-            }
-        }
-
-        .trigger {
-            clear: both;
-            display: none;
-        }
-
-        &:hover .trigger {
-            display: block;
-            padding-bottom: 5px;
-        }
-
-        .page-link {
-            display: block;
-            padding: 5px 10px;
-
-            &:not(:last-child) {
-                margin-right: 0;
-            }
-            margin-left: 20px;
-        }
-    }
-}
-
-
-
-/**
- * Site footer
- */
-.site-footer {
-    border-top: 1px solid $grey-color-light;
-    padding: $spacing-unit 0;
-}
-
-.footer-heading {
     font-size: 18px;
-    margin-bottom: $spacing-unit / 2;
-}
-
-.contact-list,
-.social-media-list {
-    list-style: none;
-    margin-left: 0;
-}
-
-.footer-col-wrapper {
-    font-size: 15px;
-    color: $grey-color;
-    margin-left: -$spacing-unit / 2;
-    @extend %clearfix;
-}
-
-.footer-col {
-    float: left;
-    margin-bottom: $spacing-unit / 2;
-    padding-left: $spacing-unit / 2;
-}
-
-.footer-col-1 {
-    width: -webkit-calc(35% - (#{$spacing-unit} / 2));
-    width:         calc(35% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-2 {
-    width: -webkit-calc(20% - (#{$spacing-unit} / 2));
-    width:         calc(20% - (#{$spacing-unit} / 2));
-}
-
-.footer-col-3 {
-    width: -webkit-calc(45% - (#{$spacing-unit} / 2));
-    width:         calc(45% - (#{$spacing-unit} / 2));
-}
-
-@include media-query($on-laptop) {
-    .footer-col-1,
-    .footer-col-2 {
-        width: -webkit-calc(50% - (#{$spacing-unit} / 2));
-        width:         calc(50% - (#{$spacing-unit} / 2));
-    }
-
-    .footer-col-3 {
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
+    margin-left: 10px;
+    @media #{$medium-and-up} {
+        font-size: 24px;
+        margin-left: 20px;
     }
 }
 
-@include media-query($on-palm) {
-    .footer-col {
-        float: none;
-        width: -webkit-calc(100% - (#{$spacing-unit} / 2));
-        width:         calc(100% - (#{$spacing-unit} / 2));
-    }
+// FIXME: offsetting html anchor to adjust for fixed header
+/*
+a.footnote,
+a.reversefootnote {
+    padding-top: 80px;
+    margin-top: -80px;
+}
+*/
+
+/*
+.brand-logo {
+    padding: 0 10px !important;
 }
 
+// replace(broken) materialize css default style
+//.site-header {
+    .side-nav li { padding: 0 0; }
+    .side-nav a { padding: 0 26px; }
+//}
+*/
+
+/* May bug, see:
+ * https://github.com/Dogfalo/materialize/issues/2879
+ */
+#sidenav-overlay {
+    z-index: 996;
+}
 
 
 /**
- * Page content
+ * Site post list
  */
-.page-content {
-    padding: $spacing-unit 0;
+.page-heading {
+    margin-top: $spacing-unit;
 }
 
-.page-heading {
-    font-size: 20px;
+.favo {
+    letter-spacing: .2em;
 }
 
 .post-list {
     margin-left: 0;
+    margin-top: 32px;
     list-style: none;
 
     > li {
@@ -184,68 +121,205 @@
     }
 }
 
-.post-meta {
-    font-size: $small-font-size;
-    color: $grey-color;
-}
-
 .post-link {
+    font-family: $list-link-font;
     display: block;
-    font-size: 24px;
-}
+    font-size: 1.5em;
+    margin-bottom: 10px;
 
+    color: $pink;
 
+    &:hover {
+        color: $blue;
+    }
 
-/**
- * Posts
- */
-.post-header {
-    margin-bottom: $spacing-unit;
-}
-
-.post-title {
-    font-size: 42px;
-    letter-spacing: -1px;
-    line-height: 1;
-
-    @include media-query($on-laptop) {
-        font-size: 36px;
+    @media #{$small-and-down} {
+        font-size: 1.3em;
     }
 }
 
+
+/**
+ * Site pagination
+ */
+.pagination {
+    margin-top: 32px;
+    margin-bottom: 40px;
+
+    .page {
+        /* center the item (waitting other elegant method) */
+        left: 50%;
+        margin-left: -9.89rem;
+    }
+}
+
+
+/**
+ * Site footer
+ */
+.page-footer {
+    ul {
+        margin-left: 0;
+    }
+    li {
+        margin-top: 10px;
+    }
+}
+
+
+/**
+ */
+.tab-section {
+    @media #{$small-and-down} {
+        //padding: 70px 0px;
+    }
+    @media #{$medium-and-up} {
+        padding: 10px 56px;
+        margin-bottom: 60px;
+    }
+}
+
+
+/**
+ * Category
+ */
+
+.post-category {
+    ul li {
+        margin-top: 8px;
+        list-style-type: none !important;
+    }
+
+    .collapsible-body {
+        padding: 1rem;
+    }
+
+    @media #{$medium-and-up} {
+        .category-link {
+            /*
+            transition: padding-left 0.25s;
+            -webkit-transition: padding-left 0.25s;
+            -moz-transition: padding-left 0.25s;
+            -o-transition: padding-left 0.25s;
+
+            &:hover {
+                padding-left: 12px;
+            }
+            */
+        }
+    }
+
+    @media #{$small-and-down} {
+        .collapsible-body ul { margin-left: 10px; margin-right: 10px; }
+    }
+}
+
+
+/**
+ * Post
+ */
+
+.post-ribbon {
+    //background-color: rgba(15, 99, 17, 0.51);
+    background-color: rgba(68, 68, 68, 0.41);
+    flex-shrink: 0;
+    height: 40vh;
+    width: 100%;
+}
+
+.post-page {
+    margin-top: -35vh;
+    flex-shrink: 0;
+    min-height: 800px;
+
+    @media #{$medium-and-up} {
+        margin-bottom: 40px;
+    }
+
+    @media #{$small-and-down} {
+        // remove z-depth-2 for mobile
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+    }
+}
+
+.post-section {
+    @media #{$small-and-down} {
+        //padding: 70px 0px;
+    }
+    @media #{$medium-and-up} {
+        padding: 70px 56px;
+        margin-bottom: 60px;
+    }
+}
+
+.post-header {
+    margin-top: $spacing-unit*1.5;
+    margin-bottom: $spacing-unit*1.6;
+
+    .post-tag {
+        font-size: 1.5rem;
+        color: lighten($pink, 10%);
+    }
+}
+
+/* post title (head 1) */
+.post-title {
+    font-family: $post-title-font;
+    color: rgba(0, 0, 0, 0.76);
+    font-size: 2rem;
+    margin: 2.1rem 0 1.68rem;
+
+    @media #{$medium-and-down} {
+        font-size: 2rem;
+    }
+}
+
+/* post and page content */
 .post-content {
     margin-bottom: $spacing-unit;
 
     h2 {
-        font-size: 32px;
+        font-family: $head-font;
+        font-size: 1.8rem;
+        color: #ee6e73;
+        margin: 2.78rem 0 1.224rem;
 
-        @include media-query($on-laptop) {
-            font-size: 28px;
+        @media #{$medium-and-down} {
+            font-size: 1.8rem;
         }
     }
 
     h3 {
-        font-size: 26px;
-
-        @include media-query($on-laptop) {
-            font-size: 22px;
-        }
+        font-size: 1.8rem;
+        margin: 2.68rem 0 1.2rem;
     }
 
     h4 {
-        font-size: 20px;
+        color: #105a98;
+        font-family: $head-font;
+        font-size: 1.4rem;
+        margin: 1.68rem 0 1rem;
 
-        @include media-query($on-laptop) {
-            font-size: 18px;
+        @media #{$medium-and-down} {
+            font-size: 1.5rem;
         }
     }
+
+    h5,
+    h6 {
+        font-size: 1.2rem;
+        margin: 1.68rem 0 1rem;
+    }
+
+    strong {
+        color: darken($red, 20%);
+    }
+
+    ul li { list-style-type: disc; }
 }
 
-/* markdown table */
-.mbtablestyle {
-        border-collapse: collapse;
-
-   > table, td, th {
-        border: 1px solid gray;
-        }
+/* post share */
+.post-share {
+    margin-top: 100px;
+    letter-spacing: .2em;
 }

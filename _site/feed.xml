@@ -1,77 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>wychen</title>
-    <description>Thanks for watching.
-</description>
-    <link>http://wenyuangg.github.io//</link>
-    <atom:link href="http://wenyuangg.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Jun 2018 12:52:15 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Jun 2018 12:52:15 +0800</lastBuildDate>
-    <generator>Jekyll v3.1.6</generator>
-    
-      <item>
-        <title>[Python] datasets 建立自己的數據集</title>
-        <description>&lt;p&gt;我在之前的&lt;a href=&quot;https://wenyuangg.github.io/python/2018/03/04/python-knn.html&quot;&gt;文章&lt;/a&gt;中有示範過如何&lt;strong&gt;載入 datasets 中已有的數據&lt;/strong&gt;來練習使用機器學習, 而在這篇文章中要練習的是如何&lt;code class=&quot;highlighter-rouge&quot;&gt;建立自己的數據&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;此外, 你可以在官方的 sklearn API 的介紹中看到他提供的所有可建立的數據類型： &lt;a href=&quot;http://scikit-learn.org/stable/modules/classes.html#module-sklearn.datasets&quot;&gt;sklearn API 請點我&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;建立自己的數據&quot;&gt;建立自己的數據&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;我們示範使用了 &lt;code class=&quot;highlighter-rouge&quot;&gt;make_regression()&lt;/code&gt;來建立一筆線性迴歸數據
-    &lt;ul&gt;
-      &lt;li&gt;sample： 100&lt;/li&gt;
-      &lt;li&gt;feature： 1&lt;/li&gt;
-      &lt;li&gt;target： 1&lt;/li&gt;
-      &lt;li&gt;noise： 1&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;不明白甚麼是&lt;strong&gt;線性回歸&lt;/strong&gt;可以&lt;a href=&quot;https://zh.wikipedia.org/wiki/%E7%B7%9A%E6%80%A7%E5%9B%9E%E6%AD%B8&quot;&gt;看這裡&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.linear_model&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LinearRegression&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# 建立自己的數據 (線性迴歸數據)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make_regression&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n_samples&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_features&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;n_targets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;noise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# 畫點&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scatter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;X&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# show 出圖&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;執行結果&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/R6mREqS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;每次執行看到不一樣的圖是正常的, 因為他是按照我們的要求來隨機建立 100 個線性回歸樣本&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-</description>
-        <pubDate>Mon, 05 Mar 2018 10:38:00 +0800</pubDate>
-        <link>http://wenyuangg.github.io//python/2018/03/05/python-datasets-make.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//python/2018/03/05/python-datasets-make.html</guid>
-        
-        
-        <category>python</category>
-        
-      </item>
+    <title>學習筆記</title>
+    <description>This blog records my learning history</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 05 Jun 2018 19:44:43 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Jun 2018 19:44:43 +0800</lastBuildDate>
+    <generator>Jekyll v3.7.3</generator>
     
       <item>
         <title>[Python] 練習通用的機器學習法</title>
-        <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;1-蒐集數據&quot;&gt;1. 蒐集數據&lt;/h4&gt;
+        <description>&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;1-蒐集數據&quot;&gt;1. 蒐集數據&lt;/h4&gt;
 
 &lt;p&gt;在這裡我們直接使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;sklearn 函數庫&lt;/code&gt;中已有的數據來做練習&lt;/p&gt;
 
@@ -83,7 +23,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;2-載入鳶尾花數據&quot;&gt;2. 載入鳶尾花數據&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;2-載入鳶尾花數據&quot;&gt;2. 載入鳶尾花數據&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.model_selection&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_test_split&lt;/span&gt;
@@ -174,7 +114,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;3-機器學習&quot;&gt;3. 機器學習&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;3-機器學習&quot;&gt;3. 機器學習&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;
 &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sklearn.model_selection&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_test_split&lt;/span&gt;
@@ -231,7 +171,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;4-model-屬性&quot;&gt;4. Model 屬性&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;4-model-屬性&quot;&gt;4. Model 屬性&lt;/h4&gt;
 
 &lt;p&gt;此外, sklearn 還提供一些用法供使用者查詢相關資訊&lt;/p&gt;
 
@@ -302,7 +242,7 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;4-討論&quot;&gt;4. 討論&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;4-討論&quot;&gt;4. 討論&lt;/h4&gt;
 
 &lt;p&gt;從結果中可以看到，預測出來的數據&lt;strong&gt;仍可能錯誤&lt;/strong&gt;，因為不管再精良的機器學習演算法都不可能做到 100% 正確率&lt;/p&gt;
 
@@ -312,72 +252,75 @@
 
 &lt;hr /&gt;
 </description>
-        <pubDate>Sun, 04 Mar 2018 03:04:15 +0800</pubDate>
-        <link>http://wenyuangg.github.io//python/2018/03/04/python-knn.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//python/2018/03/04/python-knn.html</guid>
+        <pubDate>Sun, 04 Mar 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/machinelearning/python-knn.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/machinelearning/python-knn.html</guid>
         
         
-        <category>python</category>
+        <category>MachineLearning</category>
         
       </item>
     
       <item>
-        <title>在 Ubuntu 安裝 OpenCV 與建置 C++ 編譯環境</title>
+        <title>Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</title>
         <description>&lt;p&gt;跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;1-更新系統&quot;&gt;1. 更新系統&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;1-更新系統&quot;&gt;1. 更新系統&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;2-下載-opencv-的相依套件&quot;&gt;2. 下載 OpenCV 的相依套件&lt;/h4&gt;
-
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get update
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get upgrade&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;3-下載-opencv&quot;&gt;3. 下載 OpenCV&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;2-下載-opencv-的相依套件&quot;&gt;2. 下載 OpenCV 的相依套件&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su
-&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /opt
-git clone https://github.com/Itseez/opencv.git
-git clone https://github.com/Itseez/opencv_contrib.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python3.5-dev python3-numpy libtbb2 libtbb-dev
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;4-編譯與安裝-opencv&quot;&gt;4. 編譯與安裝 OpenCV&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;3-下載-opencv&quot;&gt;3. 下載 OpenCV&lt;/h4&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;su
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /opt
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/Itseez/opencv.git
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;git clone https://github.com/Itseez/opencv_contrib.git&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;4-編譯與安裝-opencv&quot;&gt;4. 編譯與安裝 OpenCV&lt;/h4&gt;
 
 &lt;p&gt;因為要編譯 OpenCV 以及建置環境, 所以這個環節需要一點時間&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv
-mkdir release
-&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;release
-cmake &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TIFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_CUDA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ENABLE_AVX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_OPENGL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_OPENCL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_IPP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_EIGEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_V4L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_VTK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_PERF_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;RELEASE &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;OPENCV_EXTRA_MODULES_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/opencv_contrib/modules /opt/opencv/
-make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt;
-make install
-ldconfig
-&lt;span class=&quot;nb&quot;&gt;exit
-cd&lt;/span&gt; ~&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;opencv
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;release
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;release
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;my_build_dir
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;my_build_dir
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cmake &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TIFF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_CUDA&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;ENABLE_AVX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_OPENGL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_OPENCL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_IPP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TBB&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ON &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_EIGEN&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_V4L&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;WITH_VTK&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;BUILD_PERF_TESTS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;OFF &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CMAKE_BUILD_TYPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;RELEASE &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;CMAKE_INSTALL_PREFIX&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/usr/local &lt;span class=&quot;nt&quot;&gt;-D&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;OPENCV_EXTRA_MODULES_PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/opt/opencv_contrib/modules /opt/opencv/
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nt&quot;&gt;-j4&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;make &lt;span class=&quot;nb&quot;&gt;install&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ldconfig
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;exit&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ~&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;5-查看你的-opencv-版本&quot;&gt;5. 查看你的 OpenCV 版本&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;5-查看你的-opencv-版本&quot;&gt;5. 查看你的 OpenCV 版本&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;pkg-config &lt;span class=&quot;nt&quot;&gt;--modversion&lt;/span&gt; opencv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pkg-config &lt;span class=&quot;nt&quot;&gt;--modversion&lt;/span&gt; opencv&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;6-寫個簡單的程式來編譯看看&quot;&gt;6. 寫個簡單的程式來編譯看看&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;6-寫個簡單的程式來編譯看看&quot;&gt;6. 寫個簡單的程式來編譯看看&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;opencv2/opencv.hpp&quot;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* A simple example */&lt;/span&gt;
+&lt;span class=&quot;cp&quot;&gt;#include &quot;opencv2/opencv.hpp&quot;
 &lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
@@ -394,13 +337,8 @@ cd&lt;/span&gt; ~&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;編譯與執行&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 編譯
-&lt;/span&gt;
-g++ main.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;pkg-config &lt;span class=&quot;nt&quot;&gt;--cflags&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--libs&lt;/span&gt; opencv&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
-
-&lt;span class=&quot;c&quot;&gt;# 執行
-&lt;/span&gt;
-./output&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;g++ main.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;pkg-config &lt;span class=&quot;nt&quot;&gt;--cflags&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--libs&lt;/span&gt; opencv&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;./output&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;上面的 main.cpp 請改成你自己程式的名稱&lt;/p&gt;
@@ -408,7 +346,7 @@ g++ main.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &lt;span cl
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/&quot;&gt;How to Install OpenCV in Ubuntu 16.04 LTS for C / C++&lt;/a&gt;&lt;/li&gt;
@@ -418,113 +356,18 @@ g++ main.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &lt;span cl
 
 &lt;hr /&gt;
 </description>
-        <pubDate>Mon, 25 Dec 2017 19:58:18 +0800</pubDate>
-        <link>http://wenyuangg.github.io//opencv/installation/2017/12/25/opencv-installation.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//opencv/installation/2017/12/25/opencv-installation.html</guid>
+        <pubDate>Mon, 25 Dec 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/opencv/opencv-installation.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/opencv/opencv-installation.html</guid>
         
         
-        <category>opencv</category>
-        
-        <category>installation</category>
-        
-      </item>
-    
-      <item>
-        <title>107 年研究所甄試心得</title>
-        <description>&lt;p&gt;在這裡分享我的 107 年研究所推甄成果和心得，希望學弟妹看了可以有個依據，讓你們大概知道自己的成績可以推到哪間研究所。&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;我的推甄相關資料&quot;&gt;我的推甄相關資料&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;就讀校系：&lt;/strong&gt; 逢甲大學通訊工程學系&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;在校成績&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;班排名(5/53)&lt;/li&gt;
-      &lt;li&gt;系排名(10/106)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;專題：&lt;/strong&gt; 有&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;多益成績：&lt;/strong&gt; 無&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;校內/外表現&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;校內專題競賽佳作&lt;/li&gt;
-      &lt;li&gt;IMP2017 研討會論文通過並發表&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;因為是私校而且成績又不在最前面，所以推甄的成果非常慘烈&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;推甄的校系&quot;&gt;推甄的校系&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;成功大學電腦與通訊工程所甲組 (初審未通過)&lt;/li&gt;
-  &lt;li&gt;成功大學資訊工程所 (初審未通過)&lt;/li&gt;
-  &lt;li&gt;清華大學通訊所乙組 (初審未通過)&lt;/li&gt;
-  &lt;li&gt;中央大學資訊工程所 (&lt;code class=&quot;highlighter-rouge&quot;&gt;初審通過&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;中山大學電機工程所丙組 (&lt;code class=&quot;highlighter-rouge&quot;&gt;初審通過&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;逢甲大學通訊工程所 (&lt;code class=&quot;highlighter-rouge&quot;&gt;直接錄取&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;最後結果&quot;&gt;最後結果&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;中央大學資訊工程所 (放棄面試)&lt;/li&gt;
-  &lt;li&gt;中山大學電機工程所丙組 (&lt;code class=&quot;highlighter-rouge&quot;&gt;正取&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;逢甲大學通訊工程所 (&lt;code class=&quot;highlighter-rouge&quot;&gt;正取1&lt;/code&gt;)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;最後因為已下定決心重考，所以放棄去中央大學面試了&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;中山大學電機所丙組--面試心得&quot;&gt;中山大學電機所丙組  面試心得&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;穿著：&lt;/strong&gt; 當天幾乎男生都穿西裝、女生都穿套裝，所以建議至少男生也要穿個&lt;strong&gt;白襯衫+西裝褲&lt;/strong&gt;，才不會顯得太過突兀，西裝外套的話就自己斟酌吧~可穿可不穿&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;面試方式：&lt;/strong&gt; 一次進去都是 4 個人，而裡面有 4 個教授，每個教授都會單獨面試你 5 分鐘，所以總共面試 20 分鐘&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;面試問題&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;教授1： 詢問我的專題內容，還有我之後想要研究的方向&lt;/li&gt;
-      &lt;li&gt;教授2： 5 分鐘都在問我的專題內容&lt;/li&gt;
-      &lt;li&gt;教授3： 問我什麼是&lt;code class=&quot;highlighter-rouge&quot;&gt;線性獨立&lt;/code&gt;以及&lt;code class=&quot;highlighter-rouge&quot;&gt;機率獨立&lt;/code&gt;。因為我的簡歷上有寫我會影像處理，所以還有問我&lt;code class=&quot;highlighter-rouge&quot;&gt;影像處理&lt;/code&gt;的相關問題&lt;/li&gt;
-      &lt;li&gt;教授4： 跟我聊天 5 分鐘&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;結論&quot;&gt;結論&lt;/h4&gt;
-
-&lt;p&gt;總結來說，這次推甄的非常慘，我建議讀通訊的人不要輕易跨到資工領域，除非你在大學時期都有在修資訊系的課程，或者你在校外有很多資訊類的優異表現，否則推上的機率真的非常的低&lt;/p&gt;
-
-&lt;p&gt;在我面試完之後才去查了中山電機丙組的評價，發現非常的糟糕，我在放榜之後也有去中山找教授，如果真的想念電機丙的話，請你要做好至少 3 年的準備XD，所以我打算要延畢重考了&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-</description>
-        <pubDate>Fri, 01 Dec 2017 10:00:00 +0800</pubDate>
-        <link>http://wenyuangg.github.io//experience/2017/12/01/107-institute-apply-sharing.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//experience/2017/12/01/107-institute-apply-sharing.html</guid>
-        
-        
-        <category>experience</category>
+        <category>OpenCV</category>
         
       </item>
     
       <item>
         <title>[OpenCV] 臉部偵測 (FaceDetection)</title>
-        <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;我的實作環境&quot;&gt;我的實作環境&lt;/h4&gt;
+        <description>&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;我的實作環境&quot;&gt;我的實作環境&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;作業系統：&lt;/strong&gt; Lubuntu 16.04&lt;/li&gt;
@@ -538,18 +381,18 @@ g++ main.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &lt;span cl
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;先建立檔案&quot;&gt;先建立檔案&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;先建立檔案&quot;&gt;先建立檔案&lt;/h4&gt;
 
 &lt;p&gt;先依序建立以下幾個檔案：&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir FaceDetection
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;FaceDetection
 &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;FaceDetection
-mkdir Source
-touch FaceDetection.cpp&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;Source
+&lt;span class=&quot;nb&quot;&gt;touch &lt;/span&gt;FaceDetection.cpp&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;下載人臉及人眼分類器&quot;&gt;下載人臉及人眼分類器&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;下載人臉及人眼分類器&quot;&gt;下載人臉及人眼分類器&lt;/h4&gt;
 
 &lt;p&gt;先進到 Source 目錄中&lt;/p&gt;
 
@@ -572,7 +415,7 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;開始撰寫臉部偵測&quot;&gt;開始撰寫臉部偵測&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;開始撰寫臉部偵測&quot;&gt;開始撰寫臉部偵測&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-cpp&quot; data-lang=&quot;cpp&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/** FaceDetection.cpp **/&lt;/span&gt;
 &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;opencv2/opencv.hpp&amp;gt;
@@ -593,8 +436,10 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
 &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;face_cascade_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Source/haarcascade_frontalface_default.xml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eyes_cascade_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Source/haarcascade_eye_tree_eyeglasses.xml&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;CascadeClassifier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;face_cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Declare the face classifier
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CascadeClassifier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eyes_cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Declare the eyes classifier
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;window_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Face detection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CascadeClassifier&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;eyes_cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Declare the eyes classifier
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;window_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Face detection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
 &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]){&lt;/span&gt;
 	&lt;span class=&quot;cm&quot;&gt;/* Open the web camera */&lt;/span&gt;
@@ -622,7 +467,7 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
 			
 			&lt;span class=&quot;cm&quot;&gt;/** If you press ESC, q, or Q , the process will end **/&lt;/span&gt;
 			&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;&#39;q&#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;&#39;Q&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'q'&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'Q'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 				&lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 		&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
@@ -641,15 +486,19 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
     &lt;span class=&quot;cm&quot;&gt;/* Convert to gray scale */&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;cvtColor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame_gray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;COLOR_BGR2GRAY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;//imshow(&quot;grayscale&quot;, frame_gray);
-&lt;/span&gt;	
+&lt;/span&gt;
+	
     &lt;span class=&quot;cm&quot;&gt;/* Resize the grayscale Image */&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;//resize(frame_gray, frame_resize, Size(), 1, 1, INTER_LINEAR);
-&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;//imshow(&quot;resize&quot;, frame_resize);
-&lt;/span&gt;	
+&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;//imshow(&quot;resize&quot;, frame_resize);
+&lt;/span&gt;
+	
     &lt;span class=&quot;cm&quot;&gt;/* Histogram equalization */&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;equalizeHist&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame_gray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame_gray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;//imshow(&quot;equalize&quot;, frame_gray);
-&lt;/span&gt;	
+&lt;/span&gt;
+	
     &lt;span class=&quot;cm&quot;&gt;/* Detect faces of different sizes using cascade classifier */&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;face_cascade&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;detectMultiScale&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame_gray&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;faces&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CV_HAAR_SCALE_IMAGE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
 	
@@ -677,12 +526,13 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
  
     &lt;span class=&quot;c1&quot;&gt;// Show Processed Image with detected faces
-&lt;/span&gt;    &lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Face Detection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;Face Detection&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;編譯與執行&quot;&gt;編譯與執行&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;編譯與執行&quot;&gt;編譯與執行&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;## 編譯
 &lt;/span&gt;
@@ -695,12 +545,12 @@ g++ FaceDetection.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &l
 &lt;p&gt;執行後將你的臉對準攝相頭, 應該會看到你的臉及眼睛被框出來&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;如果你還沒安裝 OpenCV 可以參考&lt;a href=&quot;https://wenyuangg.github.io/opencv/installation/2017/12/25/opencv-installation.html&quot;&gt;我的文章&lt;/a&gt;來安裝&lt;/p&gt;
+  &lt;p&gt;如果你還沒安裝 OpenCV 可以參考&lt;a href=&quot;&quot;&gt;我的文章&lt;/a&gt;來安裝&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;解釋程式&quot;&gt;解釋程式&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;解釋程式&quot;&gt;解釋程式&lt;/h4&gt;
 
 &lt;p&gt;其實過程很簡單, 大致分為以下幾個步驟：&lt;/p&gt;
 
@@ -718,20 +568,20 @@ g++ FaceDetection.cpp &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; output &l
 
 &lt;hr /&gt;
 </description>
-        <pubDate>Mon, 20 Nov 2017 19:58:18 +0800</pubDate>
-        <link>http://wenyuangg.github.io//opencv/2017/11/20/opencv-face-detection.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//opencv/2017/11/20/opencv-face-detection.html</guid>
+        <pubDate>Mon, 20 Nov 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/opencv/opencv-face-detection.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/opencv/opencv-face-detection.html</guid>
         
         
-        <category>opencv</category>
+        <category>OpenCV</category>
         
       </item>
     
       <item>
         <title>寫簡單的 Linux Kernel Module</title>
-        <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;1-先創建一個資料夾-並寫個簡單的-kernel-module-helloc&quot;&gt;1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)&lt;/h4&gt;
+        <description>&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;1-先創建一個資料夾-並寫個簡單的-kernel-module-helloc&quot;&gt;1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)&lt;/h4&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir helloworld
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;helloworld
 
 &lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;helloworld
 
@@ -767,7 +617,7 @@ vim hello.c&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;2-接著在同個目錄下寫個-makefile&quot;&gt;2. 接著在同個目錄下寫個 Makefile&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;2-接著在同個目錄下寫個-makefile&quot;&gt;2. 接著在同個目錄下寫個 Makefile&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;vim Makefile&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
@@ -776,7 +626,7 @@ vim hello.c&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;/ul&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;PWD :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;shell &lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt; 
-KVERSION :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;shell uname &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
+KVERSION :&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;shell &lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;
 KERNEL_DIR &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; /usr/src/linux-headers-&lt;span class=&quot;k&quot;&gt;$(&lt;/span&gt;KVERSION&lt;span class=&quot;k&quot;&gt;)&lt;/span&gt;/
  
 MODULE_NAME &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; hello
@@ -789,7 +639,7 @@ clean:
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;3-最後就可以使用-sudo-make-指令來編譯&quot;&gt;3. 最後就可以使用 sudo make 指令來編譯&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;3-最後就可以使用-sudo-make-指令來編譯&quot;&gt;3. 最後就可以使用 sudo make 指令來編譯&lt;/h4&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;將他編譯成 &lt;code class=&quot;highlighter-rouge&quot;&gt;.ko&lt;/code&gt; 檔&lt;/p&gt;
@@ -801,7 +651,7 @@ clean:
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;4-使用-insmod-來載入-module&quot;&gt;4. 使用 insmod 來載入 module&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;4-使用-insmod-來載入-module&quot;&gt;4. 使用 insmod 來載入 module&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;insmod hello.ko
 
@@ -845,18 +695,18 @@ dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;hr /&gt;
 </description>
-        <pubDate>Thu, 04 May 2017 10:00:00 +0800</pubDate>
-        <link>http://wenyuangg.github.io//linux/2017/05/04/simple-linux-kernel-module.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//linux/2017/05/04/simple-linux-kernel-module.html</guid>
+        <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/linux/simple-linux-kernel-module.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/linux/simple-linux-kernel-module.html</guid>
         
         
-        <category>linux</category>
+        <category>Linux</category>
         
       </item>
     
       <item>
         <title>增加一個 System Call 到 Linux Kernel (v4.x)</title>
-        <description>&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;我的系統環境&quot;&gt;我的系統環境&lt;/h4&gt;
+        <description>&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;我的系統環境&quot;&gt;我的系統環境&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;作業系統：&lt;/strong&gt; Lubuntu 16.04&lt;/li&gt;
@@ -865,7 +715,7 @@ dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;更新系統&quot;&gt;更新系統&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;更新系統&quot;&gt;更新系統&lt;/h4&gt;
 
 &lt;ul&gt;
   &lt;li&gt;更新&lt;/li&gt;
@@ -878,13 +728,13 @@ dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
   &lt;li&gt;查看你當前的 &lt;strong&gt;Kernel 版本&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;uname &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://2.bp.blogspot.com/-0k5fdklzdWQ/WQs1A8MV9cI/AAAAAAAAAKM/jGcdqvzht78HSXmFJFVNPMqjbZwHouTyQCLcB/s1600/1.JPG&quot; alt=&quot;picture01&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;下載-kernel-source&quot;&gt;下載 Kernel Source&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;下載-kernel-source&quot;&gt;下載 Kernel Source&lt;/h4&gt;
 
 &lt;p&gt;到 &lt;a href=&quot;https://www.kernel.org/&quot;&gt;Kernel Archive&lt;/a&gt; 下載 kernel source
 我下載的是當時較為穩定的 “ 4.10.14 “ kernel
@@ -914,7 +764,7 @@ dmesg&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;span class=&quot;c&quot;&gt;# 在裡面創建一個名叫 hello 的資料夾
 &lt;/span&gt;
-mkdir hello
+&lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;hello
 
 &lt;span class=&quot;c&quot;&gt;# 把目錄轉到 hello 資料夾
 &lt;/span&gt;
@@ -973,7 +823,7 @@ vim Makefile&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;p&gt;接著因為我的系統是 &lt;strong&gt;64 位元&lt;/strong&gt;的 ((我想大部分的人都是))
 所以我要&lt;strong&gt;去修改 syscall_64.tbl 檔&lt;/strong&gt;&lt;/p&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;arch/x86/entry/syscalls
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd arch&lt;/span&gt;/x86/entry/syscalls
 vim syscall_64.tbl&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;請你在最後一行添加上你的 system call
@@ -1001,13 +851,13 @@ vim syscalls.h&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;編譯-kernel&quot;&gt;編譯 kernel&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;編譯-kernel&quot;&gt;編譯 kernel&lt;/h4&gt;
 
 &lt;p&gt;先把會用到的套件安裝好&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 這個套件可以幫我們 build 出 kernel-pakage
 &lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install fakeroot build-essential kernel-package libncurses5 libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;fakeroot build-essential kernel-package libncurses5 libncurses5-dev&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://1.bp.blogspot.com/-Ba1CeFDl218/WQtG0alzuvI/AAAAAAAAAMM/Fl7zWf7UCXsxGK9tCx26x34RXV9wxz2NQCLcB/s1600/6.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
 
@@ -1023,7 +873,7 @@ vim syscalls.h&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 &lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /usr/src/linux-4.10.14
 
-cp /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;uname &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; ./.config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;cp&lt;/span&gt; /boot/config-&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt; ./.config&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;然後用 &lt;code class=&quot;highlighter-rouge&quot;&gt;make menuconfig&lt;/code&gt; 來設定組態&lt;/p&gt;
 
@@ -1056,13 +906,13 @@ fakeroot make-kpkg &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 4 &lt;span c
   &lt;p&gt;如果你在編譯的時候出現 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;fatal error: openssl/opensslv.h: No such file or directory&quot;&lt;/code&gt; 錯誤訊息的話，表示你的 &lt;strong&gt;SSL 庫有缺失&lt;/strong&gt;，請你先安裝下面套件後再重新編譯&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get install python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;sudo &lt;/span&gt;apt-get &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
 
 &lt;span class=&quot;c&quot;&gt;# 再重新下指令編譯
 &lt;/span&gt;
 fakeroot make-kpkg &lt;span class=&quot;nt&quot;&gt;-j&lt;/span&gt; 4 &lt;span class=&quot;nt&quot;&gt;--initrd&lt;/span&gt; kernel_image kernel_headers&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;編譯完成&quot;&gt;編譯完成&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;編譯完成&quot;&gt;編譯完成&lt;/h4&gt;
 
 &lt;p&gt;編譯完成後會在 &lt;code class=&quot;highlighter-rouge&quot;&gt;/usr/src&lt;/code&gt; 路徑下產生了這個 kernel 的 &lt;strong&gt;image 和 headers&lt;/strong&gt; ，我們要用指令安裝他們&lt;/p&gt;
 
@@ -1088,13 +938,13 @@ reboot&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 查看 kernel version
 &lt;/span&gt;
-uname &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+&lt;span class=&quot;nb&quot;&gt;uname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-r&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;&lt;img src=&quot;https://1.bp.blogspot.com/-s7kDQlzSFxQ/WQt1e60FoGI/AAAAAAAAANU/jnLPgz2DcacW4HUTfUAr8yJl-K01BDv5gCLcB/s1600/9.JPG&quot; alt=&quot;image alt&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;h4 style=&quot;color:#3498DB;&quot; id=&quot;測試-system-call&quot;&gt;測試 system call&lt;/h4&gt;
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;測試-system-call&quot;&gt;測試 system call&lt;/h4&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;c&quot;&gt;# 建一個 hello.c
 &lt;/span&gt;
@@ -1149,11 +999,11 @@ gcc &lt;span class=&quot;nt&quot;&gt;-g&lt;/span&gt; &lt;span class=&quot;nt&quo
 &lt;hr /&gt;
 </description>
         <pubDate>Thu, 04 May 2017 00:00:00 +0800</pubDate>
-        <link>http://wenyuangg.github.io//linux/2017/05/04/linux-add-system-call.html</link>
-        <guid isPermaLink="true">http://wenyuangg.github.io//linux/2017/05/04/linux-add-system-call.html</guid>
+        <link>http://localhost:4000/posts/linux/linux-add-system-call.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/linux/linux-add-system-call.html</guid>
         
         
-        <category>linux</category>
+        <category>Linux</category>
         
       </item>
     

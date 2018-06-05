@@ -1,6 +1,10 @@
 /**
- * Reset some basic elements
+ * Base
  */
+
+
+/* Reset some basic elements */
+
 body, h1, h2, h3, h4, h5, h6,
 p, blockquote, pre, hr,
 dl, dd, ol, ul, figure {
@@ -9,27 +13,21 @@ dl, dd, ol, ul, figure {
 }
 
 
+/* Basic styling */
 
-/**
- * Basic styling
- */
 body {
-    font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    font-weight: 300;
     color: $text-color;
     background-color: $background-color;
     -webkit-text-size-adjust: 100%;
-    -webkit-font-feature-settings: "kern" 1;
-    -moz-font-feature-settings: "kern" 1;
-    -o-font-feature-settings: "kern" 1;
-    font-feature-settings: "kern" 1;
-    font-kerning: normal;
 }
 
 
+/* Set `margin-bottom` to maintain vertical rhythm */
 
-/**
- * Set `margin-bottom` to maintain vertical rhythm
- */
 h1, h2, h3, h4, h5, h6,
 p, blockquote, pre,
 ul, ol, dl, figure,
@@ -38,20 +36,40 @@ ul, ol, dl, figure,
 }
 
 
+/* Text */
 
-/**
- * Images
- */
+strong {
+    //font-weight: bold;
+}
+
+p {
+    padding: 10px 0;
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    //border-bottom: 1px solid #aaa;
+}
+
+hr {
+    margin: 4px 0 8px;
+}
+
+
+/* Images */
+
 img {
     max-width: 100%;
     vertical-align: middle;
 }
 
 
+/* Figures */
 
-/**
- * Figures
- */
 figure > img {
     display: block;
 }
@@ -60,11 +78,12 @@ figcaption {
     font-size: $small-font-size;
 }
 
+table {
+    background-color: #e8e8e9;
+}
 
+/* Lists */
 
-/**
- * Lists
- */
 ul, ol {
     margin-left: $spacing-unit;
 }
@@ -72,89 +91,87 @@ ul, ol {
 li {
     > ul,
     > ol {
-         margin-bottom: 0;
-    }
-}
-
-
-
-/**
- * Headings
- */
-h1, h2, h3, h4, h5, h6 {
-    font-weight: $base-font-weight;
-}
-
-
-
-/**
- * Links
- */
-a {
-    color: $brand-color;
-    text-decoration: none;
-
-    &:visited {
-        color: darken($brand-color, 15%);
-    }
-
-    &:hover {
-        color: $text-color;
-        text-decoration: underline;
-    }
-}
-
-
-
-/**
- * Blockquotes
- */
-blockquote {
-    color: $grey-color;
-    border-left: 4px solid $grey-color-light;
-    padding-left: $spacing-unit / 2;
-    font-size: 18px;
-    letter-spacing: -1px;
-    font-style: italic;
-
-    > :last-child {
         margin-bottom: 0;
     }
 }
 
 
+/* Links */
 
-/**
- * Code formatting
- */
-pre,
-code {
-    font-size: 15px;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
-    background-color: #eef;
-}
+a {
+    //color: darken($blue, 10%);
+    color: #00BCD4;
 
-code {
-    padding: 1px 5px;
-}
+    text-decoration: none;
 
-pre {
-    padding: 8px 12px;
-    overflow-x: auto;
+    &:visited {
+        //color: darken($blue, 20%);
+    }
 
-    > code {
-        border: 0;
-        padding-right: 0;
-        padding-left: 0;
+    &:hover {
+        color: $pink;
+        //text-decoration: underline;
     }
 }
 
 
+/* Blockquotes */
 
-/**
- * Wrapper
- */
+blockquote {
+    font-family: $code-font-family;
+    background-color: lighten($grey, 30%);
+    border-left: 4px solid #ee6e73;
+    padding-left: $spacing-unit / 2;
+    letter-spacing: -1px;
+    /*font-style: italic;*/
+
+    > :last-child {
+        margin-bottom: 0;
+        border-left: 0;
+    }
+}
+
+
+/* Code formatting */
+
+pre,
+code {
+    font-family: $code-font-family;
+    border-radius: 3px;
+}
+
+code {
+    font-size: .9rem;
+    padding: 1px 5px;
+    background-color: #e8e8e9;
+    color: #333388;
+}
+
+pre {
+    padding: 8px 12px;
+    //overflow-x: scroll;
+    font-size: 1rem;
+    border: 1px solid $grey-light;
+    background-color: #efefef;  /*#c8e6c9;*/
+
+    > code {
+        font-size: inherit;
+        color: inherit;
+        background-color: inherit;      
+        border: 0;
+        padding-right: 0;
+        padding-left: 0;
+        display: block;
+    }
+    td, th {
+        padding: 0px 0px;
+    }
+}
+
+
+/* Wrapper */
+
+/*
 .wrapper {
     max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
     max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
@@ -171,12 +188,11 @@ pre {
         padding-left: $spacing-unit / 2;
     }
 }
+*/
 
 
+/* Clearfix */
 
-/**
- * Clearfix
- */
 %clearfix {
 
     &:after {
@@ -187,10 +203,9 @@ pre {
 }
 
 
+/* Icons */
 
-/**
- * Icons
- */
+/*
 .icon {
 
     > svg {
@@ -200,7 +215,17 @@ pre {
         vertical-align: middle;
 
         path {
-            fill: $grey-color;
+            fill: $grey;
         }
     }
+}
+*/
+
+.emoji {
+    vertical-align: text-top;
+}
+
+.footnote {
+    font-size: 14px;
+    padding: 0 5px;
 }

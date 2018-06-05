@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[OpenCV] 臉部偵測 (FaceDetection)</title>
+  <meta name="description" content="我的實作環境  作業系統： Lubuntu 16.04  OpenCV 函式庫版本： Version 3.3  程式語言： C++  在作業系統方面不用擔心, 因為 OpenCV 是一個跨平台的函數庫先建立檔案先依序建立以下幾個檔案：mkdir FaceDetectioncd FaceDetectionmkdir...">
+  <link rel="canonical" href="http://localhost:4000/posts/opencv/opencv-face-detection.html">
+  <link rel="alternate" type="application/rss+xml" title="學習筆記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">學習筆記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab "><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Nov 20, 2017
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        OpenCV
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 5, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[OpenCV] 臉部偵測 (FaceDetection)</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <h4 style="color:MediumSeaGreen;" id="我的實作環境">我的實作環境</h4>
+
+<ul>
+  <li><strong>作業系統：</strong> Lubuntu 16.04</li>
+  <li><strong>OpenCV 函式庫版本：</strong> <code class="highlighter-rouge">Version 3.3</code></li>
+  <li><strong>程式語言：</strong> C++</li>
+</ul>
+
+<blockquote>
+  <p>在作業系統方面不用擔心, 因為 OpenCV 是一個<strong>跨平台</strong>的函數庫</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="先建立檔案">先建立檔案</h4>
+
+<p>先依序建立以下幾個檔案：</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>FaceDetection
+<span class="nb">cd </span>FaceDetection
+<span class="nb">mkdir </span>Source
+<span class="nb">touch </span>FaceDetection.cpp</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="下載人臉及人眼分類器">下載人臉及人眼分類器</h4>
+
+<p>先進到 Source 目錄中</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>Source</code></pre></figure>
+
+<p>下載人臉及人眼分類器</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 取得人眼分類器
+</span>
+wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml
+
+<span class="c"># 取得人臉分類器
+</span>
+wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml</code></pre></figure>
+
+<blockquote>
+  <p>XML 是可以自行定義各標籤名稱的標記式語言, 透過標記式語言, 電腦之間便可以傳輸各種資訊
+所以當我們 Load 上面兩個 XML 進程式之後, 就可以使用他們的演算法來找出人臉及眼睛</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="開始撰寫臉部偵測">開始撰寫臉部偵測</h4>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/** FaceDetection.cpp **/</span>
+<span class="cp">#include &lt;opencv2/opencv.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+
+<span class="cm">/** Print error message **/</span>
+<span class="kt">void</span> <span class="n">PANIC</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">);</span>
+<span class="cp">#define PANIC(msg){perror(msg); exit(-1);}
+</span>
+<span class="cm">/** Function for face detection **/</span>
+<span class="kt">void</span> <span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">Mat</span> <span class="n">frame</span><span class="p">);</span>
+
+<span class="cm">/** Global variables **/</span>
+<span class="n">String</span> <span class="n">face_cascade_name</span> <span class="o">=</span> <span class="s">"Source/haarcascade_frontalface_default.xml"</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">eyes_cascade_name</span> <span class="o">=</span> <span class="s">"Source/haarcascade_eye_tree_eyeglasses.xml"</span><span class="p">;</span>
+<span class="n">CascadeClassifier</span> <span class="n">face_cascade</span><span class="p">;</span> <span class="c1">// Declare the face classifier
+</span>
+<span class="n">CascadeClassifier</span> <span class="n">eyes_cascade</span><span class="p">;</span> <span class="c1">// Declare the eyes classifier
+</span>
+<span class="n">String</span> <span class="n">window_name</span> <span class="o">=</span> <span class="s">"Face detection"</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+	<span class="cm">/* Open the web camera */</span>
+	<span class="n">VideoCapture</span> <span class="n">capture</span> <span class="o">=</span> <span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">Mat</span> <span class="n">frame</span><span class="p">,</span> <span class="n">image</span><span class="p">;</span>
+	
+	<span class="cm">/** Load cascade classifiers **/</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">face_cascade</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">face_cascade_name</span><span class="p">))</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error loading face cascade"</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">eyes_cascade</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">eyes_cascade_name</span><span class="p">))</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error loading eyes cascade"</span><span class="p">);</span>
+	
+	<span class="cm">/** After the camera is opened **/</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">capture</span><span class="p">.</span><span class="n">isOpened</span><span class="p">()){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Face Detection Started..."</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+		<span class="k">for</span><span class="p">(;;){</span>
+			<span class="cm">/* Get image from camera */</span>
+			<span class="n">capture</span><span class="o">&gt;&gt;</span><span class="n">frame</span><span class="p">;</span> 			
+			<span class="k">if</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+				<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error capture frame"</span><span class="p">);</span>
+			
+			<span class="cm">/* Start the face detection function */</span>
+			<span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+			
+			<span class="cm">/** If you press ESC, q, or Q , the process will end **/</span>
+			<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">ch</span><span class="o">==</span><span class="mi">27</span> <span class="o">||</span> <span class="n">ch</span><span class="o">==</span><span class="sc">'q'</span> <span class="o">||</span> <span class="n">ch</span><span class="o">==</span><span class="sc">'Q'</span><span class="p">)</span>
+				<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error open camera"</span><span class="p">);</span>
+	
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">Mat</span> <span class="n">frame</span><span class="p">){</span>
+    <span class="cm">/* Declare vector for faces and eyes */</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">faces</span><span class="p">,</span> <span class="n">eyes</span><span class="p">;</span>
+    <span class="n">Mat</span> <span class="n">frame_gray</span><span class="p">,</span> <span class="n">frame_resize</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">radius</span><span class="p">;</span>
+	
+    <span class="cm">/* Convert to gray scale */</span>
+    <span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frame_gray</span><span class="p">,</span> <span class="n">COLOR_BGR2GRAY</span><span class="p">);</span>
+    <span class="c1">//imshow("grayscale", frame_gray);
+</span>
+	
+    <span class="cm">/* Resize the grayscale Image */</span>
+    <span class="c1">//resize(frame_gray, frame_resize, Size(), 1, 1, INTER_LINEAR);
+</span>
+    <span class="c1">//imshow("resize", frame_resize);
+</span>
+	
+    <span class="cm">/* Histogram equalization */</span>
+    <span class="n">equalizeHist</span><span class="p">(</span><span class="n">frame_gray</span><span class="p">,</span> <span class="n">frame_gray</span><span class="p">);</span>
+    <span class="c1">//imshow("equalize", frame_gray);
+</span>
+	
+    <span class="cm">/* Detect faces of different sizes using cascade classifier */</span>
+    <span class="n">face_cascade</span><span class="p">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">frame_gray</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">CV_HAAR_SCALE_IMAGE</span><span class="p">,</span> <span class="n">Size</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+	
+    <span class="cm">/** Draw circles around the faces **/</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">faces</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">center</span><span class="p">;</span>
+ 
+        <span class="cm">/* Draw rectangular on face */</span>
+        <span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Scalar</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">Mat</span> <span class="n">faceROI</span> <span class="o">=</span> <span class="n">frame_gray</span><span class="p">(</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+        <span class="cm">/* Detection of eyes int the input image */</span>
+        <span class="n">eyes_cascade</span><span class="p">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">faceROI</span><span class="p">,</span> <span class="n">eyes</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CV_HAAR_SCALE_IMAGE</span><span class="p">,</span> <span class="n">Size</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> 
+         
+        <span class="cm">/** Draw circles around eyes **/</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">eyes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="n">center</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">width</span><span class="o">*</span><span class="mf">0.5</span><span class="p">));</span>
+            <span class="n">center</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">y</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">height</span><span class="o">*</span><span class="mf">0.5</span><span class="p">));</span>
+            <span class="n">radius</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">width</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">height</span><span class="p">)</span><span class="o">*</span><span class="mf">0.25</span><span class="p">);</span>
+            <span class="n">circle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="c1">// Show Processed Image with detected faces
+</span>
+    <span class="n">imshow</span><span class="p">(</span> <span class="s">"Face Detection"</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="編譯與執行">編譯與執行</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## 編譯
+</span>
+g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
+
+<span class="c"># 執行
+</span>
+./output</code></pre></figure>
+
+<p>執行後將你的臉對準攝相頭, 應該會看到你的臉及眼睛被框出來</p>
+
+<blockquote>
+  <p>如果你還沒安裝 OpenCV 可以參考<a href="">我的文章</a>來安裝</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="解釋程式">解釋程式</h4>
+
+<p>其實過程很簡單, 大致分為以下幾個步驟：</p>
+
+<ol>
+  <li>將人臉和人眼分類器 Load 進來</li>
+  <li>使用 <code class="highlighter-rouge">cvtColor()</code> 將影像轉換成<code class="highlighter-rouge">灰階</code></li>
+  <li>使用 <code class="highlighter-rouge">resize()</code> 更改影像大小比率, 視情況而定, 我們在這裡先不用</li>
+  <li>使用 <code class="highlighter-rouge">equalizeHist()</code> 將影像做直方圖等化, 以增強對比度</li>
+  <li>運用 XML 內的分類器演算法來偵測人臉和人眼</li>
+  <li>分別框出臉和眼睛</li>
+  <li>完成臉部偵測</li>
+</ol>
+
+<p><br /></p>
+
+<hr />
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/opencv/opencv-face-detection.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[OpenCV] 臉部偵測 (FaceDetection)&url=http://localhost:4000/posts/opencv/opencv-face-detection.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/opencv/opencv-face-detection.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/opencv/opencv-face-detection.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[OpenCV] 臉部偵測 (FaceDetection)&url=http://localhost:4000/posts/opencv/opencv-face-detection.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/opencv/opencv-face-detection.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

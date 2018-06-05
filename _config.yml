@@ -1,23 +1,67 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'jekyll serve'. If you change this file, please restart the server process.
-
 # Site settings
-title: wychen
+
+author: WenYuan
 email: chenwy0806@gmail.com
-description: > # this means to ignore newlines until "baseurl:"
-  Thanks for watching.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://wenyuangg.github.io/" # the base hostname & protocol for your site
-github_username:  WenYuanGG
+twitter_username: 
+github_username: WenYuanGG
+googleplus_username: 
 
-comments :
-  provider : disqus
-  disqus :
-    short_name : wenyuangg
+head-title: 學習筆記
+title: 學習筆記
 
+baseurl: ""    # the subpath of your site, "/blog"
+url: ""
+
+# footer 
+description: "This blog records my learning history"
+
+favo: "To be or not to be, that's a question"
+descrpt: "生存還是毀滅, 這是一個值得思考的問題"
+
+
+#
 # Build settings
+#
+
+#exclude: [vendor]
+
 markdown: kramdown
+highlighter: rouge
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+  highlight: true
+  auto_ids:  true
+
+sass:
+  style: compressed
+
+permalink: /posts/:categories/:title.html
+
+paginate: 7
+#paginate_path: 'page/:num'
+
+gems: [jekyll-paginate, jekyll-last-modified-at, jemoji]
+
+
+#
+# Custom
+#
+
+# Color
+# All css class, see: http://materializecss.com/color.html
+header-color: "indigo lighten-1"
+head-theme-color: "#5c6bc0"     # MUST in hex format, may the same as header-color. This color is for android chrome browser.
+
+footer-color: "indigo lighten-1"
+footer-button-color: "indigo lighten-2"
+footer-link-color: "red-text text-accent-1"
+
+share-button-color: "pink"
+share-button-small-color: ""
+
+
+##
+#excerpt_separator: <!-- excerpt_end -->       # for post.excerpt
+

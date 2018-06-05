@@ -2,132 +2,229 @@
 <html>
 
   <head>
-  	<meta charset="utf-8">
-  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
 
-  	<title>About</title>
-  	<meta name="description" content="Thanks for watching.
-">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>About</title>
+  <meta name="description" content="This blog records my learning history">
+  <link rel="canonical" href="http://localhost:4000/about/">
+  <link rel="alternate" type="application/rss+xml" title="學習筆記" href="http://localhost:4000/feed.xml" />
 
-  	<link rel="stylesheet" href="/css/main.css">
-  	<link rel="canonical" href="http://wenyuangg.github.io//about/">
-  	<link rel="alternate" type="application/rss+xml" title="wychen" href="http://wenyuangg.github.io//feed.xml">
-    <link rel="shortcut icon" href="/favicon.png">
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
 
-  	<!--The following informations are for my bootstrap4-->
-	  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
-	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
 </head>
 
 
   <body>
 
-    <script id="dsq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
-
     <header class="site-header">
-
-  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
-    <a class="navbar-brand" href="/">wychen</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav">
-        
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">About</a>
-            </li>
-          
-        
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/catogory/">Catogory</a>
-            </li>
-          
-        
-          
-        
-          
-        
-          
-        
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">學習筆記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
       </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab "><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
     </div>
-  </nav>
 
-</header>
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
 
 
-    <div class="page-content">
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
       <div class="wrapper">
-        <article class="post">
+        <div class="post-ribbon"></div>
 
-  <header class="post-header">
-    <h1 class="post-title">About</h1>
-  </header>
+<div class="container page-container">
+  <div class="post-page card-panel z-depth-2">
+    <div class="post-section">
+      <div class="post-header">
+        <h1 class="post-title">About</h1>
+      </div>
 
-  <div class="post-content">
-    <p>This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at <a href="http://jekyllrb.com/">jekyllrb.com</a></p>
+      <article class="post-content"><h4 id="introduction">Introduction</h4>
 
-<p>You can find the source code for the Jekyll new theme at:
-<a href="https://github.com/jglovier"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
-</span><span class="username">jglovier</span></a>
- /
-<a href="https://github.com/jglovier/jekyll-new">jekyll-new</a></p>
+<p>我目前是一位大學生</p>
 
-<p>You can find the source code for Jekyll at
-<a href="https://github.com/jekyll"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
-</span><span class="username">jekyll</span></a>
- /
-<a href="https://github.com/jekyll/jekyll">jekyll</a></p>
+<p>熱愛學習新的知識以及分享所學</p>
 
-  </div>
+<p>同時也想紀錄我自己的學習歷程</p>
 
+<p>因此建立了這個 Blog</p>
+
+<p>希望各位讀者指教</p>
+
+<h4 id="this-theme">This theme</h4>
+
+<p>這個 <a href="https://jekyllrb.com">jekyll</a> 主題是基於 <a href="http://materializecss.com">materialize</a> 以及個人的部份修改而成</p>
+
+<p>想得到更多資訊可以參閱: <a href="https://github.com/mumuxme/materialize-jekyll">mumuxme/materialize-jekyll</a></p>
+
+<h4 id="license">License</h4>
+
+<p>Copyright © WenYuan</p>
+
+<hr />
+
+<p>如果你有任何問題 <b>問題</b>, 歡迎寄 <b>email</b> 給我, 與我一起討論</p>
+
+<p>As for all articles(except reference) are under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC Attribution-ShareAlike 4.0 International License</a>, you are free to <b>share</b> and <b>adapt</b> for any purpose.</p>
+
+<hr />
+
+<h4 id="personal-information">Personal information</h4>
+
+<p>Email: chenwy0806@gmail.com</p>
 </article>
-
-      </div>
     </div>
-
-    <footer class="site-footer">
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">wychen</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li><a href="mailto:chenwy0806@gmail.com">chenwy0806@gmail.com</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-2">
-        <ul class="social-media-list">
-          
-          <li>
-            <a href="https://github.com/WenYuanGG"><span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/></svg>
-</span><span class="username">WenYuanGG</span></a>
-
-          </li>
-          
-        </ul>
-      </div>
-
-      <div class="footer-col footer-col-3">
-        <p>Thanks for watching.
-</p>
-      </div>
-    </div>
-
   </div>
+</div>
 
-</footer>
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
 
 
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
   </body>
 
 </html>

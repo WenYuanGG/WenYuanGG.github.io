@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</title>
+  <meta name="description" content="跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境  注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!1. 更新系統$ sudo apt-get update$ sudo apt-get upgrade2...">
+  <link rel="canonical" href="http://localhost:4000/posts/opencv/opencv-installation.html">
+  <link rel="alternate" type="application/rss+xml" title="學習筆記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">學習筆記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab "><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Dec 25, 2017
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        OpenCV
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 5, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <p>跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境</p>
+
+<blockquote>
+  <p>注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!</p>
+</blockquote>
+
+<h4 style="color:MediumSeaGreen;" id="1-更新系統">1. 更新系統</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get upgrade</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="2-下載-opencv-的相依套件">2. 下載 OpenCV 的相依套件</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3.5-dev python3-numpy libtbb2 libtbb-dev
+<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="3-下載-opencv">3. 下載 OpenCV</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>su
+<span class="nv">$ </span><span class="nb">cd</span> /opt
+<span class="nv">$ </span>git clone https://github.com/Itseez/opencv.git
+<span class="nv">$ </span>git clone https://github.com/Itseez/opencv_contrib.git</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="4-編譯與安裝-opencv">4. 編譯與安裝 OpenCV</h4>
+
+<p>因為要編譯 OpenCV 以及建置環境, 所以這個環節需要一點時間</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd </span>opencv
+<span class="nv">$ </span><span class="nb">mkdir </span>release
+<span class="nv">$ </span><span class="nb">cd </span>release
+<span class="nv">$ </span><span class="nb">mkdir </span>my_build_dir
+<span class="nv">$ </span><span class="nb">cd </span>my_build_dir
+<span class="nv">$ </span>cmake <span class="nt">-D</span> <span class="nv">BUILD_TIFF</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_CUDA</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">ENABLE_AVX</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENGL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENCL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_IPP</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">BUILD_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_EIGEN</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_V4L</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_VTK</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_PERF_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE <span class="nt">-D</span> <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/local <span class="nt">-D</span> <span class="nv">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=</span>/opt/opencv_contrib/modules /opt/opencv/
+<span class="nv">$ </span>make <span class="nt">-j4</span>
+<span class="nv">$ </span>make <span class="nb">install</span>
+<span class="nv">$ </span>ldconfig
+<span class="nv">$ </span><span class="nb">exit</span>
+<span class="nv">$ </span><span class="nb">cd</span> ~</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="5-查看你的-opencv-版本">5. 查看你的 OpenCV 版本</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>pkg-config <span class="nt">--modversion</span> opencv</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="6-寫個簡單的程式來編譯看看">6. 寫個簡單的程式來編譯看看</h4>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* A simple example */</span>
+<span class="cp">#include "opencv2/opencv.hpp"
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    <span class="n">Mat</span> <span class="n">srcImg</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">"picture.jpg"</span><span class="p">);</span>
+    
+    <span class="n">imshow</span><span class="p">(</span><span class="s">"srcImg"</span><span class="p">,</span> <span class="n">srcImg</span><span class="p">);</span>
+    <span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+    
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<ul>
+  <li>編譯與執行</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>g++ main.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
+<span class="nv">$ </span>./output</code></pre></figure>
+
+<blockquote>
+  <p>上面的 main.cpp 請改成你自己程式的名稱</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="reference">Reference</h4>
+
+<ul>
+  <li><a href="http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/">How to Install OpenCV in Ubuntu 16.04 LTS for C / C++</a></li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/opencv/opencv-installation.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境&url=http://localhost:4000/posts/opencv/opencv-installation.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/opencv/opencv-installation.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/opencv/opencv-installation.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境&url=http://localhost:4000/posts/opencv/opencv-installation.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/opencv/opencv-installation.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

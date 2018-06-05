@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#5c6bc0">
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <title>寫簡單的 Linux Kernel Module</title>
-  <meta name="description" content="1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)mkdir helloworldcd helloworldvim hello.c  hello.c 的 code 如下：/* hello.c */#include &lt;linux/init.h&gt;#include &lt;...">
-  <link rel="canonical" href="http://localhost:4000/posts/linux/simple-linux-kernel-module.html">
+  <title>在 Linux 上寫 C 語言該注意的事</title>
+  <meta name="description" content="1. if…else… 排序">
+  <link rel="canonical" href="http://localhost:4000/posts/linux/programming-notice.html">
   <link rel="alternate" type="application/rss+xml" title="學習筆記" href="http://localhost:4000/feed.xml" />
 
   <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
@@ -138,7 +138,7 @@
 
     <p class="grey-text">
       <i class="mdi mdi-calendar"></i>&nbsp;
-      May 4, 2017
+      Jun 5, 2018
       &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
       WenYuan
       &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
@@ -150,7 +150,7 @@
     </p>
 
     <div class="post-header">
-      <h1 class="post-title">寫簡單的 Linux Kernel Module</h1>
+      <h1 class="post-title">在 Linux 上寫 C 語言該注意的事</h1>
 
       
         <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
@@ -159,121 +159,99 @@
     </div>
 
     <article class="post-content">
-      <h4 style="color:MediumSeaGreen;" id="1-先創建一個資料夾-並寫個簡單的-kernel-module-helloc">1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)</h4>
+      <h4 style="color:MediumSeaGreen;" id="1-ifelse-排序">1. if…else… 排序</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>helloworld
+<p>有學過計算機結構學就會了解, CPU 會將你的指令一行一行照順序地 Fetch 進 Instruction Memory , 因此可以想像, 如果我們 <b>將發生機率高的程式區塊放在 if 中的話, 便會讓程式整體的效率提升</b>, 如下所示：</p>
 
-<span class="nb">cd </span>helloworld
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">if</span><span class="p">(</span><span class="n">Condition</span><span class="p">){</span>
+    <span class="c1">// 放發生機率高的事件  </span>
+<span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+    <span class="c1">// 放發生機率低的事件</span>
+<span class="p">}</span></code></pre></figure>
 
-vim hello.c</code></pre></figure>
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="2-static-的運用">2. static 的運用</h4>
+
+<p>重要的 <b>函式或變數要使用 static 來宣告</b>, 可以避免多個程式連結執行時, 因為在其他檔案中已宣告過相同的函式或變數而發生錯誤, 宣告方式如下：</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="k">static</span> <span class="kt">int</span> <span class="n">errno</span><span class="p">;</span> <span class="c1">// 宣告變數</span>
+<span class="c1">// 宣告函式</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">function</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
+    
+<span class="p">}</span></code></pre></figure>
+
+<blockquote>
+  <p>使用 static 宣告的函式或變數代表只在該程式中有效</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="3-善用-define">3. 善用 #define</h4>
+
+<p>在程式中儘量不要出現數字, <b>固定的數字儘量使用 #define 來定義</b>, 其一是為了方便管理程式, 其二是怕你不小心敲到鍵盤多打到其它數字， 這時你就 GG 了, 因為你很難在幾千甚至上萬行的程式中找出錯誤點, 宣告方式如下：</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#define PI 3.14159
+#define BUFSIZE 1024</span></code></pre></figure>
+
+<blockquote>
+  <p>聽說在某些外商公司會強烈要求程式中<strong>不可以出現數字</strong></p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="4-善用-man-page">4. 善用 man page</h4>
+
+<p>使用函數時要先看 man page 中是如何定義該函數的型態, 例如下方：</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">ssize_t</span> <span class="n">write</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">count</span><span class="p">);</span></code></pre></figure>
+
+<p>你可以看到 <code class="highlighter-rouge">write()</code> 的回傳參數型態是 <code class="highlighter-rouge">ssize_t</code> , 一般情況下可能不會方生錯誤, 但是當你換到不同的 CPU 架構或者其他執行平台時就可能會發生錯誤</p>
+
+<blockquote>
+  <p>假設你想看 <code class="highlighter-rouge">write()</code> 的函數定義，你可以再瀏覽器搜尋 <code class="highlighter-rouge">man write</code></p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="5-有借有還再借不難">5. 有借有還，再借不難</h4>
+
+<p>不管你是分配了動態記憶體或者開了新的 file descriptor , 只要你 <b>不用時都要記得關掉 (釋放掉)</b>, 否則你的 <b>程式可能會再執行一段時間後因為資源不足而掛掉</b>, 如下所示：</p>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="n">sockfd</span> <span class="o">=</span> <span class="n">socket</span><span class="p">(</span><span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_family</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_socktype</span><span class="p">,</span> <span class="n">res</span><span class="o">-&gt;</span><span class="n">ai_protocol</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="n">close</span><span class="p">(</span><span class="n">sockfd</span><span class="p">);</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="kt">int</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+<span class="p">...</span>
+<span class="n">free</span><span class="p">(</span><span class="n">p</span><span class="p">);</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="6-更為嚴謹的編譯方式">6. 更為嚴謹的編譯方式</h4>
+
+<p>建議在使用 gcc 編譯時可以加入 -g -Wall 參數, 這兩個參數會 <b>幫你編入錯誤訊息 (GDB可用) 以及顯示出所有警告訊息</b>, 如下所示</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">/home/chris <span class="nv">$ </span>gcc <span class="nt">-g</span> <span class="nt">-Wall</span> exmaple.c <span class="nt">-o</span> output </code></pre></figure>
+
+<blockquote>
+  <p>試著去除所有的 Warning Message , 讓你的程式更加完美</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="reference">Reference</h4>
 
 <ul>
-  <li><code class="highlighter-rouge">hello.c</code> 的 code 如下：</li>
+  <li>學校上課內容</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* hello.c */</span>
-<span class="cp">#include &lt;linux/init.h&gt;
-#include &lt;linux/module.h&gt;
-</span>  
-<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Hello_world"</span><span class="p">);</span>
-<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL"</span><span class="p">);</span>
-  
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">hello_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
- <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"Hello world !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
- <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-  
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hello_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
- <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"ByeBye !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-<span class="p">}</span>
-  
-<span class="n">module_init</span><span class="p">(</span><span class="n">hello_init</span><span class="p">);</span>
-<span class="cm">/* When u use insmod, it will enter hello_init function */</span>
-
-<span class="n">module_exit</span><span class="p">(</span><span class="n">hello_exit</span><span class="p">);</span>
-<span class="cm">/* When u use rmmod, it will enter hello_exit function */</span></code></pre></figure>
-
 <p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="2-接著在同個目錄下寫個-makefile">2. 接著在同個目錄下寫個 Makefile</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim Makefile</code></pre></figure>
-
-<ul>
-  <li><code class="highlighter-rouge">Makefile</code> 的內容如下：</li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">PWD :<span class="o">=</span> <span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">)</span> 
-KVERSION :<span class="o">=</span> <span class="k">$(</span>shell <span class="nb">uname</span> <span class="nt">-r</span><span class="k">)</span>
-KERNEL_DIR <span class="o">=</span> /usr/src/linux-headers-<span class="k">$(</span>KVERSION<span class="k">)</span>/
- 
-MODULE_NAME <span class="o">=</span> hello
-obj-m :<span class="o">=</span> <span class="k">$(</span>MODULE_NAME<span class="k">)</span>.o
- 
-all: 
- make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> modules
-clean: 
- make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> clean</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="3-最後就可以使用-sudo-make-指令來編譯">3. 最後就可以使用 sudo make 指令來編譯</h4>
 
 <blockquote>
-  <p>將他編譯成 <code class="highlighter-rouge">.ko</code> 檔</p>
+  <p>如果有其他要補充的, 歡迎下方留言告訴我</p>
 </blockquote>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>make</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture01.JPG" alt="picture01" /></p>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="4-使用-insmod-來載入-module">4. 使用 insmod 來載入 module</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>insmod hello.ko
-
-<span class="c"># 載完後用 dmesg 來觀看 kernel 訊息
-</span>
-dmesg</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture02.JPG" alt="picture02" /></p>
-
-<blockquote>
-  <p>可以看到成功 print 出 hello world ! 字串</p>
-</blockquote>
-
-<p><br /></p>
-
-<p>你也可以使用 <code class="highlighter-rouge">lsmod</code> 指令來列出目前在使用的 module</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># grep "hello" 用來濾出我們的 hello module 
-</span>
-lsmod | <span class="nb">grep</span> <span class="s2">"hello"</span></code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture03.JPG" alt="picture03" /></p>
-
-<p><br /></p>
-
-<p>最後想要移除掉模組的話 要使用 <code class="highlighter-rouge">rmmod</code></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>rmmod hello.ko
-
-<span class="c"># 再觀察一次 kernel 訊息
-</span>
-dmesg</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture04.JPG" alt="picture04" /></p>
-
-<blockquote>
-  <p>可以看到 print 出了 ByeBye ! 字串</p>
-</blockquote>
-
-<p><br /></p>
-
-<hr />
 
     </article>
 
@@ -283,18 +261,18 @@ dmesg</code></pre></figure>
 <div class="hide-on-small-only">
   <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/simple-linux-kernel-module.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=寫簡單的 Linux Kernel Module&url=http://localhost:4000/posts/linux/simple-linux-kernel-module.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/simple-linux-kernel-module.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/programming-notice.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=在 Linux 上寫 C 語言該注意的事&url=http://localhost:4000/posts/linux/programming-notice.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/programming-notice.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 <!-- small screen device -->
 <div class="hide-on-med-and-up">
   <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/simple-linux-kernel-module.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=寫簡單的 Linux Kernel Module&url=http://localhost:4000/posts/linux/simple-linux-kernel-module.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/simple-linux-kernel-module.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/programming-notice.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=在 Linux 上寫 C 語言該注意的事&url=http://localhost:4000/posts/linux/programming-notice.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/programming-notice.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 </div>

@@ -3,6 +3,7 @@ layout: post
 title:  "[Python] 練習通用的機器學習法"
 date:   2018-03-04
 categories: [MachineLearning]
+comments: true
 ---
 
 #### 1. 蒐集數據

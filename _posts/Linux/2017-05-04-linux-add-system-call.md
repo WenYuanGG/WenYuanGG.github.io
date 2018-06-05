@@ -3,6 +3,7 @@ layout: post
 title:  "增加一個 System Call 到 Linux Kernel (v4.x)"
 date:   2017-05-04
 categories: [Linux]
+comments: true
 ---
 
 #### 我的系統環境

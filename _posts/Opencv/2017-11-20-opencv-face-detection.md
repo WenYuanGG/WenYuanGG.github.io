@@ -3,6 +3,7 @@ layout: post
 title:  "[OpenCV] 臉部偵測 (FaceDetection)"
 date:   2017-11-20
 categories: [OpenCV]
+comments: true
 ---
 
 #### 我的實作環境

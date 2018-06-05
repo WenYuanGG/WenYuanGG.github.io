@@ -3,6 +3,7 @@ layout: post
 title:  "寫簡單的 Linux Kernel Module"
 date:   2017-05-04
 categories: [Linux]
+comments: true
 ---
 
 #### 1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c) 

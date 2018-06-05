@@ -5,13 +5,58 @@
     <description>This blog records my learning history</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Jun 2018 22:27:42 +0800</pubDate>
-    <lastBuildDate>Tue, 05 Jun 2018 22:27:42 +0800</lastBuildDate>
+    <pubDate>Wed, 06 Jun 2018 00:06:52 +0800</pubDate>
+    <lastBuildDate>Wed, 06 Jun 2018 00:06:52 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
+        <title>隨機變數 (Random Variable) 觀念</title>
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;隨機變數是相關科系研究所口試很愛問的問題&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;定義&quot;&gt;定義&lt;/h4&gt;
+
+&lt;p&gt;隨機變數實際上是一個&lt;b&gt;函數&lt;/b&gt;，而不是變數, 他可以將定義域中千奇百怪的樣本點經過隨機變數轉換為數值&lt;/p&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;為何需要隨機變數&quot;&gt;為何需要隨機變數&lt;/h4&gt;
+
+&lt;p&gt;主要是因為隨機試驗的種類多而且複雜, 如果我們將一大堆的試驗結果經過隨機變數處理，將其轉換為數值, 可以方便我們用來做數學分析&lt;/p&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;隨機變數的使用&quot;&gt;隨機變數的使用&lt;/h4&gt;
+
+&lt;p&gt;假設有一試驗為投擲硬幣 3 次, 我們令一個隨機變數 X 為投擲出正面的數量, 則會產生出下圖結果&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/8EPs6Ol.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;試驗的結果為定義域, 而硬幣正面的數量為定應域, 所以會產生出上圖的定應結果, 我們就稱這種對應方式為 &lt;b&gt;Random Variable&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;由上圖你也可以得知, 多個試驗結果是可能對應到同一個值的, 所以隨機變數並不必一定要是 &lt;strong&gt;one-to-one 的函數&lt;/strong&gt;, 也可以是個&lt;strong&gt;多對一函數&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;隨機變數又可以分成-3-種型態&quot;&gt;隨機變數又可以分成 3 種型態&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;b&gt;離散型：&lt;/b&gt; 對應域數值為&lt;strong&gt;有限個或可數無限個&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;連續型：&lt;/b&gt; 對應域數值為&lt;strong&gt;無限不可數個&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;b&gt;混合型：&lt;/b&gt; 代表對應域中&lt;strong&gt;同時包含以上兩種&lt;/strong&gt;特性&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 06 Jun 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/random-variable.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/random-variable.html</guid>
+        
+        
+        <category>機率論</category>
+        
+      </item>
+    
+      <item>
         <title>在 Linux 上寫 C 語言該注意的事</title>
-        <description>&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;1-ifelse-排序&quot;&gt;1. if…else… 排序&lt;/h4&gt;
+        <description>&lt;blockquote&gt;
+  &lt;p&gt;我將告訴你 - 在 Linux 上寫 C 語言該注意的事&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;1-ifelse-排序&quot;&gt;1. if…else… 排序&lt;/h4&gt;
 
 &lt;p&gt;有學過計算機結構學就會了解, CPU 會將你的指令一行一行照順序地 Fetch 進 Instruction Memory , 因此可以想像, 如果我們 &lt;b&gt;將發生機率高的程式區塊放在 if 中的話, 便會讓程式整體的效率提升&lt;/b&gt;, 如下所示：&lt;/p&gt;
 

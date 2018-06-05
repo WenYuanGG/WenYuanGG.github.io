@@ -6,6 +6,8 @@ categories: [Linux]
 comments: true
 ---
 
+> 我將告訴你 - 在 Linux 上寫 C 語言該注意的事
+
 #### 1. if...else... 排序
 {: style="color:MediumSeaGreen;"}
 

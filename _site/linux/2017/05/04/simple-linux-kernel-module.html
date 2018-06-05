@@ -28,7 +28,7 @@
 
     <header class="site-header">
 
-  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     <a class="navbar-brand" href="/">wychen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -71,7 +71,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h4 style="color:#3498DB;" id="kernel-module-helloc">1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)</h4>
+    <h4 style="color:#3498DB;" id="1-先創建一個資料夾-並寫個簡單的-kernel-module-helloc">1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)</h4>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir helloworld
 
@@ -109,7 +109,7 @@ vim hello.c</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="makefile">2. 接著在同個目錄下寫個 Makefile</h4>
+<h4 style="color:#3498DB;" id="2-接著在同個目錄下寫個-makefile">2. 接著在同個目錄下寫個 Makefile</h4>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim Makefile</code></pre></figure>
 
@@ -118,34 +118,34 @@ vim hello.c</code></pre></figure>
 </ul>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash">PWD :<span class="o">=</span> <span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">)</span> 
-KVERSION :<span class="o">=</span> <span class="k">$(</span>shell uname -r<span class="k">)</span>
+KVERSION :<span class="o">=</span> <span class="k">$(</span>shell uname <span class="nt">-r</span><span class="k">)</span>
 KERNEL_DIR <span class="o">=</span> /usr/src/linux-headers-<span class="k">$(</span>KVERSION<span class="k">)</span>/
  
 MODULE_NAME <span class="o">=</span> hello
 obj-m :<span class="o">=</span> <span class="k">$(</span>MODULE_NAME<span class="k">)</span>.o
  
 all: 
- make -C <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> modules
+ make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> modules
 clean: 
- make -C <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> clean</code></pre></figure>
+ make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> clean</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="sudo-make-">3. 最後就可以使用 sudo make 指令來編譯</h4>
+<h4 style="color:#3498DB;" id="3-最後就可以使用-sudo-make-指令來編譯">3. 最後就可以使用 sudo make 指令來編譯</h4>
 
 <blockquote>
   <p>將他編譯成 <code class="highlighter-rouge">.ko</code> 檔</p>
 </blockquote>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo make</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>make</code></pre></figure>
 
 <p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture01.JPG" alt="picture01" /></p>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="insmod--module">4. 使用 insmod 來載入 module</h4>
+<h4 style="color:#3498DB;" id="4-使用-insmod-來載入-module">4. 使用 insmod 來載入 module</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo insmod hello.ko
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>insmod hello.ko
 
 <span class="c"># 載完後用 dmesg 來觀看 kernel 訊息
 </span>
@@ -163,7 +163,7 @@ dmesg</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># grep "hello" 用來濾出我們的 hello module 
 </span>
-lsmod | grep <span class="s2">"hello"</span></code></pre></figure>
+lsmod | <span class="nb">grep</span> <span class="s2">"hello"</span></code></pre></figure>
 
 <p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture03.JPG" alt="picture03" /></p>
 
@@ -171,7 +171,7 @@ lsmod | grep <span class="s2">"hello"</span></code></pre></figure>
 
 <p>最後想要移除掉模組的話 要使用 <code class="highlighter-rouge">rmmod</code></p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo rmmod hello.ko
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>rmmod hello.ko
 
 <span class="c"># 再觀察一次 kernel 訊息
 </span>

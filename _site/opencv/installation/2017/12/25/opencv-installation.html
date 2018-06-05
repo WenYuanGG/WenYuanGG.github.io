@@ -28,7 +28,7 @@
 
     <header class="site-header">
 
-  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     <a class="navbar-brand" href="/">wychen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -77,39 +77,39 @@
   <p>注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!</p>
 </blockquote>
 
-<h4 style="color:#3498DB;" id="section">1. 更新系統</h4>
+<h4 style="color:#3498DB;" id="1-更新系統">1. 更新系統</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get upgrade</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:#3498DB;" id="opencv-">2. 下載 OpenCV 的相依套件</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-sudo apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
-sudo apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get upgrade</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="opencv">3. 下載 OpenCV</h4>
+<h4 style="color:#3498DB;" id="2-下載-opencv-的相依套件">2. 下載 OpenCV 的相依套件</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo su
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+<span class="nb">sudo </span>apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
+<span class="nb">sudo </span>apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:#3498DB;" id="3-下載-opencv">3. 下載 OpenCV</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>su
 <span class="nb">cd</span> /opt
 git clone https://github.com/Itseez/opencv.git
 git clone https://github.com/Itseez/opencv_contrib.git</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="opencv-1">4. 編譯與安裝 OpenCV</h4>
+<h4 style="color:#3498DB;" id="4-編譯與安裝-opencv">4. 編譯與安裝 OpenCV</h4>
 
 <p>因為要編譯 OpenCV 以及建置環境, 所以這個環節需要一點時間</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>opencv
 mkdir release
 <span class="nb">cd </span>release
-cmake -D <span class="nv">BUILD_TIFF</span><span class="o">=</span>ON -D <span class="nv">WITH_CUDA</span><span class="o">=</span>OFF -D <span class="nv">ENABLE_AVX</span><span class="o">=</span>OFF -D <span class="nv">WITH_OPENGL</span><span class="o">=</span>OFF -D <span class="nv">WITH_OPENCL</span><span class="o">=</span>OFF -D <span class="nv">WITH_IPP</span><span class="o">=</span>OFF -D <span class="nv">WITH_TBB</span><span class="o">=</span>ON -D <span class="nv">BUILD_TBB</span><span class="o">=</span>ON -D <span class="nv">WITH_EIGEN</span><span class="o">=</span>OFF -D <span class="nv">WITH_V4L</span><span class="o">=</span>OFF -D <span class="nv">WITH_VTK</span><span class="o">=</span>OFF -D <span class="nv">BUILD_TESTS</span><span class="o">=</span>OFF -D <span class="nv">BUILD_PERF_TESTS</span><span class="o">=</span>OFF -D <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE -D <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/local -D <span class="nv">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=</span>/opt/opencv_contrib/modules /opt/opencv/
-make -j4
+cmake <span class="nt">-D</span> <span class="nv">BUILD_TIFF</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_CUDA</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">ENABLE_AVX</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENGL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENCL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_IPP</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">BUILD_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_EIGEN</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_V4L</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_VTK</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_PERF_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE <span class="nt">-D</span> <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/local <span class="nt">-D</span> <span class="nv">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=</span>/opt/opencv_contrib/modules /opt/opencv/
+make <span class="nt">-j4</span>
 make install
 ldconfig
 <span class="nb">exit
@@ -117,13 +117,13 @@ cd</span> ~</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="opencv--1">5. 查看你的 OpenCV 版本</h4>
+<h4 style="color:#3498DB;" id="5-查看你的-opencv-版本">5. 查看你的 OpenCV 版本</h4>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pkg-config --modversion opencv</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">pkg-config <span class="nt">--modversion</span> opencv</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-1">6. 寫個簡單的程式來編譯看看</h4>
+<h4 style="color:#3498DB;" id="6-寫個簡單的程式來編譯看看">6. 寫個簡單的程式來編譯看看</h4>
 
 <figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cp">#include "opencv2/opencv.hpp"
 </span>
@@ -144,7 +144,7 @@ cd</span> ~</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 編譯
 </span>
-g++ main.cpp -o output <span class="sb">`</span>pkg-config --cflags --libs opencv<span class="sb">`</span>
+g++ main.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
 
 <span class="c"># 執行
 </span>

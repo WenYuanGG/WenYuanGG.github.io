@@ -6,7 +6,7 @@
   	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<title>[OpenCV]臉部偵測 (FaceDetection)</title>
+  	<title>[OpenCV] 臉部偵測 (FaceDetection)</title>
   	<meta name="description" content="我的實作環境  作業系統： Lubuntu 16.04  OpenCV 函式庫版本： Version 3.3  程式語言： C++  在作業系統方面不用擔心, 因為 OpenCV 是一個跨平台的函數庫先建立檔案先依序建立以下幾個檔案：mkdir FaceDetectioncd FaceDetectionmkdir...">
 
   	<link rel="stylesheet" href="/css/main.css">
@@ -28,7 +28,7 @@
 
     <header class="site-header">
 
-  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     <a class="navbar-brand" href="/">wychen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -66,12 +66,12 @@
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h2 itemprop="name headline" style="color:#556B2F">[OpenCV]臉部偵測 (FaceDetection)</h2>
+    <h2 itemprop="name headline" style="color:#556B2F">[OpenCV] 臉部偵測 (FaceDetection)</h2>
     <p class="post-meta"><time datetime="2017-11-20T19:58:18+08:00" itemprop="datePublished">Nov 20, 2017</time></p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h4 style="color:#3498DB;" id="section">我的實作環境</h4>
+    <h4 style="color:#3498DB;" id="我的實作環境">我的實作環境</h4>
 
 <ul>
   <li><strong>作業系統：</strong> Lubuntu 16.04</li>
@@ -85,7 +85,7 @@
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-1">先建立檔案</h4>
+<h4 style="color:#3498DB;" id="先建立檔案">先建立檔案</h4>
 
 <p>先依序建立以下幾個檔案：</p>
 
@@ -96,7 +96,7 @@ touch FaceDetection.cpp</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-2">下載人臉及人眼分類器</h4>
+<h4 style="color:#3498DB;" id="下載人臉及人眼分類器">下載人臉及人眼分類器</h4>
 
 <p>先進到 Source 目錄中</p>
 
@@ -119,7 +119,7 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-3">開始撰寫臉部偵測</h4>
+<h4 style="color:#3498DB;" id="開始撰寫臉部偵測">開始撰寫臉部偵測</h4>
 
 <figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/** FaceDetection.cpp **/</span>
 <span class="cp">#include &lt;opencv2/opencv.hpp&gt;
@@ -229,11 +229,11 @@ wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/ha
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-4">編譯與執行</h4>
+<h4 style="color:#3498DB;" id="編譯與執行">編譯與執行</h4>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## 編譯
 </span>
-g++ FaceDetection.cpp -o output <span class="sb">`</span>pkg-config --cflags --libs opencv<span class="sb">`</span>
+g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
 
 <span class="c"># 執行
 </span>
@@ -247,7 +247,7 @@ g++ FaceDetection.cpp -o output <span class="sb">`</span>pkg-config --cflags --l
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-5">解釋程式</h4>
+<h4 style="color:#3498DB;" id="解釋程式">解釋程式</h4>
 
 <p>其實過程很簡單, 大致分為以下幾個步驟：</p>
 

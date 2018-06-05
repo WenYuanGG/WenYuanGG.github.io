@@ -28,7 +28,7 @@
 
     <header class="site-header">
 
-  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     <a class="navbar-brand" href="/">wychen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -77,7 +77,7 @@
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section">建立自己的數據</h4>
+<h4 style="color:#3498DB;" id="建立自己的數據">建立自己的數據</h4>
 
 <ul>
   <li>我們示範使用了 <code class="highlighter-rouge">make_regression()</code>來建立一筆線性迴歸數據
@@ -93,7 +93,7 @@
 
 <figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="c"># 建立自己的數據 (線性迴歸數據)</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_targets</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>

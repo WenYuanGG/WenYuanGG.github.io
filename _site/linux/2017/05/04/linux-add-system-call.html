@@ -28,7 +28,7 @@
 
     <header class="site-header">
 
-  <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+  <nav class="navbar navbar-expand-sm bg-secondary navbar-dark fixed-top">
     <a class="navbar-brand" href="/">wychen</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -71,7 +71,7 @@
   </header>
 
   <div class="post-content" itemprop="articleBody">
-    <h4 style="color:#3498DB;" id="section">我的系統環境</h4>
+    <h4 style="color:#3498DB;" id="我的系統環境">我的系統環境</h4>
 
 <ul>
   <li><strong>作業系統：</strong> Lubuntu 16.04</li>
@@ -80,26 +80,26 @@
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="section-1">更新系統</h4>
+<h4 style="color:#3498DB;" id="更新系統">更新系統</h4>
 
 <ul>
   <li>更新</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get upgrade</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get upgrade</code></pre></figure>
 
 <ul>
   <li>查看你當前的 <strong>Kernel 版本</strong></li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">uname -r</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">uname <span class="nt">-r</span></code></pre></figure>
 
 <p><img src="https://2.bp.blogspot.com/-0k5fdklzdWQ/WQs1A8MV9cI/AAAAAAAAAKM/jGcdqvzht78HSXmFJFVNPMqjbZwHouTyQCLcB/s1600/1.JPG" alt="picture01" /></p>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="kernel-source">下載 Kernel Source</h4>
+<h4 style="color:#3498DB;" id="下載-kernel-source">下載 Kernel Source</h4>
 
 <p>到 <a href="https://www.kernel.org/">Kernel Archive</a> 下載 kernel source
 我下載的是當時較為穩定的 “ 4.10.14 “ kernel
@@ -113,11 +113,11 @@ sudo apt-get upgrade</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 進入 root 模式
 </span>
-sudo su
+<span class="nb">sudo </span>su
 
 <span class="c"># 把檔案解壓縮到 /usr/src 目錄底下
 </span>
-tar -xvf linux-4.10.5.tar.xz -C /usr/src</code></pre></figure>
+<span class="nb">tar</span> <span class="nt">-xvf</span> linux-4.10.5.tar.xz <span class="nt">-C</span> /usr/src</code></pre></figure>
 
 <p><br /></p>
 
@@ -216,13 +216,13 @@ vim syscalls.h</code></pre></figure>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="kernel">編譯 kernel</h4>
+<h4 style="color:#3498DB;" id="編譯-kernel">編譯 kernel</h4>
 
 <p>先把會用到的套件安裝好</p>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 這個套件可以幫我們 build 出 kernel-pakage
 </span>
-sudo apt-get install fakeroot build-essential kernel-package libncurses5 libncurses5-dev</code></pre></figure>
+<span class="nb">sudo </span>apt-get install fakeroot build-essential kernel-package libncurses5 libncurses5-dev</code></pre></figure>
 
 <p><img src="https://1.bp.blogspot.com/-Ba1CeFDl218/WQtG0alzuvI/AAAAAAAAAMM/Fl7zWf7UCXsxGK9tCx26x34RXV9wxz2NQCLcB/s1600/6.JPG" alt="image alt" /></p>
 
@@ -238,7 +238,7 @@ sudo apt-get install fakeroot build-essential kernel-package libncurses5 libncur
 </span>
 <span class="nb">cd</span> /usr/src/linux-4.10.14
 
-cp /boot/config-<span class="sb">`</span>uname -r<span class="sb">`</span> ./.config</code></pre></figure>
+cp /boot/config-<span class="sb">`</span>uname <span class="nt">-r</span><span class="sb">`</span> ./.config</code></pre></figure>
 
 <p>然後用 <code class="highlighter-rouge">make menuconfig</code> 來設定組態</p>
 
@@ -262,7 +262,7 @@ make-kpkg clean
 
 <span class="c"># 編譯 kernel
 </span>
-fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers
+fakeroot make-kpkg <span class="nt">-j</span> 4 <span class="nt">--initrd</span> kernel_image kernel_headers
 <span class="c"># 等編譯完後會產生 kernel 的 image 和 headers</span></code></pre></figure>
 
 <p><br /></p>
@@ -271,13 +271,13 @@ fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers
   <p>如果你在編譯的時候出現 <code class="highlighter-rouge">"fatal error: openssl/opensslv.h: No such file or directory"</code> 錯誤訊息的話，表示你的 <strong>SSL 庫有缺失</strong>，請你先安裝下面套件後再重新編譯</p>
 </blockquote>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get install python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get install python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
 
 <span class="c"># 再重新下指令編譯
 </span>
-fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers</code></pre></figure>
+fakeroot make-kpkg <span class="nt">-j</span> 4 <span class="nt">--initrd</span> kernel_image kernel_headers</code></pre></figure>
 
-<h4 style="color:#3498DB;" id="section-2">編譯完成</h4>
+<h4 style="color:#3498DB;" id="編譯完成">編譯完成</h4>
 
 <p>編譯完成後會在 <code class="highlighter-rouge">/usr/src</code> 路徑下產生了這個 kernel 的 <strong>image 和 headers</strong> ，我們要用指令安裝他們</p>
 
@@ -287,11 +287,11 @@ fakeroot make-kpkg -j 4 --initrd kernel_image kernel_headers</code></pre></figur
 
 <span class="c"># 安裝 kernel image
 </span>
-sudo dpkg -i linux-image-4.10.14_4.10.14-10.00.Custom_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> linux-image-4.10.14_4.10.14-10.00.Custom_amd64.deb
 
 <span class="c"># 安裝 kernel headers
 </span>
-sudo dpkg -i linux-headers-4.10.14_4.10.14-10.00.Custom_amd64.deb
+<span class="nb">sudo </span>dpkg <span class="nt">-i</span> linux-headers-4.10.14_4.10.14-10.00.Custom_amd64.deb
 
 <span class="c"># 安裝完後就重開機
 </span>
@@ -303,13 +303,13 @@ reboot</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 查看 kernel version
 </span>
-uname -r</code></pre></figure>
+uname <span class="nt">-r</span></code></pre></figure>
 
 <p><img src="https://1.bp.blogspot.com/-s7kDQlzSFxQ/WQt1e60FoGI/AAAAAAAAANU/jnLPgz2DcacW4HUTfUAr8yJl-K01BDv5gCLcB/s1600/9.JPG" alt="image alt" /></p>
 
 <p><br /></p>
 
-<h4 style="color:#3498DB;" id="system-call">測試 system call</h4>
+<h4 style="color:#3498DB;" id="測試-system-call">測試 system call</h4>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 建一個 hello.c
 </span>
@@ -335,7 +335,7 @@ vim hello.c</code></pre></figure>
 
 <figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 編譯 hello.c
 </span>
-gcc -g -Wall hello.c -o hello
+gcc <span class="nt">-g</span> <span class="nt">-Wall</span> hello.c <span class="nt">-o</span> hello
 
 <span class="c"># 執行
 </span>

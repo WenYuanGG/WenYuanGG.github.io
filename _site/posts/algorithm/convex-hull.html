@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[Java] Convex Hull 演算法</title>
+  <meta name="description" content="建議可以先到 這裡 了解 Convex Hull 演算法的基本概念, 我覺得他的觀念講的很清楚">
+  <link rel="canonical" href="http://localhost:4000/posts/algorithm/convex-hull.html">
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <script id="diq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">通訊雜記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      May 6, 2017
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        Algorithm
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 6, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[Java] Convex Hull 演算法</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <p>建議可以先到 <a href="http://www.csie.ntnu.edu.tw/~u91029/ConvexHull.html">這裡</a> 了解 Convex Hull 演算法的基本概念, 我覺得他的觀念講的很清楚</p>
+
+<h4 style="color:MediumSeaGreen;" id="我的做法">我的做法</h4>
+
+<ul>
+  <li>
+    <p>我是使用 JAVA AWT 實作圖形化, 而 JAVA AWT 視窗的<strong>座標原點是在最左上角</strong>，我沒有重新修改，但這並不影響我的運算結果</p>
+  </li>
+  <li>
+    <p>在平面上亂數產生 N 個點 (由使用者決定) , 接著從這些點中找出<strong>左界和右界</strong>，再依此左界來找出最左上角的點，我將會把此點當成我的<strong>起始點位 (current)</strong> ，如下圖：</p>
+  </li>
+</ul>
+
+<p><img src="https://i.imgur.com/IusDQ64.png" alt="" /></p>
+
+<ul>
+  <li>
+    <p>現在我們可以先確定最左上角的點也是凸包的其中一點，所以我要以這點為起始點位 (current) ，用迴圈<strong>由左往右尋找可以與起始點形成斜率較大的點</strong>，找到後除了用 buffer 把它紀錄下來之外，也要把它放進 current ，因為我們要繼續以這點為起始點繼續尋找下個點，<strong>直到抵達右界(right)</strong></p>
+  </li>
+  <li>
+    <p>抵達右界後 (right) 之後我們要反過來，由<strong>右往左尋找斜率較大的點</strong>，就如同步驟 3 一樣，只是方向變了而已。如下圖：</p>
+  </li>
+</ul>
+
+<p><img src="https://i.imgur.com/JnMASM9.png" alt="" /></p>
+
+<ul>
+  <li>做完步驟 3 4 之後就可以找出最外圍的點到底有哪些了，因為在過程中找出來的點我們都存到一個 buffer 裡，所以接下來就可以直接把這些座標取出來畫一個凸包</li>
+</ul>
+
+<blockquote>
+  <p>在第 3 4 步驟的時候要注意，假設找到兩個斜率一樣大的點，我們要<strong>取長度比較長的</strong>那個，所以記得多寫一個判斷式</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="完整程式碼">完整程式碼</h4>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.awt.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Color</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.Graphics</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.WindowAdapter</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.awt.event.WindowEvent</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Vector</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">Convex</span> <span class="kd">extends</span> <span class="n">Frame</span> <span class="kd">implements</span> <span class="n">ActionListener</span><span class="o">,</span> <span class="n">TextListener</span><span class="o">,</span> <span class="n">MouseMotionListener</span><span class="o">{</span>
+	<span class="cm">/*-------------定義會用到的東西----------------*/</span>
+	<span class="kd">static</span> <span class="n">Convex</span> <span class="n">frm</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Convex</span><span class="o">();</span>
+	<span class="kd">static</span> <span class="n">Button</span> <span class="n">btn</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Button</span><span class="o">(</span><span class="s">"Send"</span><span class="o">);</span>
+	<span class="kd">static</span> <span class="n">TextArea</span> <span class="n">txa</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextArea</span><span class="o">(</span><span class="s">"請輸入要幾個點"</span><span class="o">);</span>
+	<span class="c1">//static TextArea txa1 = new TextArea("Convex Hull");</span>
+	<span class="kd">static</span> <span class="n">Label</span> <span class="n">lab</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">();</span>
+	<span class="kd">static</span> <span class="n">Label</span> <span class="n">lab1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Label</span><span class="o">(</span><span class="s">"Convex Hull"</span><span class="o">);</span>
+	<span class="kt">int</span> <span class="n">amount</span><span class="o">;</span>  <span class="c1">//接收由文字方塊輸入的數字</span>
+
+	<span class="c1">//定義一個 Vertex 類別，放置 x y 形成一個座標</span>
+	<span class="kd">private</span> <span class="kd">static</span> <span class="kd">class</span> <span class="nc">Vertex</span> <span class="o">{</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+		<span class="kd">public</span> <span class="kt">int</span> <span class="n">y</span><span class="o">;</span>
+
+		<span class="c1">//建構子，可以直接拿來放 x y</span>
+		<span class="kd">public</span> <span class="nf">Vertex</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">,</span> <span class="kt">int</span> <span class="n">y</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+  	<span class="cm">/*----------------------------------------------*/</span>
+
+
+
+	<span class="cm">/*-------------程式的 Entry Point---------------*/</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span> <span class="n">args</span><span class="o">[]){</span>
+		<span class="n">btn</span><span class="o">.</span><span class="na">addActionListener</span><span class="o">(</span><span class="n">frm</span><span class="o">);</span>  <span class="c1">//將frm設為btn的事件傾聽者</span>
+		<span class="n">txa</span><span class="o">.</span><span class="na">addTextListener</span><span class="o">(</span><span class="n">frm</span><span class="o">);</span>  <span class="c1">//將frm設為txa的事件傾聽者</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">addMouseMotionListener</span><span class="o">(</span><span class="n">frm</span><span class="o">);</span>
+
+		<span class="n">frm</span><span class="o">.</span><span class="na">setLayout</span><span class="o">(</span><span class="kc">null</span><span class="o">);</span>  <span class="c1">//不使用版面配置</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">setTitle</span><span class="o">(</span><span class="s">"Convex Hull"</span><span class="o">);</span>  <span class="c1">//設定視窗名稱</span>
+		<span class="n">btn</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">425</span><span class="o">,</span><span class="mi">500</span><span class="o">,</span><span class="mi">75</span><span class="o">,</span><span class="mi">50</span><span class="o">);</span>  <span class="c1">//定義按鈕格式</span>
+		<span class="n">txa</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">200</span><span class="o">,</span><span class="mi">500</span><span class="o">,</span><span class="mi">225</span><span class="o">,</span><span class="mi">50</span><span class="o">);</span>  <span class="c1">//定義文字方塊格式</span>
+		<span class="n">lab1</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span><span class="mi">30</span><span class="o">,</span><span class="mi">300</span><span class="o">,</span><span class="mi">40</span><span class="o">);</span> <span class="c1">//定義文字方塊格式</span>
+		<span class="n">lab1</span><span class="o">.</span><span class="na">setBackground</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">yellow</span><span class="o">);</span>  <span class="c1">//lab1設成黃色背景</span>
+		<span class="n">lab</span><span class="o">.</span><span class="na">setBounds</span><span class="o">(</span><span class="mi">30</span><span class="o">,</span><span class="mi">500</span><span class="o">,</span><span class="mi">190</span><span class="o">,</span><span class="mi">50</span><span class="o">);</span>
+		<span class="c1">//txa1.setEditable(false);  //把 txa1 設為不可編輯</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">setSize</span><span class="o">(</span><span class="mi">500</span><span class="o">,</span><span class="mi">550</span><span class="o">);</span>  <span class="c1">//設定視窗大小</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">btn</span><span class="o">);</span>  <span class="c1">//加入按鈕</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">txa</span><span class="o">);</span>  <span class="c1">//加入文字方塊</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">lab1</span><span class="o">);</span> <span class="c1">//加入label</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">lab</span><span class="o">);</span>  <span class="c1">//加入label</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">setVisible</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>  <span class="c1">//顯示出視窗</span>
+
+		<span class="c1">//案 X 時讓視窗可以自動關閉</span>
+		<span class="n">frm</span><span class="o">.</span><span class="na">addWindowListener</span><span class="o">(</span><span class="k">new</span> <span class="n">WindowAdapter</span><span class="o">(){</span>
+			<span class="kd">public</span> <span class="kt">void</span> <span class="nf">windowClosing</span><span class="o">(</span><span class="n">WindowEvent</span> <span class="n">e</span><span class="o">){</span>
+				<span class="n">frm</span><span class="o">.</span><span class="na">dispose</span><span class="o">();</span>
+			<span class="o">}</span>
+		<span class="o">});</span>
+	<span class="o">}</span>
+	<span class="cm">/*-----------------------------------------------*/</span>
+
+
+
+	<span class="cm">/*--------------------處理事件-------------------*/</span>
+	<span class="c1">//處理 button 的事件</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">actionPerformed</span><span class="o">(</span><span class="n">ActionEvent</span> <span class="n">e</span><span class="o">){</span>
+		<span class="n">Graphics</span> <span class="n">g</span> <span class="o">=</span> <span class="n">getGraphics</span><span class="o">();</span>
+		<span class="n">update</span><span class="o">(</span><span class="n">g</span><span class="o">);</span>  <span class="c1">//先清空畫面後再呼叫paint函式</span>
+	<span class="o">}</span>
+
+	<span class="c1">//處理 TextArea 的事件</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">textValueChanged</span><span class="o">(</span><span class="n">TextEvent</span> <span class="n">e</span><span class="o">){</span>
+		<span class="c1">//幫接收到的字串轉成整數放到 amount</span>
+		<span class="n">amount</span> <span class="o">=</span> <span class="n">Integer</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">txa</span><span class="o">.</span><span class="na">getText</span><span class="o">());</span>
+	<span class="o">}</span>
+
+	<span class="c1">//處理滑鼠移動事件</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseMoved</span><span class="o">(</span><span class="n">MouseEvent</span> <span class="n">e</span><span class="o">){</span>
+		<span class="n">lab</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"座標：("</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">()+</span><span class="s">","</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">()+</span><span class="s">")"</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="c1">//處理滑鼠拖曳事件</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">mouseDragged</span><span class="o">(</span><span class="n">MouseEvent</span> <span class="n">e</span><span class="o">){</span>
+		<span class="n">lab</span><span class="o">.</span><span class="na">setText</span><span class="o">(</span><span class="s">"座標：("</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getX</span><span class="o">()+</span><span class="s">","</span><span class="o">+</span><span class="n">e</span><span class="o">.</span><span class="na">getY</span><span class="o">()+</span><span class="s">")"</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="cm">/*-----------------------------------------------*/</span>
+
+
+
+	<span class="cm">/*---------------------畫圖----------------------*/</span>
+	<span class="c1">//在平面上畫出亂數產生的點</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">paint</span><span class="o">(</span><span class="n">Graphics</span> <span class="n">g</span><span class="o">){</span>
+		<span class="c1">//陣列的大小由我們自己的輸入來決定</span>
+		<span class="kt">int</span> <span class="n">x</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+		<span class="kt">int</span> <span class="n">y</span><span class="o">[]</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">];</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">vertices</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;();</span>
+
+		<span class="c1">//標出座標點</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">x</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++){</span>
+			<span class="c1">//x y由亂數產生</span>
+			<span class="n">x</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mi">441</span><span class="o">)+</span><span class="mi">30</span><span class="o">;</span>
+			<span class="n">y</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="kt">int</span><span class="o">)(</span><span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">()*</span><span class="mi">405</span><span class="o">)+</span><span class="mi">75</span><span class="o">;</span>
+
+			<span class="n">Vertex</span> <span class="n">v</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vertex</span><span class="o">(</span><span class="n">x</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">y</span><span class="o">[</span><span class="n">i</span><span class="o">]);</span>
+			<span class="n">vertices</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">v</span><span class="o">);</span>  <span class="c1">//做成一個座標陣列</span>
+			<span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">red</span><span class="o">);</span>  <span class="c1">//設定點的顏色為紅色</span>
+			<span class="n">g</span><span class="o">.</span><span class="na">fillOval</span><span class="o">(</span><span class="n">x</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="n">y</span><span class="o">[</span><span class="n">i</span><span class="o">],</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">5</span><span class="o">);</span>  <span class="c1">//畫出亂數座標點</span>
+		<span class="o">}</span>
+
+		<span class="c1">//計算執行 Convex Hull 演算法所要花的時間</span>
+		<span class="kt">long</span> <span class="n">begin</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">();</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">polygon</span> <span class="o">=</span> <span class="n">convexhull</span><span class="o">(</span><span class="n">vertices</span><span class="o">);</span>  <span class="c1">//執行 Convex Hull 演算法</span>
+		<span class="kt">long</span> <span class="n">elapsed</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">currentTimeMillis</span><span class="o">()-</span><span class="n">begin</span><span class="o">;</span>
+		<span class="kt">double</span> <span class="n">seconds</span> <span class="o">=</span> <span class="n">elapsed</span><span class="o">/</span><span class="mf">1000.0</span><span class="o">;</span>
+
+		<span class="c1">//依序將最外圍的點做連線</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">polygon</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+			<span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">black</span><span class="o">);</span>
+      		<span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span><span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">).</span><span class="na">x</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">).</span><span class="na">y</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">x</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">y</span><span class="o">);</span>
+    	<span class="o">}</span>
+    	<span class="c1">//最後記得再把最後一個點連回第一點</span>
+    	<span class="n">g</span><span class="o">.</span><span class="na">setColor</span><span class="o">(</span><span class="n">Color</span><span class="o">.</span><span class="na">black</span><span class="o">);</span>
+    	<span class="n">g</span><span class="o">.</span><span class="na">drawLine</span><span class="o">(</span><span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">x</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">y</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">polygon</span><span class="o">.</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">).</span><span class="na">x</span><span class="o">,</span> <span class="n">polygon</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">polygon</span><span class="o">.</span><span class="na">size</span><span class="o">()-</span><span class="mi">1</span><span class="o">).</span><span class="na">y</span><span class="o">);</span>
+
+    	<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">printf</span><span class="o">(</span><span class="s">"耗費了 %f 秒\n"</span><span class="o">,</span> <span class="n">seconds</span><span class="o">);</span>
+	<span class="o">}</span>
+	<span class="cm">/*-----------------------------------------------*/</span>
+
+
+
+	<span class="cm">/*------執行 Convex Hull，找出凸包最外圍的點-----*/</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="nf">convexhull</span><span class="o">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">vertices</span><span class="o">){</span>
+		<span class="n">List</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;</span> <span class="n">polygon</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Vector</span><span class="o">&lt;</span><span class="n">Vertex</span><span class="o">&gt;();</span>
+		<span class="kt">int</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">;</span>  <span class="c1">//左右範圍</span>
+		<span class="kt">int</span> <span class="n">dxs</span><span class="o">,</span><span class="n">dys</span><span class="o">;</span>  <span class="c1">//起始斜率</span>
+    	<span class="kt">int</span> <span class="n">dxc</span><span class="o">,</span><span class="n">dyc</span><span class="o">;</span>  <span class="c1">//暫存斜率</span>
+    	<span class="kt">int</span> <span class="n">dxt</span><span class="o">,</span><span class="n">dyt</span><span class="o">;</span>  <span class="c1">//測試斜率</span>
+    	<span class="kt">int</span> <span class="n">lqc</span><span class="o">,</span><span class="n">lqt</span><span class="o">;</span>  <span class="c1">//長度平方(暫存/測試)</span>
+    	<span class="kt">int</span> <span class="n">compareResult</span><span class="o">;</span>  <span class="c1">//斜率比較結果</span>
+    	<span class="kt">int</span> <span class="n">x</span><span class="o">;</span>  <span class="c1">//存放數據用的</span>
+		<span class="n">Vertex</span> <span class="n">current</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  <span class="c1">//目前拜訪的點</span>
+		<span class="n">Vertex</span> <span class="n">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  <span class="c1">//下一個選擇點</span>
+
+		<span class="c1">//先取出座標點的左右範圍</span>
+		<span class="n">left</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">x</span><span class="o">;</span>
+		<span class="n">right</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="mi">0</span><span class="o">).</span><span class="na">x</span><span class="o">;</span>
+		<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="o">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">vertices</span><span class="o">.</span><span class="na">size</span><span class="o">();</span> <span class="n">i</span><span class="o">++){</span>
+			<span class="c1">//依序取出 x 來做比較，藉此求出左右範圍</span>
+			<span class="n">x</span> <span class="o">=</span> <span class="n">vertices</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">i</span><span class="o">).</span><span class="na">x</span><span class="o">;</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">x</span><span class="o">&lt;</span><span class="n">left</span><span class="o">)</span> <span class="n">left</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">x</span><span class="o">&gt;</span><span class="n">right</span><span class="o">)</span> <span class="n">right</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="c1">//找出最左上角的點，準備當成起點</span>
+		<span class="k">for</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">){</span>
+		<span class="c1">//依序把 vertices 加入 v</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">x</span><span class="o">==</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">current</span><span class="o">==</span><span class="kc">null</span> <span class="o">||</span> <span class="n">v</span><span class="o">.</span><span class="na">y</span><span class="o">&gt;</span><span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">))</span>
+				<span class="n">current</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+				<span class="c1">//再找出一個y最大的點，放到current</span>
+		<span class="o">}</span>
+
+		<span class="c1">//將我們剛剛找到的起點加入polygon,就是最左上角的點</span>
+		<span class="n">polygon</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">current</span><span class="o">);</span>
+
+
+
+		<span class="c1">//1. 我們首先定義起始斜率為無限大</span>
+		<span class="c1">//2. 以currnt.x為基準來測試右邊的點</span>
+		<span class="c1">//3. 在這些斜率中找出斜率最大的</span>
+		<span class="c1">//4. 若有斜率相同的情況則取長度最長者</span>
+		<span class="c1">//5. 新找到的斜率就作為下次的起始斜率</span>
+		<span class="c1">//6. 繞完迴圈之後就可以得到全部座標中的斜率最大者</span>
+		<span class="n">dys</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="n">dxs</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="c1">//先把起始斜率設成無限大</span>
+		<span class="k">while</span><span class="o">(</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">&lt;=</span><span class="n">right</span><span class="o">){</span>
+			<span class="n">dyc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>  <span class="n">dxc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="n">lqc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+			<span class="k">for</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">){</span>
+			<span class="c1">//依序把 vertices 加入 v</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">x</span><span class="o">&gt;=</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">){</span>
+					<span class="n">dyt</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="na">y</span> <span class="o">-</span> <span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+					<span class="n">dxt</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="na">x</span> <span class="o">-</span> <span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+
+					<span class="c1">//把起始斜率和測試斜率送到 compareSlope 函式作比較</span>
+					<span class="k">if</span><span class="o">(</span><span class="n">compareSlope</span><span class="o">(</span><span class="n">dyt</span><span class="o">,</span> <span class="n">dxt</span><span class="o">,</span> <span class="n">dys</span><span class="o">,</span> <span class="n">dxs</span><span class="o">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+						<span class="n">compareResult</span> <span class="o">=</span> <span class="n">compareSlope</span><span class="o">(</span><span class="n">dyt</span><span class="o">,</span><span class="n">dxt</span><span class="o">,</span><span class="n">dyc</span><span class="o">,</span><span class="n">dxc</span><span class="o">);</span>
+						<span class="n">lqt</span> <span class="o">=</span> <span class="n">dyt</span><span class="o">*</span><span class="n">dyt</span><span class="o">+</span><span class="n">dxt</span><span class="o">*</span><span class="n">dxt</span><span class="o">;</span>  <span class="c1">//計算長度平方</span>
+
+						<span class="k">if</span><span class="o">(</span><span class="n">compareResult</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">)</span>
+							<span class="k">if</span><span class="o">(</span><span class="n">compareResult</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">lqt</span><span class="o">&gt;</span><span class="n">lqc</span><span class="o">){</span>
+								<span class="n">next</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+								<span class="n">dyc</span> <span class="o">=</span> <span class="n">dyt</span><span class="o">;</span>
+								<span class="n">dxc</span> <span class="o">=</span> <span class="n">dxt</span><span class="o">;</span>
+								<span class="n">lqc</span> <span class="o">=</span> <span class="n">lqt</span><span class="o">;</span>
+							<span class="o">}</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+
+			<span class="k">if</span><span class="o">(</span><span class="n">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+			<span class="c1">//若找到我們要的點以後，就把起始斜率換成最後一次的暫存斜率</span>
+			<span class="n">dys</span> <span class="o">=</span> <span class="n">dyc</span><span class="o">;</span>
+			<span class="n">dxs</span> <span class="o">=</span> <span class="n">dxc</span><span class="o">;</span>
+			<span class="n">polygon</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>  <span class="c1">//把找出來的點加到polygon</span>
+			<span class="n">vertices</span><span class="o">.</span><span class="na">remove</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>  <span class="c1">//把我們找過的點移除掉</span>
+			<span class="n">current</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>  <span class="c1">//把next放到current，把它當成目前點位來繼續找下個點</span>
+			<span class="n">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>  <span class="c1">//把next清空</span>
+		<span class="o">}</span>
+
+
+		<span class="c1">//1. 我們首先定義起始斜率為無限大</span>
+		<span class="c1">//2. 以 current.x 為基準來測試左邊的點</span>
+		<span class="c1">//3. 在這些斜率中找出斜率最大的</span>
+		<span class="c1">//4. 若有斜率相同的情況則取長度最長者</span>
+		<span class="c1">//5. 新找到的斜率就作為下次的起始斜率</span>
+		<span class="c1">//6. 繞完迴圈之後就可以得到全部座標中的斜率最大者</span>
+		<span class="n">dys</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>  <span class="n">dxs</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+		<span class="k">while</span><span class="o">(</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">&gt;</span><span class="n">left</span><span class="o">){</span>
+			<span class="n">dyc</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>  <span class="n">dxc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>  <span class="n">lqc</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+			<span class="k">for</span><span class="o">(</span><span class="n">Vertex</span> <span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">){</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">v</span><span class="o">.</span><span class="na">x</span><span class="o">&lt;</span><span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">){</span>
+					<span class="n">dyt</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="na">y</span> <span class="o">-</span> <span class="n">current</span><span class="o">.</span><span class="na">y</span><span class="o">;</span>
+					<span class="n">dxt</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="na">x</span> <span class="o">-</span> <span class="n">current</span><span class="o">.</span><span class="na">x</span><span class="o">;</span>
+
+					<span class="k">if</span><span class="o">(</span><span class="n">compareSlope</span><span class="o">(</span><span class="n">dyt</span><span class="o">,</span> <span class="n">dxt</span><span class="o">,</span> <span class="n">dys</span><span class="o">,</span> <span class="n">dxs</span><span class="o">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">){</span>
+						<span class="n">compareResult</span> <span class="o">=</span> <span class="n">compareSlope</span><span class="o">(</span><span class="n">dyt</span><span class="o">,</span> <span class="n">dxt</span><span class="o">,</span> <span class="n">dyc</span><span class="o">,</span> <span class="n">dxc</span><span class="o">);</span>
+						<span class="n">lqt</span> <span class="o">=</span> <span class="n">dyt</span><span class="o">*</span><span class="n">dyt</span><span class="o">+</span><span class="n">dxt</span><span class="o">*</span><span class="n">dxt</span><span class="o">;</span>  <span class="c1">//計算長度平方</span>
+
+						<span class="k">if</span><span class="o">(</span><span class="n">compareResult</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">)</span>
+							<span class="k">if</span><span class="o">(</span><span class="n">compareResult</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">lqt</span><span class="o">&gt;</span><span class="n">lqc</span><span class="o">){</span>
+								<span class="n">next</span> <span class="o">=</span> <span class="n">v</span><span class="o">;</span>
+								<span class="n">dyc</span> <span class="o">=</span> <span class="n">dyt</span><span class="o">;</span>
+								<span class="n">dxc</span> <span class="o">=</span> <span class="n">dxt</span><span class="o">;</span>
+								<span class="n">lqc</span> <span class="o">=</span> <span class="n">lqt</span><span class="o">;</span>
+							<span class="o">}</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+
+			<span class="k">if</span><span class="o">(</span><span class="n">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+			<span class="n">dys</span> <span class="o">=</span> <span class="n">dyc</span><span class="o">;</span>
+			<span class="n">dxs</span> <span class="o">=</span> <span class="n">dxc</span><span class="o">;</span>
+			<span class="n">polygon</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">next</span><span class="o">);</span>
+			<span class="n">current</span> <span class="o">=</span> <span class="n">next</span><span class="o">;</span>
+			<span class="n">next</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">polygon</span><span class="o">;</span>
+		<span class="c1">//回傳我們找到的最外圍的點</span>
+	<span class="o">}</span>
+	<span class="cm">/*-----------------------------------------------*/</span>
+
+
+
+	<span class="cm">/*-------------------比較斜率--------------------*/</span>
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">compareSlope</span><span class="o">(</span><span class="kt">int</span> <span class="n">dy2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dx2</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dy1</span><span class="o">,</span> <span class="kt">int</span> <span class="n">dx1</span><span class="o">){</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">dx2</span><span class="o">!=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">dx1</span><span class="o">!=</span><span class="mi">0</span><span class="o">){</span>
+		<span class="c1">//如果兩個數的斜率都不是無限的話...</span>
+			 <span class="kt">double</span> <span class="n">test</span> <span class="o">=</span> <span class="n">dy2</span><span class="o">*</span><span class="n">dx1</span><span class="o">-</span><span class="n">dy1</span><span class="o">*</span><span class="n">dx2</span><span class="o">;</span>
+			 <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">Math</span><span class="o">.</span><span class="na">signum</span><span class="o">(</span><span class="n">test</span><span class="o">);</span>
+			 <span class="c1">//若 test&gt;0 則返回 1，若 test&lt;0 則回傳 -1，若 test 為 0 則回傳 0</span>
+		<span class="o">}</span>
+
+		<span class="k">else</span><span class="o">{</span>
+			<span class="c1">//只有其中一數的斜率是無限的時候</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">dx2</span><span class="o">!=</span><span class="mi">0</span> <span class="o">||</span> <span class="n">dx1</span><span class="o">!=</span><span class="mi">0</span><span class="o">){</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">dx2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">){</span>
+					<span class="c1">// dy2/dx2 斜率，無限大或無限小</span>
+					<span class="k">return</span> <span class="n">dy2</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+				<span class="o">}</span>
+				<span class="k">else</span><span class="o">{</span>
+					<span class="c1">// dy1/dx1 斜率，無限大或無限小</span>
+					<span class="k">return</span> <span class="n">dy1</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+
+			<span class="k">else</span><span class="o">{</span>
+			<span class="c1">//此情況代表兩個座標點的斜率都是無窮</span>
+				<span class="k">if</span><span class="o">(</span><span class="n">dy2</span><span class="o">&gt;=</span><span class="mi">0</span><span class="o">){</span>
+					<span class="c1">// dy2/dx2 斜率，無限大或無限小</span>
+					<span class="k">return</span> <span class="n">dy1</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="mi">1</span><span class="o">;</span>
+				<span class="o">}</span>
+				<span class="k">else</span><span class="o">{</span>
+					<span class="c1">// dy2/dx2 斜率，無限大或無限小</span>
+					<span class="k">return</span> <span class="n">dy1</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">?</span> <span class="o">-</span><span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="o">;</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+	<span class="cm">/*-----------------------------------------------*/</span>
+<span class="o">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="執行結果">執行結果</h4>
+
+<ul>
+  <li>由使用者輸入要產生幾個亂數點</li>
+</ul>
+
+<p><img src="https://i.imgur.com/FCNvDSY.png" alt="" /></p>
+
+<ul>
+  <li>我們試試看產生 500 個點</li>
+</ul>
+
+<p><img src="https://i.imgur.com/IxC86Fu.png" alt="" /></p>
+
+<ul>
+  <li>此外我在程式中還有計算耗費時間</li>
+</ul>
+
+<p><img src="https://i.imgur.com/qPbo0fY.png" alt="" /></p>
+
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/algorithm/convex-hull.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Java] Convex Hull 演算法&url=http://localhost:4000/posts/algorithm/convex-hull.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/algorithm/convex-hull.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/algorithm/convex-hull.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Java] Convex Hull 演算法&url=http://localhost:4000/posts/algorithm/convex-hull.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/algorithm/convex-hull.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            <li><a href="https://plus.google.com/+chenwy0806" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-google-plus"></i></a></li>
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

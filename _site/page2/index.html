@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#5c6bc0">
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <title>增加一個 System Call 到 Linux Kernel (v4.x)</title>
-  <meta name="description" content="我的系統環境  作業系統： Lubuntu 16.04  Kernel 版本： 4.8.0-49-generic更新系統  更新sudo apt-get updatesudo apt-get upgrade  查看你當前的 Kernel 版本uname -r下載 Kernel Source到 Kernel Arc...">
-  <link rel="canonical" href="http://localhost:4000/posts/linux/linux-add-system-call.html">
+  <title>通訊雜記</title>
+  <meta name="description" content="This blog records my learning history">
+  <link rel="canonical" href="http://localhost:4000/page2/">
   <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
 
   <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
@@ -130,36 +130,30 @@
 
     <div class="site-container" id="tab-main"> 
       <div class="wrapper">
-        <div class="post-ribbon"></div>
+        <div class="home container">
 
-<div class="container post-container">
-  <div class="post-page card-panel z-depth-2">
-  <div class="post-section">
+  <div class="page-heading">
+    <ul class="collapsible popout" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header favo"><i class="mdi mdi-weather-windy-variant"></i>To be or not to be, that's a question<i class="mdi mdi-pin right pink-text hide-on-small-only"></i></div>
+        <div class="collapsible-body"><p>生存還是毀滅, 這是一個值得思考的問題</p></div>
+      </li>
+    </ul>
+  </div>
 
-    <p class="grey-text">
-      <i class="mdi mdi-calendar"></i>&nbsp;
-      May 4, 2017
-      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
-      WenYuan
-      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
-      <span class="capitalize">
-        Linux
-        
-      </span>
-      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 5, 2018
-    </p>
+  <ul class="post-list">
+    <!-- This loops through the paginated posts -->
+    
+      <li class="card-panel hoverable">
+        <span class="grey-text right">May 4, 2017</span>
+        <a class="post-link" href="/posts/linux/linux-add-system-call.html">增加一個 System Call 到 Linux Kernel (v4.x)</a>
 
-    <div class="post-header">
-      <h1 class="post-title">增加一個 System Call 到 Linux Kernel (v4.x)</h1>
+        <button data-target="_posts_linux_linux-add-system-call" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
 
-      
-        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
-        
-      
-    </div>
-
-    <article class="post-content">
-      <h4 style="color:MediumSeaGreen;" id="我的系統環境">我的系統環境</h4>
+        <div id="_posts_linux_linux-add-system-call" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>增加一個 System Call 到 Linux Kernel (v4.x)</h4>
+            <p><h4 style="color:MediumSeaGreen;" id="我的系統環境">我的系統環境</h4>
 
 <ul>
   <li><strong>作業系統：</strong> Lubuntu 16.04</li>
@@ -450,59 +444,29 @@ gcc <span class="nt">-g</span> <span class="nt">-Wall</span> hello.c <span class
 <p><br /></p>
 
 <hr />
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/linux/linux-add-system-call.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+  </ul>
 
-    </article>
+  <!-- Pagination links -->
+  <div class="pagination">
+    
+    <a href="/" class="waves-effect waves-light btn cyan left"><i class="mdi mdi-chevron-left white-text"></i></a>
+    
 
-    <div class="post-share">
+    <div class="waves-effect btn-flat lower-case page">Page: <span class="pink-text">2</span> of 2</div>
 
-<!-- desktop and tablet-->
-<div class="hide-on-small-only">
-  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
-
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/linux-add-system-call.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=增加一個 System Call 到 Linux Kernel (v4.x)&url=http://localhost:4000/posts/linux/linux-add-system-call.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/linux-add-system-call.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
-</div>
-
-<!-- small screen device -->
-<div class="hide-on-med-and-up">
-  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
-
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/linux-add-system-call.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=增加一個 System Call 到 Linux Kernel (v4.x)&url=http://localhost:4000/posts/linux/linux-add-system-call.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/linux-add-system-call.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
-</div>
-
-</div>
-
-
+    
+    <span class="btn disabled right"><i class="mdi mdi-chevron-right white-text"></i></a></li>
+    
   </div>
-  </div>
-
-  
-
-  
-    <div id="disqus_thread"></div>
-    <script>
-
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
-  
 
 </div>
 

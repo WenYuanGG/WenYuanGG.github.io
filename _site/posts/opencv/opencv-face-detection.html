@@ -11,7 +11,7 @@
   <title>[OpenCV] 臉部偵測 (FaceDetection)</title>
   <meta name="description" content="我的實作環境  作業系統： Lubuntu 16.04  OpenCV 函式庫版本： Version 3.3  程式語言： C++  在作業系統方面不用擔心, 因為 OpenCV 是一個跨平台的函數庫先建立檔案先依序建立以下幾個檔案：mkdir FaceDetectioncd FaceDetectionmkdir...">
   <link rel="canonical" href="http://localhost:4000/posts/opencv/opencv-face-detection.html">
-  <link rel="alternate" type="application/rss+xml" title="學習筆記" href="http://localhost:4000/feed.xml" />
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
 
   <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
   <link rel="stylesheet" href="/css/main.css">
@@ -36,7 +36,7 @@
     <header class="site-header">
       <nav class="nav-extended indigo lighten-1">
         <div class="nav-wrapper">
-      <span class="site-title">學習筆記</span>
+      <span class="site-title">通訊雜記</span>
       <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
       
       <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -346,7 +346,7 @@ g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span
 
 <p>其實過程很簡單, 大致分為以下幾個步驟：</p>
 
-<ol>
+<ul>
   <li>將人臉和人眼分類器 Load 進來</li>
   <li>使用 <code class="highlighter-rouge">cvtColor()</code> 將影像轉換成<code class="highlighter-rouge">灰階</code></li>
   <li>使用 <code class="highlighter-rouge">resize()</code> 更改影像大小比率, 視情況而定, 我們在這裡先不用</li>
@@ -354,7 +354,7 @@ g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span
   <li>運用 XML 內的分類器演算法來偵測人臉和人眼</li>
   <li>分別框出臉和眼睛</li>
   <li>完成臉部偵測</li>
-</ol>
+</ul>
 
 <p><br /></p>
 
@@ -434,6 +434,8 @@ g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span
             
             <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
             
+            
+            <li><a href="https://plus.google.com/+chenwy0806" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-google-plus"></i></a></li>
             
             
           </ul>

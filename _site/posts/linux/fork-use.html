@@ -8,8 +8,8 @@
   <meta name="theme-color" content="#5c6bc0">
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <title>[Linux C] 學習使用 fork 函數</title>
-  <meta name="description" content="fork 是 Linux 系統中常用的多工函數, 而 fork 同時也是 Linux 的 System call (系統呼叫), 當你呼叫了 fork 函數後, 會創建一個和當前 process 一模一樣的子程序, 從而進行多工動作">
+  <title>[Linux C] fork 觀念由淺入深</title>
+  <meta name="description" content="fork 是 Linux 系統中常用的多工函數, 而 fork 同時也是 Linux 的 System call (系統呼叫), 當你呼叫了 fork 函數後, 會創建一個和當前 process 一模一樣的子程序, 從而進行多工動作… 同時我也會說明 fork 使用時會遇到的各種問題並且一一解答">
   <link rel="canonical" href="http://localhost:4000/posts/linux/fork-use.html">
   <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
 
@@ -150,7 +150,7 @@
     </p>
 
     <div class="post-header">
-      <h1 class="post-title">[Linux C] 學習使用 fork 函數</h1>
+      <h1 class="post-title">[Linux C] fork 觀念由淺入深</h1>
 
       
         <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
@@ -159,7 +159,7 @@
     </div>
 
     <article class="post-content">
-      <p>fork 是 Linux 系統中常用的<b>多工函數</b>, 而 fork 同時也是 Linux 的 System call (系統呼叫), 當你呼叫了 fork 函數後, 會創建一個和當前 process 一模一樣的<b>子程序</b>, 從而進行多工動作</p>
+      <p>fork 是 Linux 系統中常用的<b>多工函數</b>, 而 fork 同時也是 Linux 的 System call (系統呼叫), 當你呼叫了 fork 函數後, 會創建一個和當前 process 一模一樣的<b>子程序</b>, 從而進行多工動作… 同時我也會<b>說明 fork 使用時會遇到的各種問題並且一一解答</b></p>
 
 <p><br /></p>
 
@@ -212,7 +212,36 @@
   <li>我們可以試著練習下面<b>範例 1</b> ：</li>
 </ul>
 
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* example1.c */</span>
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre></td><td class="code"><pre><span class="cm">/* example1.c */</span>
 <span class="cp">#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;stdlib.h&gt;
@@ -240,13 +269,201 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
+<span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <ul>
   <li>範例 1 執行結果：</li>
 </ul>
 
 <p><img src="https://i.imgur.com/41bzl1d.png" alt="" /></p>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="僵屍程序-zombie-process">僵屍程序 (Zombie Process)</h4>
+
+<p>講到 <code class="highlighter-rouge">fork()</code> 是不得不介紹僵屍程序的, 這是在做 <strong>Multi-process</strong> 開發時經常會遇到的問題</p>
+
+<ul>
+  <li><b>何謂僵屍程序 (Zombie Process)：</b>
+    <ul>
+      <li>僵屍程序是指一支存活在系統中, 但是他卻沒有做任何事, 只是<b>佔著並耗用系統資源</b>的程序</li>
+      <li>當使用 fork() 來建立子程序多工運行時, 如果子程序還沒運行結束就將父程序關閉的話, 就會有僵屍程序產生</li>
+      <li>我以下面的<b>範例 2</b> 為例：</li>
+    </ul>
+  </li>
+  <li><b>程式範例 2 ：</b></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+</pre></td><td class="code"><pre><span class="cm">/* example2.c */</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="c1">// 從呼叫 fork 開始, 會分成兩支程序多工進行</span>
+    <span class="n">pid_t</span> <span class="n">PID</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="k">switch</span><span class="p">(</span><span class="n">PID</span><span class="p">){</span>
+        <span class="c1">// PID == -1 代表 fork 出錯</span>
+        <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">"fork()"</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        
+        <span class="c1">// PID == 0 代表是子程序</span>
+        <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"I'm Child process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Child's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        
+        <span class="c1">// PID &gt; 0 代表是父程序</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"I'm Parent process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"Parent's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>編譯執行並使用 ps 察看系統進程</li>
+</ul>
+
+<p><img src="https://i.imgur.com/u4SMwkL.png" alt="" /></p>
+
+<p>我在<b>範例 2 中的 20 行 (子程序區塊) 中加了 <code class="highlighter-rouge">sleep(3)</code></b> , 意思是子程序在做完事後還要停滯 3 秒才會結束, 結果子程序 3 秒還沒結束, 父程序就 <code class="highlighter-rouge">return 0</code> 並且關閉掉程式了</p>
+
+<p>所以從上面的執行結果可以看到, 明明程式已經執行完且結束了, 但是子程序 (6984) 卻還活在系統中, 此時的子程序就是一個<strong>僵屍程序</strong>, 他不做任何事卻依然<b>佔用系統資源</b></p>
+
+<ul>
+  <li><b>該如何避免僵屍程序發生呢？</b>
+    <ul>
+      <li>可以使用 <code class="highlighter-rouge">signal()</code> 或者 <code class="highlighter-rouge">wait()</code> 來解決</li>
+      <li>我在下面會一一介紹</li>
+    </ul>
+  </li>
+</ul>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="使用-wait-來解決僵屍程序問題">使用 wait 來解決僵屍程序問題</h4>
+
+<p>最簡單的方法就是在父程序區塊中使用 <code class="highlighter-rouge">wait()</code> , 當父程序遇到 <code class="highlighter-rouge">wait()</code> 時, 必須<b>停下來等待接收子程序的結束狀態值</b>, 如下面的<b>範例 3</b> 所示</p>
+
+<ul>
+  <li><b>程式範例 3 ：</b></li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+</pre></td><td class="code"><pre><span class="cm">/* example3.c */</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">exit_status</span><span class="p">;</span>
+    <span class="n">pid_t</span> <span class="n">PID</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="k">switch</span><span class="p">(</span><span class="n">PID</span><span class="p">){</span>
+        <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">"fork()"</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] I'm Child process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] Child's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] Enter my exit status: "</span><span class="p">);</span>
+            <span class="n">scanf</span><span class="p">(</span><span class="s">"%d"</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">exit_status</span><span class="p">);</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] I'm Parent process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] Parent's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+            <span class="n">wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exit_status</span><span class="p">);</span>
+            <span class="c1">// WEXITSTATUS is an macro</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] Child's exit status is [%d]</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">WEXITSTATUS</span><span class="p">(</span><span class="n">exit_status</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li>編譯執行結果</li>
+</ul>
+
+<p><img src="https://i.imgur.com/3QxHWN8.png" alt="" /></p>
+
+<p>在範例 3 中的第 26 行, 我加入了 <code class="highlighter-rouge">wait(exit_status)</code> , 因此當父程序運行到這行時, 就會停下來等待子程序結束</p>
+
+<p>子程序結束後會有個結束狀態值, 父程序將會接收到子程序的結束狀態值, 並放進 <code class="highlighter-rouge">exit_status</code> 裡</p>
+
+<p>此外, 範例 3 中的第 28 行 <code class="highlighter-rouge">WEXITSTATUS</code> 是一個<b>巨集 (macro)</b> , 他可以用來<b>提取出指定的子程序結束狀態值</b></p>
+
+<blockquote>
+  <p>加入 <code class="highlighter-rouge">wait()</code> 後, 父程序就必須停下來等待子程序結束才可以繼續運行, 因此子程序就不會變成僵屍程序了 (你可以再使用 <strong>ps 指令</strong>驗證看看)</p>
+</blockquote>
 
     </article>
 
@@ -257,7 +474,7 @@
   <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
 
   <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/fork-use.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=[Linux C] 學習使用 fork 函數&url=http://localhost:4000/posts/linux/fork-use.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Linux C] fork 觀念由淺入深&url=http://localhost:4000/posts/linux/fork-use.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
   <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/fork-use.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
@@ -266,7 +483,7 @@
   <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
 
   <a href="https://plus.google.com/share?url=http://localhost:4000/posts/linux/fork-use.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=[Linux C] 學習使用 fork 函數&url=http://localhost:4000/posts/linux/fork-use.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Linux C] fork 觀念由淺入深&url=http://localhost:4000/posts/linux/fork-use.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
   <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/linux/fork-use.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 

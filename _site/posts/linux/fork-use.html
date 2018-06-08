@@ -146,7 +146,7 @@
         Linux
         
       </span>
-      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 6, 2018
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 8, 2018
     </p>
 
     <div class="post-header">
@@ -191,7 +191,7 @@
     <ul>
       <li><b>-1 ：</b> 發生錯誤</li>
       <li><b>0 ：</b> 代表為子程序</li>
-      <li><b>大於 0 ：</b> 代表為父程序, 其回傳值子程序的 ProcessID</li>
+      <li><b>大於 0 ：</b> 代表為父程序, 其回傳值為子程序的 ProcessID</li>
     </ul>
   </li>
 </ul>
@@ -464,6 +464,125 @@
 <blockquote>
   <p>加入 <code class="highlighter-rouge">wait()</code> 後, 父程序就必須停下來等待子程序結束才可以繼續運行, 因此子程序就不會變成僵屍程序了 (你可以再使用 <strong>ps 指令</strong>驗證看看)</p>
 </blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="使用-signal-來解決僵屍程序問題">使用 signal 來解決僵屍程序問題</h4>
+
+<p>當子程序結束會發出一個 <b>SIGCHLD 信號</b>, 所以我們可以在父程序中使用 <code class="highlighter-rouge">signal()</code> 來接收 SIGCHLD 信號, 再給予應對的處理方式, 如下<b>範例 4</b> :</p>
+
+<ul>
+  <li><b>程式範例 4</b> :</li>
+</ul>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+</pre></td><td class="code"><pre><span class="cm">/* example4.c */</span>
+<span class="cp">#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="n">sig_handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">retval</span><span class="p">;</span>
+    
+    <span class="k">if</span> <span class="p">(</span> <span class="n">sig</span> <span class="o">==</span> <span class="n">SIGCHLD</span> <span class="p">){</span> 
+        <span class="c1">// 等待子程序的結束狀態</span>
+        <span class="n">wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">retval</span><span class="p">);</span>
+        
+        <span class="n">printf</span><span class="p">(</span><span class="s">"CATCH SIGNAL PID=%d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="n">getpid</span><span class="p">());</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">exit_status</span><span class="p">;</span>
+
+    <span class="c1">// 呼叫 signal 來接收 SIGCHLD 信號</span>
+    <span class="n">signal</span><span class="p">(</span><span class="n">SIGCHLD</span><span class="p">,</span><span class="n">sig_handler</span><span class="p">);</span>
+
+    <span class="c1">// 從呼叫 fork 開始, 會分成兩支程序多工進行</span>
+    <span class="n">pid_t</span> <span class="n">PID</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+    <span class="k">switch</span><span class="p">(</span><span class="n">PID</span><span class="p">){</span>
+        <span class="c1">// PID == -1 代表 fork 出錯</span>
+        <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">perror</span><span class="p">(</span><span class="s">"fork()"</span><span class="p">);</span>
+            <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="c1">// PID == 0 代表是子程序</span>
+        <span class="k">case</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] I'm Child process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Child] Child's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+            <span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 暫停 5 秒</span>
+            <span class="k">break</span><span class="p">;</span>
+
+        <span class="c1">// PID &gt; 0 代表是父程序</span>
+        <span class="k">default</span><span class="o">:</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] I'm Parent process</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
+            <span class="n">printf</span><span class="p">(</span><span class="s">"[Parent] Parent's PID is %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">getpid</span><span class="p">());</span>
+            <span class="c1">// wait(&amp;exit_status);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ul>
+  <li><b>編譯執行結果</b></li>
+</ul>
+
+<p><img src="https://i.imgur.com/jX7JIYp.png" alt="" /></p>
+
+<p>你編譯執行可以發現, 父程序<b>不再會阻塞</b>下來等待子程序了, 因為我們已經將等待子程序的動作交給 SIGCHLD 處理函數來處理</p>
+
+<p>當你執行完程式的 <strong>5 秒內</strong>馬上打 ps 指令觀看進程, 你會發現子程序 (132) 還在, 等到 <strong>5 秒後</strong>就會被 <code class="highlighter-rouge">signal()</code> 接收並結束, 所以也<b>不會造成殭屍程序的產生</b></p>
 
     </article>
 

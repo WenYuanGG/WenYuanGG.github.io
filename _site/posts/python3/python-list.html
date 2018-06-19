@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[Python] 學習使用串列 (List)</title>
+  <meta name="description" content="串列 (List) 是一個儲存資料的容器, 如果你有學過 C/C++ Java 等其它語言的話, 你會發現他跟陣列 (array) 很類似, 只不過 Python 串列的功能更為強大, 可以同時存放多種不同類型的資料">
+  <link rel="canonical" href="http://localhost:4000/posts/python3/python-list.html">
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <script id="diq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">通訊雜記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Jun 20, 2018
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        Python3
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 20, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[Python] 學習使用串列 (List)</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <p>串列 (List) 是一個儲存資料的容器, 如果你有學過 <b>C/C++ Java</b> 等其它語言的話, 你會發現他跟<b>陣列 (array)</b> 很類似, 只不過 Python 串列的功能更為強大, 可以同時<b>存放多種不同類型的資料</b></p>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="練習使用一維串列">練習使用一維串列</h4>
+
+<p>一維陣列的形式如下：</p>
+
+<p><img src="https://i.imgur.com/VzFeNaw.png" alt="" /></p>
+
+<ul>
+  <li><b>宣告串列</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 建立空串列</span>
+
+<span class="c"># 下面的存放資料方式都是正確的</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>使用 index 印出特定項目</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 建立空串列</span>
+
+<span class="c"># 下面的存放資料方式都是正確的</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c"># 印出第 1 項</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="c"># 印出第 4 項</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span> <span class="c"># 印出 1~4 項</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># 印出最後一項</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="c"># 印出最後第二項</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="c"># 從第三項印到最後一項</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>在串列插入新項目</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 建立空串列</span>
+
+<span class="c"># 下面的存放資料方式都是正確的</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+
+<span class="c"># 把 'new' 字串加到 list2 的最後一項</span>
+<span class="n">list2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">'new'</span><span class="p">)</span>
+
+<span class="c"># 把 4 加到 list4 的 index=3 的地方</span>
+<span class="n">list4</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>從串列中刪除項目</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 建立空串列</span>
+
+<span class="c"># 下面的存放資料方式都是正確的</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+
+<span class="c"># 刪除 list2 的最後一項</span>
+<span class="n">list2</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+<span class="c"># 刪除 list3 index=1 的項目</span>
+<span class="n">list3</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c"># 刪除 list4 中, 值出現 'chris' 的第一項</span>
+<span class="n">list4</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s">'chris'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>使用 count 與 index</b></li>
+</ul>
+
+<p><code class="highlighter-rouge">count(value)</code> 可以計算 <code class="highlighter-rouge">value</code> 在串列中<b>出現的次數</b> ; 而 <code class="highlighter-rouge">index(value)</code> 可以回傳 <code class="highlighter-rouge">value</code> 在串列中的<b>索引值</b></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 建立空串列</span>
+
+<span class="c"># 下面的存放資料方式都是正確的</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="p">[</span><span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'chris'</span><span class="p">,</span> <span class="s">'peggy'</span><span class="p">,</span> <span class="s">'mary'</span><span class="p">]</span>
+<span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c"># 印出 list5 中出現 1 的次數</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list5</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c"># 印出 list5 中, 值為 3 的索引值</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list5</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>將串列內容做排序 or 反轉</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c"># 將他由小到大排序好</span>
+<span class="n">list5</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list5</span><span class="p">)</span>
+
+<span class="c"># 將他的順序反轉</span>
+<span class="n">list5</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">list5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>判斷項目是否存在於串列中</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="c"># 若 list5 中有 2 的話就回傳 True , 沒有就回傳 False</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">list5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">list5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>計算最大最小值以及總和</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list5</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span> <span class="c"># 印出最大值</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span> <span class="c"># 印出最小值</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span> <span class="c"># 印出總和</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list5</span><span class="p">))</span> <span class="c"># 印出 list5 的長度</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>串列的連結以及複製</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">list2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="c"># 將 list1 和 list2 兩串列合起來</span>
+<span class="n">list3</span> <span class="o">=</span> <span class="n">list1</span> <span class="o">+</span> <span class="n">list2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list3</span><span class="p">)</span>
+
+<span class="c"># 將 list1 多複製一次</span>
+<span class="n">list4</span> <span class="o">=</span> <span class="n">list1</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>使用 for 迴圈來印出串列</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">List</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Peter'</span><span class="p">,</span> <span class="s">'Kevin'</span><span class="p">,</span> <span class="s">'George'</span><span class="p">,</span> <span class="s">'Chris'</span><span class="p">,</span> <span class="s">'Peggy'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">List</span><span class="p">)):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'List[</span><span class="si">%</span><span class="s">i] = </span><span class="si">%</span><span class="s">s'</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="練習使用二維串列">練習使用二維串列</h4>
+
+<p>由<b>多個一維串列所構成</b>, 架構如下：</p>
+
+<p><img src="https://i.imgur.com/7sLYG09.png" alt="" /></p>
+
+<ul>
+  <li><b>宣告串列</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 宣告一個二維串列</span>
+<span class="n">List</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">List</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>將新項目加到二維串列中</b></li>
+</ul>
+
+<p>下面用數字以亂數產生</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter the amount of row: '</span><span class="p">))</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter the amount of column: '</span><span class="p">))</span>
+<span class="n">List</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 宣告一個一維串列</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="n">List</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span> <span class="c"># 令其轉為二維串列形式</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+        <span class="c"># 將亂數產生的值放入串列中</span>
+        <span class="n">List</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">List</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>使用 for 迴圈來印出二維串列</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter the amount of row: '</span><span class="p">))</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'Enter the amount of column: '</span><span class="p">))</span>
+<span class="n">List</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># 宣告一個一維串列</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rows</span><span class="p">):</span>
+    <span class="n">List</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span> <span class="c"># 令其轉為二維串列形式</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+        <span class="c"># 將亂數產生的值放入串列中</span>
+        <span class="n">List</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+<span class="c"># 使用 for 迴圈來印出串列</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">List</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="si">%5</span><span class="s">d'</span> <span class="o">%</span><span class="p">(</span><span class="n">List</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]),</span> <span class="n">end</span> <span class="o">=</span> <span class="s">''</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-list.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 學習使用串列 (List)&url=http://localhost:4000/posts/python3/python-list.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-list.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-list.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 學習使用串列 (List)&url=http://localhost:4000/posts/python3/python-list.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-list.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            <li><a href="https://plus.google.com/+chenwy0806" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-google-plus"></i></a></li>
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

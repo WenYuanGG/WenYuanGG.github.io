@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[Python] 學習使用數組 (Tuple)</title>
+  <meta name="description" content="Python 的數組 (Tuple) 跟串列 (List) 很類似, 但是他們兩者有以下幾點不同：">
+  <link rel="canonical" href="http://localhost:4000/posts/python3/python-tuple.html">
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <script id="diq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">通訊雜記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Jun 20, 2018
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        Python3
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 20, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[Python] 學習使用數組 (Tuple)</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <p>Python 的數組 (Tuple) 跟串列 (List) 很類似, 但是他們兩者有以下幾點不同：</p>
+
+<ol>
+  <li>數組的<b>元素值不可以更改</b></li>
+  <li>在數組中不可以刪除個別元素或取代數組中的資料 (要刪除也<b>只能把整個數組元素都刪掉</b>)</li>
+  <li>數組不能使用 <code class="highlighter-rouge">append</code> 和 <code class="highlighter-rouge">insert</code> 來加入新元素, 但可以使用 <code class="highlighter-rouge">+</code> 來加入新元素或者使用 <code class="highlighter-rouge">*</code> 來複製元素</li>
+</ol>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="宣告與建立數組-tuple">宣告與建立數組 (Tuple)</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span> <span class="c"># 建立空數組</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c"># 以數值建立數組</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s">'Hello World'</span><span class="p">)</span> <span class="c"># 以字串建立數組</span>
+
+<span class="c"># 以串列建立數組</span>
+<span class="n">tuple4</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="數組可使用的函式">數組可使用的函式</h4>
+
+<p>數組 (Tuple) 也可以使用串列所使用的函式, 例如： <code class="highlighter-rouge">len()</code> , <code class="highlighter-rouge">max()</code> , <code class="highlighter-rouge">min()</code> , <code class="highlighter-rouge">sum()</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span> <span class="c"># 建立空數組</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c"># 以數值建立數組</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s">'Hello World'</span><span class="p">)</span> <span class="c"># 以字串建立數組</span>
+
+<span class="c"># 以串列建立數組</span>
+<span class="n">tuple4</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tuple3</span><span class="p">))</span> <span class="c"># 印出 tuple3 的長度</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tuple2</span><span class="p">))</span> <span class="c"># 印出 tuple2 的最大值</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">tuple2</span><span class="p">))</span> <span class="c"># 印出 tuple2 的最小值</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">tuple4</span><span class="p">))</span> <span class="c"># 印出 tuple4 的數值總和</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="判斷元素是否存在於數組中">判斷元素是否存在於數組中</h4>
+
+<p>可以使用 <code class="highlighter-rouge">in</code> 與 <code class="highlighter-rouge">not in</code> 運算子來判斷該元素是否存在於數組中</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span> <span class="c"># 建立空數組</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c"># 以數值建立數組</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="s">'Hello World'</span><span class="p">)</span> <span class="c"># 以字串建立數組</span>
+
+<span class="c"># 以串列建立數組</span>
+<span class="n">tuple4</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="mi">2</span> <span class="ow">in</span> <span class="n">tuple2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'H'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tuple3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="mi">9</span> <span class="ow">in</span> <span class="n">tuple4</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><code class="highlighter-rouge">in</code> 與 <code class="highlighter-rouge">not in</code> 成立時會回傳 True , 不成立時則回傳 False</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="在數組中添加新元素">在數組中添加新元素</h4>
+
+<p>數組不能使用串列的 <code class="highlighter-rouge">append</code> 以及 <code class="highlighter-rouge">insert</code> 來添加新元素, 數組必須使用 <code class="highlighter-rouge">+</code> 來添加新元素, 如下所示：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple1 中加入元素 1, 2, 3 </span>
+<span class="n">tuple1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple2 中加入元素 20</span>
+<span class="n">tuple2</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p><strong>注意：</strong> 只連結一個元素時, 要在後面加上逗號, 如上面程式第 8 行所示</p>
+</blockquote>
+
+<p>此外, 數組與串列一樣也可以使用 <code class="highlighter-rouge">*</code> 來複製, 如下所示：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple1 中加入元素 1, 2, 3 </span>
+<span class="n">tuple1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple2 中加入元素 20</span>
+<span class="n">tuple2</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple2</span><span class="p">)</span>
+
+<span class="c"># 多複製一次 tuple2</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="n">tuple2</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="利用索引來擷取元素">利用索引來擷取元素</h4>
+
+<p>數組與串列相同, 都可以使用索引 (Index) 來<b>擷取特定元素</b>, 如下所示：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple1 中加入元素 1, 2, 3 </span>
+<span class="n">tuple1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple2 中加入元素 20</span>
+<span class="n">tuple2</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span>
+
+<span class="c"># 多複製一次 tuple2</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="n">tuple2</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+</code></pre></div></div>
+
+<p>當然也可以使用 <code class="highlighter-rouge">for</code> 迴圈來印出數組資料</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple1 中加入元素 1, 2, 3 </span>
+<span class="n">tuple1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="c"># 在 tuple2 中加入元素 20</span>
+<span class="n">tuple2</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span>
+
+<span class="c"># 多複製一次 tuple2</span>
+<span class="n">tuple3</span> <span class="o">=</span> <span class="n">tuple2</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">tuple1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple2</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">tuple3</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tuple2</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="刪除數組內容">刪除數組內容</h4>
+
+<p>數組<b>不可以</b>刪除特定或單一元素, 也無法修改值, 只能透過 <code class="highlighter-rouge">del</code> 來<b>刪除整個數組的資料</b></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">()</span>
+<span class="n">tuple2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+
+<span class="n">tuple1</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">tuple2</span> <span class="o">+=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,)</span>
+
+<span class="n">tuple3</span> <span class="o">=</span> <span class="n">tuple2</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">del</span> <span class="n">tuple3</span> <span class="c"># 刪除 tuple3</span>
+</code></pre></div></div>
+
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-tuple.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 學習使用數組 (Tuple)&url=http://localhost:4000/posts/python3/python-tuple.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-tuple.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-tuple.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 學習使用數組 (Tuple)&url=http://localhost:4000/posts/python3/python-tuple.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-tuple.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            <li><a href="https://plus.google.com/+chenwy0806" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-google-plus"></i></a></li>
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

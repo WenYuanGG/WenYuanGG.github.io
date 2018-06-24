@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[Python] 檔案處理</title>
+  <meta name="description" content="使用 open() 函數開檔">
+  <link rel="canonical" href="http://localhost:4000/posts/python3/file-processing.html">
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <script id="diq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">通訊雜記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Jun 22, 2018
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        Python3
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 24, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[Python] 檔案處理</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <h4 id="使用-open-函數開檔">使用 <code class="highlighter-rouge">open()</code> 函數開檔</h4>
+
+<p><code class="highlighter-rouge">open()</code> 的函數雛型如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">variable</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">Filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>第一個參數 Filename 就是你想要開啟的檔案名稱</p>
+
+<p>第二個參數 mode 則是檔案的運作屬性, 常用的運作屬性大致有以下幾種：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>屬性</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>w</td>
+      <td>寫入資料</td>
+    </tr>
+    <tr>
+      <td>r</td>
+      <td>讀出資料</td>
+    </tr>
+    <tr>
+      <td>a</td>
+      <td>附加資料</td>
+    </tr>
+    <tr>
+      <td>wb</td>
+      <td>寫入二進位檔案</td>
+    </tr>
+    <tr>
+      <td>rb</td>
+      <td>讀取二進位檔案</td>
+    </tr>
+    <tr>
+      <td>ab</td>
+      <td>附加資料近二進位檔案</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>一般的 <code class="highlighter-rouge">w</code> <code class="highlighter-rouge">r</code> <code class="highlighter-rouge">a</code> 屬性是用來讀寫文字檔案</p>
+
+<p><code class="highlighter-rouge">wb</code> <code class="highlighter-rouge">rb</code> <code class="highlighter-rouge">ab</code> 屬性則是用來讀寫二進位形式檔案</p>
+
+<p>而檔案的常用操作有以下的幾種函數：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函數</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">write()</code></td>
+      <td>用以寫入資料</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">read()</code></td>
+      <td>讀取檔案中的所有內容 (存成字串形式)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">readline()</code></td>
+      <td>從檔案中讀取一行資料</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">readlines()</code></td>
+      <td>讀取檔案中的所有內容 (存成串列形式)</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">read(num)</code></td>
+      <td>從檔案中讀取 num 個字元</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">close()</code></td>
+      <td>關閉檔案</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<h4 id="練習寫入資料">練習寫入資料</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 開啟檔案 example.txt , 若不存在則自動建立</span>
+<span class="c"># 並將檔案屬性設為寫入</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>
+
+<span class="c"># 寫入資料</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'Hello world!</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'I love Python.'</span><span class="p">)</span>
+
+<span class="c"># 關閉檔案</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>執行後會在同目錄下生成一個 <code class="highlighter-rouge">example.txt</code> 檔</p>
+
+<p><img src="https://i.imgur.com/ku0gIlu.png" alt="" /></p>
+
+<p><br /></p>
+
+<h4 id="練習讀取資料">練習讀取資料</h4>
+
+<p>從剛剛建立的 <code class="highlighter-rouge">exmaple.txt</code> 來讀取</p>
+
+<ul>
+  <li><b>使用 <code class="highlighter-rouge">read()</code> 來讀取</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 開啟檔案 example.txt , 並將檔案屬性設為讀取</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="c"># 使用 read() 一次讀出所有內容</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c"># 關閉檔案</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/1vWTnUU.png" alt="" /></p>
+
+<ul>
+  <li><b>使用 <code class="highlighter-rouge">readline()</code> 來讀取</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="c"># 使用 readline() 一次讀出一行</span>
+<span class="n">line1</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">line2</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">line1</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">''</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">line2</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">()</span>
+
+<span class="c"># 使用 repr() 後, 會連同轉義字元都一起印出來 (例如 \n)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">line1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">line2</span><span class="p">))</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/B4lYE1c.png" alt="" /></p>
+
+<ul>
+  <li><b>使用 <code class="highlighter-rouge">readlines()</code> 來讀取</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/POQbLrz.png" alt="" /></p>
+
+<blockquote>
+  <p>從上面結果你可以發現 <code class="highlighter-rouge">read()</code> 和 <code class="highlighter-rouge">readlines()</code> 雖然都是一次讀取全部資料, 但是 <code class="highlighter-rouge">read()</code> 是將讀出來的東西存成字串, 而 <code class="highlighter-rouge">readlines()</code> 是將讀出來的東西存成串列</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="練習附加資料">練習附加資料</h4>
+
+<p>假設你要寫入的檔案中本身就有資料, 那麼你新寫入的東西將會把原本的資料覆蓋掉, 如果想要避免此情況發生, 你可以使用附加的方式</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">How are you today?'</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="https://i.imgur.com/qtviaNd.png" alt="" /></p>
+
+<blockquote>
+  <p>如此一來, 裡面原有的資料就不會被覆蓋掉</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="寫入與讀取一起做">寫入與讀取一起做</h4>
+
+<ul>
+  <li><b>方法一</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 開啟檔案, 設定為寫入模式</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'practice.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span>
+
+<span class="c"># 寫入資料</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'how are you today?</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'I</span><span class="se">\'</span><span class="s">m file. Thanks.'</span><span class="p">)</span>
+
+<span class="c">#關閉檔案</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="c"># 開啟檔案, 設定為讀取模式</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'practice.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+
+<span class="c"># 讀取資料</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c"># 關閉檔案</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>這種方法的效率比較差, 因為開關了兩次檔案, 建議使用方法二</p>
+</blockquote>
+
+<ul>
+  <li><b>方法二</b></li>
+</ul>
+
+<p><code class="highlighter-rouge">w+</code> 模式代表可以同時寫檔與讀檔, 當然你換成 <code class="highlighter-rouge">r+</code> 或 <code class="highlighter-rouge">a+</code> 也可以得到一樣的效果</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'practice.txt'</span><span class="p">,</span> <span class="s">'w+'</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'how are you today?</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">'I</span><span class="se">\'</span><span class="s">m fine. Thanks.'</span><span class="p">)</span>
+
+<span class="c"># 將檔案指標移動到檔案頭</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="nb">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>方法二要特別注意, 在你寫完檔之後要開始讀檔時, 其檔案指標其實是指到檔案尾的, 所以你直接讀會讀不到資料, 必須先用 <code class="highlighter-rouge">seek(0, 0)</code> 將檔案指標移回檔案開頭</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="讀寫二進位檔案">讀寫二進位檔案</h4>
+
+<p>如果你要讀取的檔案中, 大部分都是數值的話, 那麼會推薦你用二進位的方式來存取會比較有效率, 在使用前還必須先引進 <code class="highlighter-rouge">pickle</code> 模組, 而它的讀寫檔案函數如下：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>函數</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">dump()</code></td>
+      <td>寫入資料</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">load()</code></td>
+      <td>讀取資料</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pickle</span>
+
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'achievement.txt'</span><span class="p">,</span> <span class="s">'wb+'</span><span class="p">)</span>
+
+<span class="c"># 使用 dump 函數寫入資料</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s">'Name</span><span class="se">\t</span><span class="s">Chinese</span><span class="se">\t</span><span class="s">English</span><span class="se">\t</span><span class="s">Math'</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s">'Chris</span><span class="se">\t</span><span class="s">90</span><span class="se">\t</span><span class="s">74</span><span class="se">\t</span><span class="s">88'</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+<span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="s">'Peggy</span><span class="se">\t</span><span class="s">98</span><span class="se">\t</span><span class="s">99</span><span class="se">\t</span><span class="s">100'</span><span class="p">,</span> <span class="nb">file</span><span class="p">)</span>
+
+<span class="c"># 將檔案指標移動到檔案頭</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c"># 使用 load 函數讀出資料</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
+
+<span class="c"># 關閉檔案</span>
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>執行後可以得到以下結果</p>
+
+<p><img src="https://i.imgur.com/ObvSh3w.png" alt="" /></p>
+
+<p><br /></p>
+
+<h4 id="open-的其他寫法"><code class="highlighter-rouge">open()</code> 的其他寫法</h4>
+
+<p>先建立一個檔案叫 <code class="highlighter-rouge">exmaple.txt</code> , 內容如下：</p>
+
+<p><img src="https://i.imgur.com/l8gIpO2.png" alt="" /></p>
+
+<p>接著寫程式讀取它</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># open 的另一種寫法</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'example.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+	<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+		<span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="nb">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>執行結果</p>
+
+<p><img src="https://i.imgur.com/8TC1mtZ.png" alt="" /></p>
+
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/file-processing.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 檔案處理&url=http://localhost:4000/posts/python3/file-processing.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/file-processing.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/file-processing.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 檔案處理&url=http://localhost:4000/posts/python3/file-processing.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/file-processing.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

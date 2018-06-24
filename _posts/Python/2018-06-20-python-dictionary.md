@@ -2,6 +2,7 @@
 layout: post
 title:  "[Python] 學習使用詞典 (Dictionary)"
 date:   2018-06-20
+update:	2018-06-21
 categories: [Python3]
 comments: true
 ---
@@ -23,7 +24,9 @@ print(dict2)
 ```
 
 > **宣告空集合 (Set) :** `set1 = set()`
+
 > **宣告空詞典 (Dictionary) :** `dict1 = {}`
+
 > 兩個宣告法不要搞錯囉!
 
 <br/>

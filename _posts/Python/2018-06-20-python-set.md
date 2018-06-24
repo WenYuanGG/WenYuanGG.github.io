@@ -2,6 +2,7 @@
 layout: post
 title:  "[Python] 學習使用集合 (Set)"
 date:   2018-06-20
+update:	2018-06-21
 categories: [Python3]
 comments: true
 ---
@@ -62,9 +63,13 @@ print(set4)
 <b>與串列 (List) 和數組 (Tuple)</b> 一樣可以使用以下函式
 
 `len()` 回傳長度
+
 `sum()` 回傳總和
+
 `max()` 回傳最大值
+
 `min()` 回傳最小值
+
 
 ```python
 set1 = {2, 4, 6, 8, 10}
@@ -113,9 +118,13 @@ for i in set1:
 {: style="color:MediumSeaGreen;"}
 
 `union` : 聯集
+
 `intersection` : 交集
+
 `difference` : 差集
+
 `symmetric_difference` : 對稱差集
+
 
 ```python
 setA = {1, 6, 8, 10, 20}
@@ -139,8 +148,11 @@ print(setA ^ setB)
 ```
 
 > **聯集：** A B 集合的所有項目
+
 > **交集：** A B 集合的共有項目
+
 > **差集：** A 集合扣掉 A B 集合的共有項目
+
 > **對稱差集：** A B 集合的獨有項目
 
 <br/>

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <meta name="theme-color" content="#5c6bc0">
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>[Python] 字串處理</title>
+  <meta name="description" content="在數據分析的時代, 處理字串的能力也是必備的, 在這篇文章中會說明一些經常用到的字串處理方法, 而這些方法已經可以讓你處理大部分的問題, 以下待續">
+  <link rel="canonical" href="http://localhost:4000/posts/python3/python-string.html">
+  <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
+
+  <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+  <link media="all" rel="stylesheet" type="text/css" href="/lib/mdi/css/materialdesignicons.min.css" >
+  <link rel="stylesheet" href="/lib/material-scrolltop/material-scrolltop.css">
+
+  <noscript>
+  <div class="notice-warning noscript">You don't have javascript enabled. Good luck! :(</div>
+</noscript>
+
+<!--[if IE]>
+  <div class="notice-warning">Oh, you are using Internet Explorer! Good luck... :(</div>
+<![endif]-->
+
+</head>
+
+
+  <body>
+
+    <script id="diq-count-scr" src="//wenyuangg-2.disqus.com/count.js" async></script>
+
+    <header class="site-header">
+      <nav class="nav-extended indigo lighten-1">
+        <div class="nav-wrapper">
+      <span class="site-title">通訊雜記</span>
+      <a href="#" data-activates="mobile-navbar" class="button-collapse"><i class="mdi mdi-menu white-text"></i></a>
+      
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/" class="white-text">
+            <i class="mdi mdi-home left indigo-text text-lighten-3"></i>Home
+        </a></li>
+        <li><a href="/about" class="white-text">
+            <i class="mdi mdi-account-circle left indigo-text text-lighten-3"></i>About
+        </a></li>
+        <li><a href="/category" class="white-text">
+            <i class="mdi mdi-folder-multiple left indigo-text text-lighten-3"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="white-text">
+            <i class="mdi mdi-rss left indigo-text text-lighten-3"></i>RSS
+        </a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-navbar">
+        <li><a href="/" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-home left green-text"></i>Home
+        </a></li>
+        <li><a href="/about" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-account-circle left blue-text"></i>About
+        </a></li>
+        <li><a href="/category" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-folder-multiple left yellow-text text-darken-1"></i>Category
+        </a></li>
+        <li><a href="/feed.xml" class="waves-effect waves-teal black-text">
+            <i class="mdi mdi-rss left red-text"></i>RSS
+        </a></li>
+      </ul>
+</div>
+
+
+        <div class="nav-content">
+          <ul class="tabs tabs-transparent">
+            <li class="tab"><a class="active" href="#tab-main">main</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test">test</a></li>
+          
+            <li class="tab disabled"><a href="#tab-test1">diasble-test</a></li>
+          
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+  
+    <div id="tab-test">
+      <div class="site-container"><div class="wrapper">
+
+<div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="tab-section">
+
+    <div class="post-header">
+      <h1 class="post-title">This is a test</h1>
+    </div>
+
+    <article class="post-content">
+       <p>You’ll find this post in your <code class="highlighter-rouge">_posts</code> directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run <code class="highlighter-rouge">jekyll serve</code>, which launches a web server and auto-regenerates your site when a file is updated.</p>
+
+      <p>To add new posts, simply add a file in the <code class="highlighter-rouge">_posts</code> directory that follows the convention <code class="highlighter-rouge">YYYY-MM-DD-name-of-post.ext</code> and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.</p>
+
+      <p>Jekyll also offers powerful support for code snippets:</p>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">print_hi</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Hi, </span><span class="si">#{</span><span class="nb">name</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">end</span>
+<span class="n">print_hi</span><span class="p">(</span><span class="s1">'Tom'</span><span class="p">)</span>
+<span class="c1">#=&gt; prints 'Hi, Tom' to STDOUT.</span></code></pre></figure>
+
+    <p>Check out the <a href="http://jekyllrb.com/docs/home">Jekyll docs</a> for more info on how to get the most out of Jekyll. File all bugs/feature requests at <a href="https://github.com/jekyll/jekyll">Jekyll’s GitHub repo</a>. If you have questions, you can ask them on <a href="https://talk.jekyllrb.com/">Jekyll Talk</a>.</p>
+    </article>
+
+  </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+    </div>
+  
+    <div id="tab-test1">
+      
+    </div>
+  
+
+    <div class="site-container" id="tab-main"> 
+      <div class="wrapper">
+        <div class="post-ribbon"></div>
+
+<div class="container post-container">
+  <div class="post-page card-panel z-depth-2">
+  <div class="post-section">
+
+    <p class="grey-text">
+      <i class="mdi mdi-calendar"></i>&nbsp;
+      Jun 21, 2018
+      &nbsp;&nbsp;<i class="mdi mdi-account-circle"></i>&nbsp;
+      WenYuan
+      &nbsp;&nbsp;<i class="mdi mdi-label"></i>&nbsp;
+      <span class="capitalize">
+        Python3
+        
+      </span>
+      &emsp;<i class="mdi mdi-refresh"></i>&nbsp;UPDATE: Jun 21, 2018
+    </p>
+
+    <div class="post-header">
+      <h1 class="post-title">[Python] 字串處理</h1>
+
+      
+        <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
+        
+      
+    </div>
+
+    <article class="post-content">
+      <p>在數據分析的時代, <b>處理字串的能力也是必備的</b>, 在這篇文章中會說明一些經常用到的字串處理方法, 而這些方法已經可以讓你處理大部分的問題, 以下待續</p>
+
+<p><br /></p>
+
+<h4 id="宣告以及建立字串">宣告以及建立字串</h4>
+
+<p>在 C/C++ 中, 字串需要使用<b>雙引號</b>括住 (字元使用<b>單引號</b>括住), 但是 Python 比較特殊, 它並沒有字元與字串之分, 因此你要用<b>單引號或雙引號都可以</b></p>
+
+<ul>
+  <li><b>以下為建立空字串的方法</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 以下 3 個都是建立空字串的意思</span>
+<span class="n">str1</span> <span class="o">=</span> <span class="nb">str</span><span class="p">()</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">''</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="s">""</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>也可以直接初始化字串</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello World!'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>也可以使用 len max min 函數</b></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>函數</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">len(string)</code></td>
+      <td>回傳字串長度</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">max(string)</code></td>
+      <td>回傳字串中最大值</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">min(string)</code></td>
+      <td>回傳字串中最小值</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello World!'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span> <span class="c"># 印出字串長度</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span> <span class="c"># 印出字串最大值</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">str1</span><span class="p">))</span> <span class="c"># 印出字串最小值</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="利用索引來擷取某字元或某字串">利用索引來擷取某字元或某字串</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello World!'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span> <span class="c"># 從索引 6 印到最後一個字</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="c"># 印出最後一個字元</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>也可以利用 <code class="highlighter-rouge">for</code> 迴圈來印出字串</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello World!'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">6</span><span class="p">:])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">7</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">str1</span><span class="p">:</span>
+	<span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">''</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="連結與複製字串">連結與複製字串</h4>
+
+<ul>
+  <li><b>將兩字串合在一起</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello '</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">'World!'</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">+</span> <span class="n">str2</span> <span class="c"># 將兩字串接在一起</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>複製字串</b></li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello '</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">'World!'</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">*</span> <span class="mi">2</span> <span class="c"># 複製字串</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="判斷某字元-or-字串-是否存在於字串中">判斷某字元 (or 字串) 是否存在於字串中</h4>
+
+<p>使用 <code class="highlighter-rouge">in</code> 與 <code class="highlighter-rouge">not in</code> 來判斷</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello '</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">'World!'</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="n">str1</span> <span class="o">*</span> <span class="mi">2</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'e'</span> <span class="ow">in</span> <span class="n">str1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span> <span class="ow">in</span> <span class="n">str3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">str3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'o'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">str2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="字串測試的方法">字串測試的方法</h4>
+
+<p>以下為一些常用的測試字串方法</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">isupper()</code></td>
+      <td>若字串為大寫字母組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">islower()</code></td>
+      <td>若字串為小寫字母組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">isspace()</code></td>
+      <td>若字串為空白字元組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">isalnum()</code></td>
+      <td>若字串為字母和數字組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">isalpha()</code></td>
+      <td>若字串為字母組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">isdigit()</code></td>
+      <td>若字串為數字組成, 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">isidentifier()</code></td>
+      <td>若字串為識別字, 就回傳 True</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'Hello'</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">'5566'</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="s">'Hello5566'</span>
+<span class="n">str4</span> <span class="o">=</span> <span class="s">'APPLE'</span>
+<span class="n">str5</span> <span class="o">=</span> <span class="s">'banana'</span>
+<span class="n">str6</span> <span class="o">=</span> <span class="s">'list'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str4</span><span class="o">.</span><span class="n">isupper</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str5</span><span class="o">.</span><span class="n">islower</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str3</span><span class="o">.</span><span class="n">isalnum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">isalpha</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str2</span><span class="o">.</span><span class="n">isdigit</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str6</span><span class="o">.</span><span class="n">isidentifier</span><span class="p">())</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>這是很好用的功能, 可以判斷你的字串到底是由哪些東西所組成</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 id="如何去掉字串中的空白字元">如何去掉字串中的空白字元</h4>
+
+<p>在字串中很怕遇到空白字元來擾亂了格式, 因此 Python 也提供了幾種<b>去除空白字元的方法</b>, 如下</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">lstrip()</code></td>
+      <td>刪除字串左側空白</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rstrip()</code></td>
+      <td>刪除字串右側空白</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">strip()</code></td>
+      <td>刪除字串兩側的空白</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'  This is an example.  '</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">lstrip</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">rstrip</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="字串中的子字串">字串中的子字串</h4>
+
+<p>Python 提供了一些方法讓你可以在字串中找尋特定的子字串, 也可以計算某字串出現的次數</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">startswith(str)</code></td>
+      <td>若字串尾端為 str , 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">endswith(str)</code></td>
+      <td>若字串開頭為 str , 就回傳 True</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">find(str)</code></td>
+      <td>找尋字串中出現 str 的最小索引值</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rfind(str)</code></td>
+      <td>找尋字串中出現 str 的最大索引值</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">count(str)</code></td>
+      <td>計算 str 在字串中出現的次數</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'This is an example.'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">'This'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s">'example.'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'a'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s">'a'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">'i'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="轉換字串">轉換字串</h4>
+
+<p>Python 也有提供方法可以將字串進行<b>轉換</b></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">capitalize()</code></td>
+      <td>將字串的第一個字轉成大寫</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">lower()</code></td>
+      <td>將字串所有字元轉成小寫</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">upper()</code></td>
+      <td>將字串所有字元轉成大寫</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">title()</code></td>
+      <td>將字串中每一個單字的第一個字元轉成大寫</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">swapcase()</code></td>
+      <td>將字串中的大寫轉小寫, 小寫轉大寫</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">replace(str1, str2)</code></td>
+      <td>將字串中的 str1 以 str2 取代</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'My name is Chris Chen. I am 21 years old.'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">capitalize</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">title</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">swapcase</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">str1</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">'Chris'</span><span class="p">,</span> <span class="s">'Peggy'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="如何將字串格式化">如何將字串格式化</h4>
+
+<p>在做資料處理, 如果可以將字串以一定的格式排列好的話, 經常可以<b>增加資料的可視性</b>, 以下為 Python 所提供的字串格式化方法</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">ljust(width)</code></td>
+      <td>字串欄寬為 width , 並向左靠齊</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">rjust(width)</code></td>
+      <td>字串欄寬為 width , 並向右靠齊</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">center(width)</code></td>
+      <td>字串欄寬為 width , 並向中靠齊</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'My name is Chris Chen.'</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'|'</span> <span class="o">+</span> <span class="n">str1</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="s">'|'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'|'</span> <span class="o">+</span> <span class="n">str1</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="s">'|'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'|'</span> <span class="o">+</span> <span class="n">str1</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="s">'|'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><b>也有切割字串的方法</b></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">split(str)</code></td>
+      <td>每當字串遇到 str 就進行切割, 並將切下來的部份放進 list 中</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">str1</span> <span class="o">=</span> <span class="s">'My name is Chris Chen.'</span>
+<span class="n">str2</span> <span class="o">=</span> <span class="s">'192.168.43.43'</span>
+<span class="n">str3</span> <span class="o">=</span> <span class="s">'DF-664-897-99'</span>
+
+<span class="n">list1</span> <span class="o">=</span> <span class="n">str1</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">' '</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span>
+
+<span class="n">list2</span> <span class="o">=</span> <span class="n">str2</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list2</span><span class="p">)</span>
+
+<span class="n">list3</span> <span class="o">=</span> <span class="n">str3</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">'-'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">list3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<h4 id="ascii-與數字間的轉換">ASCII 與數字間的轉換</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>方法</th>
+      <th>功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">ord(char)</code></td>
+      <td>將字元 char 轉成 ASCII 對應的數字</td>
+    </tr>
+    <tr>
+      <td><code class="highlighter-rouge">chr(num)</code></td>
+      <td>將數字 num 轉成 ASCII 對應的字元</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>–</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">num</span> <span class="o">=</span> <span class="nb">ord</span><span class="p">(</span><span class="s">'a'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'ASCII </span><span class="se">\'</span><span class="s">a</span><span class="se">\'</span><span class="s"> is integer'</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+
+<span class="n">char</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Integer'</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="s">'is ASCII'</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+</code></pre></div></div>
+
+    </article>
+
+    <div class="post-share">
+
+<!-- desktop and tablet-->
+<div class="hide-on-small-only">
+  <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-string.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 字串處理&url=http://localhost:4000/posts/python3/python-string.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-string.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+<!-- small screen device -->
+<div class="hide-on-med-and-up">
+  <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
+
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/python3/python-string.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=[Python] 字串處理&url=http://localhost:4000/posts/python3/python-string.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/python3/python-string.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+</div>
+
+</div>
+
+
+  </div>
+  </div>
+
+  
+
+  
+    <div id="disqus_thread"></div>
+    <script>
+
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://wenyuangg-3.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>            
+  
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="page-footer indigo lighten-1">
+    <div class="container">
+      <div class="row">
+        <div class="col l4 s12">
+          <h5 class="white-text">About</h5>
+          <p class="grey-text text-lighten-4">
+              "This blog records my learning history"
+          </p>
+        </div>
+
+        <div class="col l4 s12 right">
+          <h5 class="white-text">Connect</h5>
+          <ul>
+            
+            <li><a href="https://github.com/WenYuanGG" class="white-text text-lighten-3 btn waves-effect waves-light indigo lighten-2 lighten-3"><i class="mdi mdi-github-circle"></i></a></li>
+            
+            
+            
+          </ul>
+        </div>
+
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        Copyright © WenYuan, under<a class="red-text text-accent-1" href="https://creativecommons.org/licenses/by-sa/4.0/"> CC BY-SA 4.0</a> Powered by <a class="red-text text-accent-1" href="http://jekyllrb.com/">Jekyll</a>.
+        <a class="btn waves-effect waves-light indigo lighten-2 lighten-1 right white-text" href="/about" >Contact me</a>
+      </div>
+    </div>
+  </footer>
+
+
+
+    <!-- scrolltop button -->
+    <button class="material-scrolltop waves-effect waves-light hide-on-small-only" type="button"><i class="mdi mdi-arrow-up-bold small white-text"></i></button>
+
+    <!-- jquery -->
+    <script type="text/javascript" src="/lib/jquery-min.js"></script>
+    <!-- materialize -->
+    <script src="/lib/materialize/js/materialize.min.js"></script>
+    <!-- Material ScrollTop plugin -->
+    <script src="/lib/material-scrolltop/material-scrolltop.js"></script>
+    <!-- main -->
+    <script src="/js/init.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- google analytics -->
+    <script src="/js/google-analytics.js"></script>
+  </body>
+
+</html>

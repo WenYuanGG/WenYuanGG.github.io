@@ -145,6 +145,224 @@
     <!-- This loops through the paginated posts -->
     
       <li class="card-panel hoverable">
+        <span class="grey-text right">Nov 20, 2017</span>
+        <a class="post-link" href="/posts/opencv/opencv-face-detection.html">[OpenCV] 臉部偵測 (FaceDetection)</a>
+
+        <button data-target="_posts_opencv_opencv-face-detection" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
+
+        <div id="_posts_opencv_opencv-face-detection" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>[OpenCV] 臉部偵測 (FaceDetection)</h4>
+            <p><h4 style="color:MediumSeaGreen;" id="我的實作環境">我的實作環境</h4>
+
+<ul>
+  <li><strong>作業系統：</strong> Lubuntu 16.04</li>
+  <li><strong>OpenCV 函式庫版本：</strong> <code class="highlighter-rouge">Version 3.3</code></li>
+  <li><strong>程式語言：</strong> C++</li>
+</ul>
+
+<blockquote>
+  <p>在作業系統方面不用擔心, 因為 OpenCV 是一個<strong>跨平台</strong>的函數庫</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="先建立檔案">先建立檔案</h4>
+
+<p>先依序建立以下幾個檔案：</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>FaceDetection
+<span class="nb">cd </span>FaceDetection
+<span class="nb">mkdir </span>Source
+<span class="nb">touch </span>FaceDetection.cpp</code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="下載人臉及人眼分類器">下載人臉及人眼分類器</h4>
+
+<p>先進到 Source 目錄中</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd </span>Source</code></pre></figure>
+
+<p>下載人臉及人眼分類器</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 取得人眼分類器
+</span>
+wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_eye_tree_eyeglasses.xml
+
+<span class="c"># 取得人臉分類器
+</span>
+wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml</code></pre></figure>
+
+<blockquote>
+  <p>XML 是可以自行定義各標籤名稱的標記式語言, 透過標記式語言, 電腦之間便可以傳輸各種資訊
+所以當我們 Load 上面兩個 XML 進程式之後, 就可以使用他們的演算法來找出人臉及眼睛</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="開始撰寫臉部偵測">開始撰寫臉部偵測</h4>
+
+<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/** FaceDetection.cpp **/</span>
+<span class="cp">#include &lt;opencv2/opencv.hpp&gt;
+#include &lt;iostream&gt;
+#include &lt;stdio.h&gt;
+</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+
+<span class="cm">/** Print error message **/</span>
+<span class="kt">void</span> <span class="n">PANIC</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">);</span>
+<span class="cp">#define PANIC(msg){perror(msg); exit(-1);}
+</span>
+<span class="cm">/** Function for face detection **/</span>
+<span class="kt">void</span> <span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">Mat</span> <span class="n">frame</span><span class="p">);</span>
+
+<span class="cm">/** Global variables **/</span>
+<span class="n">String</span> <span class="n">face_cascade_name</span> <span class="o">=</span> <span class="s">"Source/haarcascade_frontalface_default.xml"</span><span class="p">;</span>
+<span class="n">String</span> <span class="n">eyes_cascade_name</span> <span class="o">=</span> <span class="s">"Source/haarcascade_eye_tree_eyeglasses.xml"</span><span class="p">;</span>
+<span class="n">CascadeClassifier</span> <span class="n">face_cascade</span><span class="p">;</span> <span class="c1">// Declare the face classifier
+</span>
+<span class="n">CascadeClassifier</span> <span class="n">eyes_cascade</span><span class="p">;</span> <span class="c1">// Declare the eyes classifier
+</span>
+<span class="n">String</span> <span class="n">window_name</span> <span class="o">=</span> <span class="s">"Face detection"</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+	<span class="cm">/* Open the web camera */</span>
+	<span class="n">VideoCapture</span> <span class="n">capture</span> <span class="o">=</span> <span class="n">VideoCapture</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+	<span class="n">Mat</span> <span class="n">frame</span><span class="p">,</span> <span class="n">image</span><span class="p">;</span>
+	
+	<span class="cm">/** Load cascade classifiers **/</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">face_cascade</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">face_cascade_name</span><span class="p">))</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error loading face cascade"</span><span class="p">);</span>
+	<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">eyes_cascade</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">eyes_cascade_name</span><span class="p">))</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error loading eyes cascade"</span><span class="p">);</span>
+	
+	<span class="cm">/** After the camera is opened **/</span>
+	<span class="k">if</span><span class="p">(</span><span class="n">capture</span><span class="p">.</span><span class="n">isOpened</span><span class="p">()){</span>
+		<span class="n">cout</span><span class="o">&lt;&lt;</span><span class="s">"Face Detection Started..."</span><span class="o">&lt;&lt;</span><span class="n">endl</span><span class="p">;</span>
+
+		<span class="k">for</span><span class="p">(;;){</span>
+			<span class="cm">/* Get image from camera */</span>
+			<span class="n">capture</span><span class="o">&gt;&gt;</span><span class="n">frame</span><span class="p">;</span> 			
+			<span class="k">if</span><span class="p">(</span><span class="n">frame</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
+				<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error capture frame"</span><span class="p">);</span>
+			
+			<span class="cm">/* Start the face detection function */</span>
+			<span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
+			
+			<span class="cm">/** If you press ESC, q, or Q , the process will end **/</span>
+			<span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="p">)</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+			<span class="k">if</span><span class="p">(</span><span class="n">ch</span><span class="o">==</span><span class="mi">27</span> <span class="o">||</span> <span class="n">ch</span><span class="o">==</span><span class="sc">'q'</span> <span class="o">||</span> <span class="n">ch</span><span class="o">==</span><span class="sc">'Q'</span><span class="p">)</span>
+				<span class="k">break</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+		<span class="n">PANIC</span><span class="p">(</span><span class="s">"Error open camera"</span><span class="p">);</span>
+	
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">DetectAndDraw</span><span class="p">(</span><span class="n">Mat</span> <span class="n">frame</span><span class="p">){</span>
+    <span class="cm">/* Declare vector for faces and eyes */</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Rect</span><span class="o">&gt;</span> <span class="n">faces</span><span class="p">,</span> <span class="n">eyes</span><span class="p">;</span>
+    <span class="n">Mat</span> <span class="n">frame_gray</span><span class="p">,</span> <span class="n">frame_resize</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">radius</span><span class="p">;</span>
+	
+    <span class="cm">/* Convert to gray scale */</span>
+    <span class="n">cvtColor</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">frame_gray</span><span class="p">,</span> <span class="n">COLOR_BGR2GRAY</span><span class="p">);</span>
+    <span class="c1">//imshow("grayscale", frame_gray);
+</span>
+	
+    <span class="cm">/* Resize the grayscale Image */</span>
+    <span class="c1">//resize(frame_gray, frame_resize, Size(), 1, 1, INTER_LINEAR);
+</span>
+    <span class="c1">//imshow("resize", frame_resize);
+</span>
+	
+    <span class="cm">/* Histogram equalization */</span>
+    <span class="n">equalizeHist</span><span class="p">(</span><span class="n">frame_gray</span><span class="p">,</span> <span class="n">frame_gray</span><span class="p">);</span>
+    <span class="c1">//imshow("equalize", frame_gray);
+</span>
+	
+    <span class="cm">/* Detect faces of different sizes using cascade classifier */</span>
+    <span class="n">face_cascade</span><span class="p">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">frame_gray</span><span class="p">,</span> <span class="n">faces</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">CV_HAAR_SCALE_IMAGE</span><span class="p">,</span> <span class="n">Size</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">));</span>
+	
+    <span class="cm">/** Draw circles around the faces **/</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">faces</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Point</span> <span class="n">center</span><span class="p">;</span>
+ 
+        <span class="cm">/* Draw rectangular on face */</span>
+        <span class="n">rectangle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Scalar</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+        <span class="n">Mat</span> <span class="n">faceROI</span> <span class="o">=</span> <span class="n">frame_gray</span><span class="p">(</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+
+        <span class="cm">/* Detection of eyes int the input image */</span>
+        <span class="n">eyes_cascade</span><span class="p">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">faceROI</span><span class="p">,</span> <span class="n">eyes</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">CV_HAAR_SCALE_IMAGE</span><span class="p">,</span> <span class="n">Size</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> 
+         
+        <span class="cm">/** Draw circles around eyes **/</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">eyes</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> 
+        <span class="p">{</span>
+            <span class="n">center</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">x</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">x</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">width</span><span class="o">*</span><span class="mf">0.5</span><span class="p">));</span>
+            <span class="n">center</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">faces</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">y</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">y</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">height</span><span class="o">*</span><span class="mf">0.5</span><span class="p">));</span>
+            <span class="n">radius</span> <span class="o">=</span> <span class="n">cvRound</span><span class="p">((</span><span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">width</span> <span class="o">+</span> <span class="n">eyes</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">height</span><span class="p">)</span><span class="o">*</span><span class="mf">0.25</span><span class="p">);</span>
+            <span class="n">circle</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">,</span> <span class="n">Scalar</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="c1">// Show Processed Image with detected faces
+</span>
+    <span class="n">imshow</span><span class="p">(</span> <span class="s">"Face Detection"</span><span class="p">,</span> <span class="n">frame</span><span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="編譯與執行">編譯與執行</h4>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">## 編譯
+</span>
+g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
+
+<span class="c"># 執行
+</span>
+./output</code></pre></figure>
+
+<p>執行後將你的臉對準攝相頭, 應該會看到你的臉及眼睛被框出來</p>
+
+<blockquote>
+  <p>如果你還沒安裝 OpenCV 可以參考<a href="">我的文章</a>來安裝</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="解釋程式">解釋程式</h4>
+
+<p>其實過程很簡單, 大致分為以下幾個步驟：</p>
+
+<ul>
+  <li>將人臉和人眼分類器 Load 進來</li>
+  <li>使用 <code class="highlighter-rouge">cvtColor()</code> 將影像轉換成<code class="highlighter-rouge">灰階</code></li>
+  <li>使用 <code class="highlighter-rouge">resize()</code> 更改影像大小比率, 視情況而定, 我們在這裡先不用</li>
+  <li>使用 <code class="highlighter-rouge">equalizeHist()</code> 將影像做直方圖等化, 以增強對比度</li>
+  <li>運用 XML 內的分類器演算法來偵測人臉和人眼</li>
+  <li>分別框出臉和眼睛</li>
+  <li>完成臉部偵測</li>
+</ul>
+
+<p><br /></p>
+
+<hr />
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/opencv/opencv-face-detection.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+      <li class="card-panel hoverable">
         <span class="grey-text right">May 6, 2017</span>
         <a class="post-link" href="/posts/algorithm/convex-hull.html">[Java] Convex Hull 演算法</a>
 

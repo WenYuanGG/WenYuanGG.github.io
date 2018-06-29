@@ -1,7 +1,8 @@
 ---
 layout: post
-title:  "[Linux C] 使用 RAW socket 實現 Ping 功能"
+title:  "[Linux C] 使用 RAW socket 實現簡易的 Ping 功能"
 date:   2017-05-17
+update: 2018-06-30
 categories: [網路程式設計]
 comments: true
 ---
@@ -31,9 +32,13 @@ ICMP Header 從第 160 位元開始 , 結構如下圖所示
 其各欄位功能大致如下：
 
 - <b>Type :</b> ICMP 種類 , 可用來識別其狀況
+
 - <b>Code :</b> 進一步劃分 ICMP Type , 可用來識別其錯誤原因
+
 - <b>Checksum :</b> 用來檢查封包資訊有無錯誤
+
 - <b>ID ：</b> 由發送者所定 , 而目標主機的 Echo Reply 必須與我們所設的 ID 相同 , 所以可作為識別之用
+
 - <b>Sequence :</b> 用來紀錄序號 , 而 Echo Reply 同樣必須和發送端相同 , 也是作為識別之用的
 
 > ID Sequence 合起來就可以用來識別特定配對的 Echo Request 和 Echo Reply
@@ -76,119 +81,120 @@ ICMP Header 從第 160 位元開始 , 結構如下圖所示
     #define RESET "\x1B[0m"
 #endif
 
-// 做 checksum 運算 , 可驗證資料再傳輸時有無毀損
+// 做 checksum 運算, 驗證資料有無毀損
 unsigned short checksum(unsigned short *buf, int bufsz){
-	unsigned long sum = 0xffff;
+    unsigned long sum = 0xffff;
 
-	while(bufsz > 1){
-		sum += *buf;
-		buf++;
-		bufsz -= 2;
-	}
+    while(bufsz > 1){
+        sum += *buf;
+        buf++;
+        bufsz -= 2;
+    }
 
-	if(bufsz == 1)
-		sum += *(unsigned char*)buf;
+    if(bufsz == 1)
+        sum += *(unsigned char*)buf;
 
-	sum = (sum & 0xffff) + (sum >> 16);
-	sum = (sum & 0xffff) + (sum >> 16);
+    sum = (sum & 0xffff) + (sum >> 16);
+    sum = (sum & 0xffff) + (sum >> 16);
 
-	return ~sum;
+    return ~sum;
 }
 
 int main(int argc, char *argv[]){
-	int sd;
-	struct icmphdr hdr;
-	struct sockaddr_in addr;
-	int num;
-	char buf[1024];
-	struct icmphdr *icmphdrptr;
-	struct iphdr *iphdrptr;
+    int sd;
+    struct icmphdr hdr;
+    struct sockaddr_in addr;
+    int num;
+    char buf[1024];
+    struct icmphdr *icmphdrptr;
+    struct iphdr *iphdrptr;
 
-	if(argc != 2){
-		printf("usage: %s IPADDR\n", argv[0]);
-		exit(-1);
-	}
+    if(argc != 2){
+        printf("usage: %s IPADDR\n", argv[0]);
+        exit(-1);
+    }
 
-	addr.sin_family = PF_INET; // IPv4
-    
-	// 將輸入的位址轉成 network order 形式
-	num = inet_pton(PF_INET, argv[1], &addr.sin_addr);
-	if(num < 0){
-		perror("inet_pton");
-		exit(-1);
-	}
+    addr.sin_family = PF_INET; // IPv4
 
-	// Create a IPv4 RAW socket, and ready to handle ICMP packets
-	sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
-	if(sd < 0){
-		perror("socket");
-		exit(-1);
-	}
+    // 將使用者輸入的 IP 轉成 network order
+    num = inet_pton(PF_INET, argv[1], &addr.sin_addr);
+    if(num < 0){
+        perror("inet_pton");
+        exit(-1);
+    }
 
-	// Empty the contents of hdr
-	memset(&hdr, 0, sizeof(hdr));
+    // 開一個 IPv4 的 RAW Socket , 並且準備收取 ICMP 封包
+    sd = socket(PF_INET, SOCK_RAW, IPPROTO_ICMP);
+    if(sd < 0){
+        perror("socket");
+        exit(-1);
+    }
 
-	// Initialize the ICMP packet
-	hdr.type = ICMP_ECHO;
-	hdr.code = 0;
-	hdr.checksum = 0;
-	hdr.un.echo.id = 0;
-	hdr.un.echo.sequence = 0;
+    // 清空結構內容
+    memset(&hdr, 0, sizeof(hdr));
 
-	// 計算出 ICMP Header 的 checksum
-	hdr.checksum = checksum((unsigned short*)&hdr, sizeof(hdr));
+    // 初始化 ICMP Header
+    hdr.type = ICMP_ECHO;
+    hdr.code = 0;
+    hdr.checksum = 0;
+    hdr.un.echo.id = 0;
+    hdr.un.echo.sequence = 0;
 
-	// 送出 ICMP Header 封包
-	num = sendto(sd, (char*)&hdr, sizeof(hdr), 0, (struct sockaddr*)&addr, sizeof(addr));
-	if(num < 1){
-		perror("sendto");
-		exit(-1);
-	}
-	printf(KYEL"We have sended an ICMP packet to %s\n", argv[1]);
+    // 計算出 checksum
+    hdr.checksum = checksum((unsigned short*)&hdr, sizeof(hdr));
 
-	memset(buf, 0, sizeof(buf));
+    // 將定義好的 ICMP Header 送到目標主機
+    num = sendto(sd, (char*)&hdr, sizeof(hdr), 0, (struct sockaddr*)&addr, sizeof(addr));
+    if(num < 1){
+        perror("sendto");
+        exit(-1);
+    }
+    printf(KYEL"We have sended an ICMP packet to %s\n", argv[1]);
 
-	printf(KGRN"Waiting for ICMP echo ...\n");
+    // 清空 buf
+    memset(buf, 0, sizeof(buf));
 
-	// 接收來自對方主機的 Echo Reply
-	num = recv(sd, buf, sizeof(buf), 0);
-	if(num < 1){
-		perror("recv");
-		exit(-1);
-	}
+    printf(KGRN"Waiting for ICMP echo...\n");
 
-	// Take out IP header
-	iphdrptr = (struct iphdr*)buf;
+    // 接收來自目標主機的 Echo Reply
+    num = recv(sd, buf, sizeof(buf), 0);
+    if(num < 1){
+        perror("recv");
+        exit(-1);
+    }
 
-	// Take out ICMP header
-	icmphdrptr = (struct icmphdr*)(buf+(iphdrptr->ihl)*4);
+    // 取出 IP Header
+    iphdrptr = (struct iphdr*)buf;
 
-	// Handle the ICMP Type
-	switch(icmphdrptr->type){
-		case 3:
-			printf(KBLU"The host %s is a unrechable purpose!\n", argv[1]);
-			printf(KBLU"The ICMP type is %d\n", icmphdrptr->type);
-			printf(KBLU"The ICMP code is %d\n", icmphdrptr->code);
-			break;
-		case 8:
-			printf(KRED"The host %s is alive!\n", argv[1]);
-			printf(KRED"The ICMP type is %d\n", icmphdrptr->type);
-			printf(KRED"The ICMP code is %d\n", icmphdrptr->code);
-			break;
-		case 0:
-			printf(KRED"The host %s is alive!\n", argv[1]);
-			printf(KRED"The ICMP type is %d\n", icmphdrptr->type);
-			printf(KRED"The ICMP code is %d\n", icmphdrptr->code);
-			break;
-		default:
-			printf(KMAG"Another situations!\n");
-			printf(KMAG"The ICMP type is %d\n", icmphdrptr->type);
-			printf(KMAG"The ICMP code is %d\n", icmphdrptr->code);
-			break;
-	}
+    // 取出 ICMP Header
+    icmphdrptr = (struct icmphdr*)(buf+(iphdrptr->ihl)*4);
 
-	close(sd);
-	return EXIT_SUCCESS;
+    // 判斷 ICMP 種類
+    switch(icmphdrptr->type){
+        case 3:
+            printf(KBLU"The host %s is a unreachable purpose!\n", argv[1]);
+            printf(KBLU"The ICMP type is %d\n", icmphdrptr->type);
+            printf(KBLU"The ICMP code is %d\n", icmphdrptr->code);
+            break;
+        case 8:
+            printf(KRED"The host %s is alive!\n", argv[1]);
+            printf(KRED"The ICMP type is %d\n", icmphdrptr->type);
+            printf(KRED"The ICMP code is %d\n", icmphdrptr->code);
+            break;
+        case 0:
+            printf(KRED"The host %s is alive!\n", argv[1]);
+            printf(KRED"The ICMP type is %d\n", icmphdrptr->type);
+            printf(KRED"The ICMP code is %d\n", icmphdrptr->code);
+            break;
+        default:
+            printf(KMAG"Another situations!\n");
+            printf(KMAG"The ICMP type is %d\n", icmphdrptr->type);
+            printf(KMAG"The ICMP code is %d\n", icmphdrptr->code);
+            break;
+    }
+
+    close(sd); // 關閉 socket
+    return EXIT_SUCCESS;
 }
 {% endhighlight %}
 

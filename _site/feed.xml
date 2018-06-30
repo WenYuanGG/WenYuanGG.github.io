@@ -5,9 +5,68 @@
     <description>This blog records my learning history</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jun 2018 22:54:25 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Jun 2018 22:54:25 +0800</lastBuildDate>
+    <pubDate>Sun, 01 Jul 2018 01:02:25 +0800</pubDate>
+    <lastBuildDate>Sun, 01 Jul 2018 01:02:25 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
+    
+      <item>
+        <title>離散型隨機變數</title>
+        <description>&lt;p&gt;在本篇中要探討的是單 (多) 變數離散型隨機變數的機率函數以及其性質的觀念&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;單變數離散型&quot;&gt;單變數離散型&lt;/h3&gt;
+
+&lt;h4 id=&quot;機率質量函數-mf&quot;&gt;機率質量函數 (m.f)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;定義：&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假設 $r.v.X$ 為離散型 , 其值域為 $S$ , 如果 $x\in S$ 的話 , 則機率質量函數可以寫成 $f_X(x)=p_X(X=x)$&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;離散型的機率質量函數具有強烈的機率意義 , 代入 x 後所求出來的值就是機率了 (單點機率值)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;必要條件：&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(1) $f_X(x)\geq0,\ \forall x \in S$ (機率一定為正)&lt;/p&gt;
+
+&lt;p&gt;(2) $\sum\limits_{x\in S}f_X(x)=1$ (機率總和為 1)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;所有單變數離散型機率函數單必須符合上述兩個條件&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;累積分佈函數-cdf&quot;&gt;累積分佈函數 (c.d.f)&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;定義：&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;假設 $r.v.X$ 的機率質量函數為 $f_X(x)$ , 則他的累積分配函數為 $F_X(x)=p_X(X\leq x)= \sum\limits_{S\leq x}f_X(s)$&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;b&gt;必要條件：&lt;/b&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;(1) $0\leq F_X(x)\leq 1,\ \forall x\in S$ (機率介於 0 到 1 之間)&lt;/p&gt;
+
+&lt;p&gt;未完待續…&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Jul 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html</link>
+        <guid isPermaLink="true">http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html</guid>
+        
+        
+        <category>機率論</category>
+        
+      </item>
     
       <item>
         <title>如何讓程式印出來的字串有顏色</title>
@@ -1826,94 +1885,6 @@ synclient &lt;span class=&quot;nv&quot;&gt;touchpadoff&lt;/span&gt;&lt;span clas
         
         
         <category>Python3</category>
-        
-      </item>
-    
-      <item>
-        <title>隨機變數 (Random Variable) 觀念</title>
-        <description>&lt;p&gt;隨機變數是相關科系研究所口試很愛問的問題 , 各類考試也很愛考 , 除了會解題之外 , 也務必要把觀念弄懂 , 讓自己的層次提升&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;定義&quot;&gt;定義&lt;/h4&gt;
-
-&lt;p&gt;隨機變數實際上是一個&lt;b&gt;函數&lt;/b&gt;，而不是變數, 他可以將定義域中千奇百怪的樣本點經過隨機變數轉換為數值&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;為何需要隨機變數&quot;&gt;為何需要隨機變數&lt;/h4&gt;
-
-&lt;p&gt;主要是因為隨機試驗的種類多而且複雜, 如果我們將一大堆的試驗結果經過隨機變數處理，將其轉換為數值, 可以方面我們用來做數學分析&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;隨機變數的使用&quot;&gt;隨機變數的使用&lt;/h4&gt;
-
-&lt;p&gt;假設有一試驗為投擲硬幣 3 次, 我們令一個隨機變數 X 為投擲出正面的數量, 則會產生出下圖結果&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/8EPs6Ol.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;試驗的結果為定義域, 而硬幣正面的數量為定應域, 所以會產生出上圖的定應結果, 我們就稱這種對應方式為 &lt;b&gt;Random Variable&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;由上圖你也可以得知, 多個試驗結果是可能對應到同一個值的, 所以隨機變數並不必一定要是 &lt;strong&gt;one-to-one 的函數&lt;/strong&gt;, 也可以是個&lt;strong&gt;多對一函數&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;其對應關係也可以寫成下式 , 轉換後的 $S_x$ 代表值域 , $E_x$ 代表發生個數 , $p_x(\ )$ 則代表機率函數&lt;/p&gt;
-
-&lt;p&gt;${S,\ E,\ p(\ )}\stackrel{Function\ X}{\longrightarrow}{S_x,\ E_x,\ p_x(\ )}$&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;隨機變數又可以分成-3-種型態&quot;&gt;隨機變數又可以分成 3 種型態&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;b&gt;離散型：&lt;/b&gt; 對應域數值為&lt;strong&gt;有限個或可數無限個&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/uRhTVQS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;b&gt;連續型：&lt;/b&gt; 對應域數值為&lt;strong&gt;無限不可數個&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/9UyH5YN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;b&gt;混合型：&lt;/b&gt; 代表對應域中&lt;strong&gt;同時包含以上兩種&lt;/strong&gt;特性&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/ZGb5wT1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;記住 ~ 隨機變數其實共有三種哦 , 很多人常常忘記混合型&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;練習使用隨機變數解題&quot;&gt;練習使用隨機變數解題&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;有五個公平的硬幣同時投出 , 請分別求出&lt;b&gt;沒有人頭&lt;/b&gt;、&lt;b&gt;剛好一個人頭&lt;/b&gt;、&lt;b&gt;至少一個人頭&lt;/b&gt;、&lt;b&gt;少於四個人頭&lt;/b&gt;的機率&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;先假設隨機變數 X 為 5 個銅板擲中正面的次數 , 所以它的值域可以寫成 $S_x = {0, 1, 2, 3, 4, 5}$ , 由此可得知他的機率函數為：&lt;/p&gt;
-
-&lt;p&gt;$p(x) = \binom{5}{x}(\frac{1}{2})^5 ;\ x=0,1,2,3,4,5$&lt;/p&gt;
-
-&lt;p&gt;(1) $p(No\ Head) = p(x=0) = (\frac{1}{2})^5$&lt;/p&gt;
-
-&lt;p&gt;(2) $p(One\ Head) = p(x=1) = 5(\frac{1}{2})^5$&lt;/p&gt;
-
-&lt;p&gt;(3) $p(At\ least\ one\ head) = p(x\geq1) = 1-p(x=0) = 1-(\frac{1}{2})^5$&lt;/p&gt;
-
-&lt;p&gt;(4) $p(No\ more\ than\ four\ heads) = p(x\leq4) = 1-p(x=5) = 1-(\frac{1}{2})^5$&lt;/p&gt;
-
-</description>
-        <pubDate>Wed, 06 Jun 2018 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/random-variable.html</link>
-        <guid isPermaLink="true">http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/random-variable.html</guid>
-        
-        
-        <category>機率論</category>
         
       </item>
     

@@ -146,6 +146,26 @@
     
       <li class="card-panel hoverable">
         <span class="grey-text right">Jun 20, 2018</span>
+        <a class="post-link" href="/posts/python3/python-set.html">[Python] 學習使用集合 (Set)</a>
+
+        <button data-target="_posts_python3_python-set" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
+
+        <div id="_posts_python3_python-set" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>[Python] 學習使用集合 (Set)</h4>
+            <p><p>集合 (Set) 其實和數組 (Tuple) 與串列 (List) 很類似, 不同的點在於<b>集合不會包含重複的資料</b></p>
+
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/python3/python-set.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+      <li class="card-panel hoverable">
+        <span class="grey-text right">Jun 20, 2018</span>
         <a class="post-link" href="/posts/python3/python-list.html">[Python] 學習使用串列 (List)</a>
 
         <button data-target="_posts_python3_python-list" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
@@ -499,116 +519,6 @@
           </div>
           <div class="modal-footer">
             <a href="/posts/machinelearning/python-knn.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
-            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
-          </div>
-        </div>
-      </li>
-    
-      <li class="card-panel hoverable">
-        <span class="grey-text right">Dec 25, 2017</span>
-        <a class="post-link" href="/posts/opencv/opencv-installation.html">Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</a>
-
-        <button data-target="_posts_opencv_opencv-installation" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
-
-        <div id="_posts_opencv_opencv-installation" class="modal modal-fixed-footer">
-          <div class="modal-content">
-            <h4>Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</h4>
-            <p><p>跟著以下步驟, 將指令複製貼上執行, 就可以在你的 Ubuntu 上建置編譯 OpenCV C/C++ 的環境</p>
-
-<blockquote>
-  <p>注意： 這只適用在 Linux Debian 以及 MacOS 系統上，Windows 不適用哦!</p>
-</blockquote>
-
-<h4 style="color:MediumSeaGreen;" id="1-更新系統">1. 更新系統</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get update
-<span class="nv">$ </span><span class="nb">sudo </span>apt-get upgrade</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="2-下載-opencv-的相依套件">2. 下載 OpenCV 的相依套件</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
-<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>python3.5-dev python3-numpy libtbb2 libtbb-dev
-<span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="3-下載-opencv">3. 下載 OpenCV</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>su
-<span class="nv">$ </span><span class="nb">cd</span> /opt
-<span class="nv">$ </span>git clone https://github.com/Itseez/opencv.git
-<span class="nv">$ </span>git clone https://github.com/Itseez/opencv_contrib.git</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="4-編譯與安裝-opencv">4. 編譯與安裝 OpenCV</h4>
-
-<p>因為要編譯 OpenCV 以及建置環境, 所以這個環節需要一點時間</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">cd </span>opencv
-<span class="nv">$ </span><span class="nb">mkdir </span>release
-<span class="nv">$ </span><span class="nb">cd </span>release
-<span class="nv">$ </span><span class="nb">mkdir </span>my_build_dir
-<span class="nv">$ </span><span class="nb">cd </span>my_build_dir
-<span class="nv">$ </span>cmake <span class="nt">-D</span> <span class="nv">BUILD_TIFF</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_CUDA</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">ENABLE_AVX</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENGL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_OPENCL</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_IPP</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">BUILD_TBB</span><span class="o">=</span>ON <span class="nt">-D</span> <span class="nv">WITH_EIGEN</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_V4L</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">WITH_VTK</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">BUILD_PERF_TESTS</span><span class="o">=</span>OFF <span class="nt">-D</span> <span class="nv">CMAKE_BUILD_TYPE</span><span class="o">=</span>RELEASE <span class="nt">-D</span> <span class="nv">CMAKE_INSTALL_PREFIX</span><span class="o">=</span>/usr/local <span class="nt">-D</span> <span class="nv">OPENCV_EXTRA_MODULES_PATH</span><span class="o">=</span>/opt/opencv_contrib/modules /opt/opencv/
-<span class="nv">$ </span>make <span class="nt">-j4</span>
-<span class="nv">$ </span>make <span class="nb">install</span>
-<span class="nv">$ </span>ldconfig
-<span class="nv">$ </span><span class="nb">exit</span>
-<span class="nv">$ </span><span class="nb">cd</span> ~</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="5-查看你的-opencv-版本">5. 查看你的 OpenCV 版本</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>pkg-config <span class="nt">--modversion</span> opencv</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="6-寫個簡單的程式來編譯看看">6. 寫個簡單的程式來編譯看看</h4>
-
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* A simple example */</span>
-<span class="cp">#include "opencv2/opencv.hpp"
-</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
-
-<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">Mat</span> <span class="n">srcImg</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="s">"picture.jpg"</span><span class="p">);</span>
-    
-    <span class="n">imshow</span><span class="p">(</span><span class="s">"srcImg"</span><span class="p">,</span> <span class="n">srcImg</span><span class="p">);</span>
-    <span class="n">waitKey</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-<ul>
-  <li>編譯與執行</li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span>g++ main.cpp <span class="nt">-o</span> output <span class="sb">`</span>pkg-config <span class="nt">--cflags</span> <span class="nt">--libs</span> opencv<span class="sb">`</span>
-<span class="nv">$ </span>./output</code></pre></figure>
-
-<blockquote>
-  <p>上面的 main.cpp 請改成你自己程式的名稱</p>
-</blockquote>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="reference">Reference</h4>
-
-<ul>
-  <li><a href="http://www.codebind.com/cpp-tutorial/install-opencv-ubuntu-cpp/">How to Install OpenCV in Ubuntu 16.04 LTS for C / C++</a></li>
-</ul>
-
-<p><br /></p>
-
-<hr />
-</p>
-          </div>
-          <div class="modal-footer">
-            <a href="/posts/opencv/opencv-installation.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
             <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
           </div>
         </div>

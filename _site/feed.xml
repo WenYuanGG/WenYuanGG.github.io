@@ -5,8 +5,8 @@
     <description>This blog records my learning history</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 30 Jun 2018 04:42:31 +0800</pubDate>
-    <lastBuildDate>Sat, 30 Jun 2018 04:42:31 +0800</lastBuildDate>
+    <pubDate>Sat, 30 Jun 2018 17:43:04 +0800</pubDate>
+    <lastBuildDate>Sat, 30 Jun 2018 17:43:04 +0800</lastBuildDate>
     <generator>Jekyll v3.7.3</generator>
     
       <item>
@@ -1855,11 +1855,24 @@ synclient &lt;span class=&quot;nv&quot;&gt;touchpadoff&lt;/span&gt;&lt;span clas
 
 &lt;h4 style=&quot;color:MediumSeaGreen;&quot; id=&quot;隨機變數又可以分成-3-種型態&quot;&gt;隨機變數又可以分成 3 種型態&lt;/h4&gt;
 
-&lt;ol&gt;
+&lt;ul&gt;
   &lt;li&gt;&lt;b&gt;離散型：&lt;/b&gt; 對應域數值為&lt;strong&gt;有限個或可數無限個&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/uRhTVQS.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
   &lt;li&gt;&lt;b&gt;連續型：&lt;/b&gt; 對應域數值為&lt;strong&gt;無限不可數個&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/9UyH5YN.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
   &lt;li&gt;&lt;b&gt;混合型：&lt;/b&gt; 代表對應域中&lt;strong&gt;同時包含以上兩種&lt;/strong&gt;特性&lt;/li&gt;
-&lt;/ol&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://i.imgur.com/ZGb5wT1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
 </description>
         <pubDate>Wed, 06 Jun 2018 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/random-variable.html</link>

@@ -2,8 +2,10 @@
 layout: post
 title:  "隨機變數 (Random Variable) 觀念"
 date:   2018-06-06
+update: 2018-06-30
 categories: [機率論]
 comments: true
+mathjax: true
 ---
 
 > 隨機變數是相關科系研究所口試很愛問的問題
@@ -32,6 +34,16 @@ comments: true
 #### 隨機變數又可以分成 3 種型態
 {: style="color:MediumSeaGreen;"}
 
-1. <b>離散型：</b> 對應域數值為**有限個或可數無限個**
-2. <b>連續型：</b> 對應域數值為**無限不可數個**
-3. <b>混合型：</b> 代表對應域中**同時包含以上兩種**特性
+- <b>離散型：</b> 對應域數值為**有限個或可數無限個**
+
+![](https://i.imgur.com/uRhTVQS.png)
+
+
+- <b>連續型：</b> 對應域數值為**無限不可數個**
+
+![](https://i.imgur.com/9UyH5YN.png)
+
+- <b>混合型：</b> 代表對應域中**同時包含以上兩種**特性
+
+![](https://i.imgur.com/ZGb5wT1.png)
+

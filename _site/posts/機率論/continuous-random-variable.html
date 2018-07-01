@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#5c6bc0">
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <title>離散型隨機變數</title>
-  <meta name="description" content="若有一隨機變數的值域 $S_X$ 為可數實數個的話 , 則稱他為離散型隨機變數 , 而在本篇中要探討的是單 (多) 變數離散型隨機變數的機率函數以及其性質的觀念">
-  <link rel="canonical" href="http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html">
+  <title>連續型隨機變數</title>
+  <meta name="description" content="若有一隨機變數的值域 $S_X$ 為不可數個的話 , 則稱他為連續型隨機變數 , 而在本篇中要探討的是單 (多) 變數連續型隨機變數的機率函數以及其性質的觀念">
+  <link rel="canonical" href="http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html">
   <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
 
   <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
@@ -150,7 +150,7 @@
     </p>
 
     <div class="post-header">
-      <h1 class="post-title">離散型隨機變數</h1>
+      <h1 class="post-title">連續型隨機變數</h1>
 
       
         <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
@@ -159,34 +159,36 @@
     </div>
 
     <article class="post-content">
-      <p>若有一隨機變數的值域 $S_X$ 為可數實數個的話 , 則稱他為離散型隨機變數 , 而在本篇中要探討的是單 (多) 變數離散型隨機變數的機率函數以及其性質的觀念</p>
+      <p>若有一隨機變數的值域 $S_X$ 為不可數個的話 , 則稱他為連續型隨機變數 , 而在本篇中要探討的是單 (多) 變數連續型隨機變數的機率函數以及其性質的觀念</p>
 
 <p><br /></p>
 
-<h3 id="單變數離散型">單變數離散型</h3>
+<h3 id="單變數連續型">單變數連續型</h3>
 
-<h4 id="機率質量函數-mf">機率質量函數 (m.f)</h4>
+<h4 id="機率密度函數-pdf">機率密度函數 (p.d.f)</h4>
 
 <ul>
   <li><b>定義：</b></li>
 </ul>
 
-<p>假設 $r.v.X$ 為離散型 , 其值域為 $S$ , 如果 $x\in S$ 的話 , 則機率質量函數可以寫成 $f_X(x)=p_X(X=x)$</p>
+<p>假設 $r.v.X$ 為連續型 , 其值域為 $S$ , 如果其中有一塊 $E$ 為 $S$ 的部份集合的話 , 而他的機率密度函數為 $f_X(x)$ , 則會滿足 $p_X(E)=\int_{x\in E}f_x(x)dx$</p>
 
-<blockquote>
-  <p>離散型的機率質量函數具有強烈的機率意義 , 代入 x 後所求出來的值就是機率了 (單點機率值)</p>
-</blockquote>
+<p>單變數機率密度函數本身的機率意義薄弱 , 他的單位為 $1/m$ , 因此若想從機率密度函數身上得到機率的話 , 還必須做一重積分 , 就如同上面所寫的 $p_X(E)=\int_{x\in E}f_x(x)dx$</p>
 
 <ul>
   <li><b>必要條件：</b></li>
 </ul>
 
-<p>(1) $f_X(x)\geq0,\ \forall x \in S$ (機率一定為正)</p>
+<p>(1) $f_X(x)\geq 0,\ \forall x\in R$ (密度恆非負)</p>
 
-<p>(2) $\sum\limits_{x\in S}f_X(x)=1$ (機率總和為 1)</p>
+<p>(2) $\int_{-\infty}^{\infty}f_X(x)dx=1$ (總機率為 1)</p>
+
+<p>(3) $p[X=x]=0, \forall x\in R$ (連續型隨機變數沒有單點機率值)</p>
+
+<p>(4) $p[a&lt;X\leq b]=\int_{a}^bf_X(x)dx$</p>
 
 <blockquote>
-  <p>所有單變數離散型機率函數單必須符合上述兩個條件</p>
+  <p>連續型隨機變數並沒有單點機率哦 , 離散型才會有單點機率 , 因此連續型的機率一定會來自一段區間範圍</p>
 </blockquote>
 
 <p><br /></p>
@@ -197,7 +199,7 @@
   <li><b>定義：</b></li>
 </ul>
 
-<p>假設 $r.v.X$ 的機率質量函數為 $f_X(x)$ , 則他的累積分配函數為 $F_X(x)=p_X(X\leq x)= \sum\limits_{S\leq x}f_X(s)$</p>
+<p>假設 $r.v.X$ 的機率密度函數為 $f_X(x)$ , 則他的累積分佈函數為 $F_X(x)=p[X\leq x]=\int_{-\infty}^xf_X(x)dt$</p>
 
 <ul>
   <li><b>必要條件：</b></li>
@@ -211,7 +213,7 @@
 
 <p>(4) $x_1&lt;x2 \rightarrow F_X(x_1)\leq F_X(x_2)$ (因為 $F_X(x)$ 為非遞減函數)</p>
 
-<p>(5) $p[X&gt;x]=1-F_X(x)$ (補事件)</p>
+<p>(5) $p[X&gt;x]=1-F_X(x)$</p>
 
 <p>(6) $p(a&lt;X\leq b)=F_X(b)-F_X(a)$</p>
 
@@ -219,7 +221,7 @@
   <li><b>性質：</b></li>
 </ul>
 
-<p>因為 $F_X(x)$ 在每個 x 上的值都剛好與右極限相同 , 意即 $F_X(x)=F_X(x^+)$ , 所以我們稱 $F_X(x)$ 為右極限函數</p>
+<p>連續型的累積分佈函數經過微分後可以得到機率密度函數 , 可由微積分第一定理得到 $\frac{dF_X(x)}{dx}=f_X(x)$</p>
 
 <p>未完待續…</p>
 
@@ -231,18 +233,18 @@
 <div class="hide-on-small-only">
   <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=離散型隨機變數&url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=連續型隨機變數&url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 <!-- small screen device -->
 <div class="hide-on-med-and-up">
   <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=離散型隨機變數&url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/discrete-random-variable.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=連續型隨機變數&url=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E6%A9%9F%E7%8E%87%E8%AB%96/continuous-random-variable.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 </div>

@@ -145,6 +145,264 @@
     <!-- This loops through the paginated posts -->
     
       <li class="card-panel hoverable">
+        <span class="grey-text right">Mar 4, 2018</span>
+        <a class="post-link" href="/posts/machinelearning/python-knn.html">[Python] 練習通用的機器學習法</a>
+
+        <button data-target="_posts_machinelearning_python-knn" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
+
+        <div id="_posts_machinelearning_python-knn" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>[Python] 練習通用的機器學習法</h4>
+            <p><h4 style="color:MediumSeaGreen;" id="1-蒐集數據">1. 蒐集數據</h4>
+
+<p>在這裡我們直接使用 <code class="highlighter-rouge">sklearn 函數庫</code>中已有的數據來做練習</p>
+
+<p>因為 <code class="highlighter-rouge">sklearn 函數庫</code>中提供了一些數據集供新手來練習用，想知道裡面提供那些數據可以看<a href="http://scikit-learn.org/stable/datasets/index.html">這裡</a></p>
+
+<blockquote>
+  <p>我們在這裡使用的是<strong>鳶尾花 (iris)</strong> 的數據集</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="2-載入鳶尾花數據">2. 載入鳶尾花數據</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iris_X</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:])</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iris_Y</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>執行程式後你會看到這樣的結果</li>
+</ul>
+
+<p><img src="https://i.imgur.com/zZ4iFRd.png" alt="" /></p>
+
+<ul>
+  <li>結果中的 <strong>5 個陣列</strong>代表的便如下表所示</li>
+</ul>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>花萼长度</th>
+      <th>花萼宽度</th>
+      <th>花瓣长度</th>
+      <th>花瓣寬度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+    </tr>
+    <tr>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><br /></p>
+
+<ul>
+  <li>結果中的 0 1 2 則代表 3 種花</li>
+</ul>
+
+<blockquote>
+  <p>但這些數據代表甚麼在這並不重要，重要的是後面的機器學習</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="3-機器學習">3. 機器學習</h4>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="c"># print(iris_X[:5, :])
+</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="c"># print(iris_Y)
+</span>
+
+<span class="c"># 將鳶尾花數據切割成訓練集和測試集，0.3 代表測試集的數據占總數據的 3 成
+</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_X</span><span class="p">,</span> <span class="n">iris_Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c"># 使用 KNN 的分類器
+</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="c"># 將訓練集丟進去 knn 做訓練
+</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="c"># 觀看預測數據以及真實數據的差別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"預測數據: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"真實數據: "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>輸出結果如下</li>
+</ul>
+
+<p><img src="https://i.imgur.com/bq8ZTnM.png" alt="" /></p>
+
+<blockquote>
+  <p>最後預測出那筆數據可能屬於哪一類的鳶尾花</p>
+</blockquote>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="4-model-屬性">4. Model 屬性</h4>
+
+<p>此外, sklearn 還提供一些用法供使用者查詢相關資訊</p>
+
+<p>這裡舉兩個例子為例</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># 印出此 model 的相關參數設定
+</span>
+<span class="o">.</span><span class="n">get_params</span><span class="p">()</span>
+
+<span class="c"># 印出此訓練模型的準確率
+</span>
+<span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span></code></pre></figure>
+
+<p>把它加進程式中使用</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">datasets</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+
+<span class="c"># Load 鳶尾花的數據集
+</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">datasets</span><span class="o">.</span><span class="n">load_iris</span><span class="p">()</span>
+
+<span class="c"># 取得鳶尾花的屬性
+</span>
+<span class="n">iris_X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span> 
+
+<span class="c"># 取得鳶尾花的類別
+</span>
+<span class="n">iris_Y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+
+<span class="c"># 印出 5 筆鳶尾花的屬性
+</span>
+<span class="c"># print(iris_X[:5, :])
+</span>
+
+<span class="c"># 印出鳶尾花的類別
+</span>
+<span class="c"># print(iris_Y)
+</span>
+
+<span class="c"># 將鳶尾花數據切割成訓練集和測試集，0.3 代表測試集的數據占總數據的 3 成
+</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">iris_X</span><span class="p">,</span> <span class="n">iris_Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c"># 使用 KNN 的分類器
+</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+
+<span class="c"># 將訓練集丟進去 knn 做訓練
+</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">)</span>
+
+<span class="c"># 觀看預測數據以及真實數據的差別
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"預測數據: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"真實數據: "</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">)</span>
+
+<span class="c"># 印出此訓練模型的相關參數設定
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"參數: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
+
+<span class="c"># 印出其準確率
+</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"準確率: "</span><span class="p">,</span> <span class="n">knn</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">))</span></code></pre></figure>
+
+<p><img src="https://i.imgur.com/QDqgqQC.png" alt="" /></p>
+
+<p><br /></p>
+
+<h4 style="color:MediumSeaGreen;" id="4-討論">4. 討論</h4>
+
+<p>從結果中可以看到，預測出來的數據<strong>仍可能錯誤</strong>，因為不管再精良的機器學習演算法都不可能做到 100% 正確率</p>
+
+<p>此外，在這裡我們使用的是 <code class="highlighter-rouge">KNN 演算法</code>，但是不管你換成甚麼演算法，其做法都<strong>大同小異</strong></p>
+
+<p><br /></p>
+
+<hr />
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/machinelearning/python-knn.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+      <li class="card-panel hoverable">
         <span class="grey-text right">Dec 25, 2017</span>
         <a class="post-link" href="/posts/opencv/opencv-installation.html">Ubuntu 18.04 安裝 OpenCV 與建置 C++ 編譯環境</a>
 

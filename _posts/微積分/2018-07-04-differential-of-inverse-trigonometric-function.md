@@ -103,7 +103,7 @@ $\therefore \frac{1}{-csc^2(y)}=\frac{-1}{1+cot^2(y)}$
 
 最後再將 $x$ 代入 , 可得 $\frac{-1}{1+x^2}$
 
-得證 $\Rightarrow \frac{d}{dx}\{cot^{-1}(x)\}=\frac{-1}{1+x^2}$
+得證 $\Rightarrow \frac{d}{dx}\{cot^{-1}(x)\} =\frac{-1}{1+x^2}$
 
 <br/>
 

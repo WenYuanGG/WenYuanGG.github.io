@@ -145,6 +145,26 @@
     <!-- This loops through the paginated posts -->
     
       <li class="card-panel hoverable">
+        <span class="grey-text right">Jun 6, 2018</span>
+        <a class="post-link" href="/posts/linux/fork-use.html">[Linux C] fork 觀念由淺入深</a>
+
+        <button data-target="_posts_linux_fork-use" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
+
+        <div id="_posts_linux_fork-use" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>[Linux C] fork 觀念由淺入深</h4>
+            <p><p>fork 是 Linux 系統中常用的<b>多工函數</b>, 而 fork 同時也是 Linux 的 System call (系統呼叫), 當你呼叫了 fork 函數後, 會創建一個和當前 process 一模一樣的<b>子程序</b>, 從而進行多工動作… 同時我也會<b>說明 fork 使用時會遇到的各種問題並且一一解答</b></p>
+
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/linux/fork-use.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+      <li class="card-panel hoverable">
         <span class="grey-text right">Jun 5, 2018</span>
         <a class="post-link" href="/posts/linux/programming-notice.html">在 Linux 上寫 C 語言該注意的事</a>
 
@@ -787,139 +807,6 @@ g++ FaceDetection.cpp <span class="nt">-o</span> output <span class="sb">`</span
           </div>
           <div class="modal-footer">
             <a href="/posts/algorithm/convex-hull.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
-            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
-          </div>
-        </div>
-      </li>
-    
-      <li class="card-panel hoverable">
-        <span class="grey-text right">May 4, 2017</span>
-        <a class="post-link" href="/posts/linux/simple-linux-kernel-module.html">寫簡單的 Linux Kernel Module</a>
-
-        <button data-target="_posts_linux_simple-linux-kernel-module" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
-
-        <div id="_posts_linux_simple-linux-kernel-module" class="modal modal-fixed-footer">
-          <div class="modal-content">
-            <h4>寫簡單的 Linux Kernel Module</h4>
-            <p><h4 style="color:MediumSeaGreen;" id="1-先創建一個資料夾-並寫個簡單的-kernel-module-helloc">1. 先創建一個資料夾 並寫個簡單的 kernel module (hello.c)</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">mkdir </span>helloworld
-
-<span class="nb">cd </span>helloworld
-
-vim hello.c</code></pre></figure>
-
-<ul>
-  <li><code class="highlighter-rouge">hello.c</code> 的 code 如下：</li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* hello.c */</span>
-<span class="cp">#include &lt;linux/init.h&gt;
-#include &lt;linux/module.h&gt;
-</span>  
-<span class="n">MODULE_DESCRIPTION</span><span class="p">(</span><span class="s">"Hello_world"</span><span class="p">);</span>
-<span class="n">MODULE_LICENSE</span><span class="p">(</span><span class="s">"GPL"</span><span class="p">);</span>
-  
-<span class="k">static</span> <span class="kt">int</span> <span class="nf">hello_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
- <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"Hello world !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
- <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-  
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">hello_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-<span class="p">{</span>
- <span class="n">printk</span><span class="p">(</span><span class="n">KERN_INFO</span> <span class="s">"ByeBye !</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-<span class="p">}</span>
-  
-<span class="n">module_init</span><span class="p">(</span><span class="n">hello_init</span><span class="p">);</span>
-<span class="cm">/* When u use insmod, it will enter hello_init function */</span>
-
-<span class="n">module_exit</span><span class="p">(</span><span class="n">hello_exit</span><span class="p">);</span>
-<span class="cm">/* When u use rmmod, it will enter hello_exit function */</span></code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="2-接著在同個目錄下寫個-makefile">2. 接著在同個目錄下寫個 Makefile</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim Makefile</code></pre></figure>
-
-<ul>
-  <li><code class="highlighter-rouge">Makefile</code> 的內容如下：</li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">PWD :<span class="o">=</span> <span class="k">$(</span>shell <span class="nb">pwd</span><span class="k">)</span> 
-KVERSION :<span class="o">=</span> <span class="k">$(</span>shell <span class="nb">uname</span> <span class="nt">-r</span><span class="k">)</span>
-KERNEL_DIR <span class="o">=</span> /usr/src/linux-headers-<span class="k">$(</span>KVERSION<span class="k">)</span>/
- 
-MODULE_NAME <span class="o">=</span> hello
-obj-m :<span class="o">=</span> <span class="k">$(</span>MODULE_NAME<span class="k">)</span>.o
- 
-all: 
- make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> modules
-clean: 
- make <span class="nt">-C</span> <span class="k">$(</span>KERNEL_DIR<span class="k">)</span> <span class="nv">M</span><span class="o">=</span><span class="k">$(</span>PWD<span class="k">)</span> clean</code></pre></figure>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="3-最後就可以使用-sudo-make-指令來編譯">3. 最後就可以使用 sudo make 指令來編譯</h4>
-
-<blockquote>
-  <p>將他編譯成 <code class="highlighter-rouge">.ko</code> 檔</p>
-</blockquote>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>make</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture01.JPG" alt="picture01" /></p>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="4-使用-insmod-來載入-module">4. 使用 insmod 來載入 module</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>insmod hello.ko
-
-<span class="c"># 載完後用 dmesg 來觀看 kernel 訊息
-</span>
-dmesg</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture02.JPG" alt="picture02" /></p>
-
-<blockquote>
-  <p>可以看到成功 print 出 hello world ! 字串</p>
-</blockquote>
-
-<p><br /></p>
-
-<p>你也可以使用 <code class="highlighter-rouge">lsmod</code> 指令來列出目前在使用的 module</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># grep "hello" 用來濾出我們的 hello module 
-</span>
-lsmod | <span class="nb">grep</span> <span class="s2">"hello"</span></code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture03.JPG" alt="picture03" /></p>
-
-<p><br /></p>
-
-<p>最後想要移除掉模組的話 要使用 <code class="highlighter-rouge">rmmod</code></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>rmmod hello.ko
-
-<span class="c"># 再觀察一次 kernel 訊息
-</span>
-dmesg</code></pre></figure>
-
-<p><img src="https://raw.githubusercontent.com/a1996850622/mdsite_document/master/Linux_kernel_module/picture04.JPG" alt="picture04" /></p>
-
-<blockquote>
-  <p>可以看到 print 出了 ByeBye ! 字串</p>
-</blockquote>
-
-<p><br /></p>
-
-<hr />
-</p>
-          </div>
-          <div class="modal-footer">
-            <a href="/posts/linux/simple-linux-kernel-module.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
             <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
           </div>
         </div>

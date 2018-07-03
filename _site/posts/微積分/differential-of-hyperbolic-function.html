@@ -8,9 +8,9 @@
   <meta name="theme-color" content="#5c6bc0">
 
   <link rel="shortcut icon" href="/favicon.ico">
-  <title>反三角函數的微分</title>
-  <meta name="description" content="以下要介紹常見的反三角函數的微分方法 (導函數) , 並會仔細撰寫其詳細過程 , 而再開始證明之前 , 你還需要先知道三角函數的微分以及一些常用的三角不等式 , 我再下面都會一一說明">
-  <link rel="canonical" href="http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html">
+  <title>反雙曲函數的微分</title>
+  <meta name="description" content="以下要介紹常見的反雙曲函數的微分方法 (導函數) , 我會仔細撰寫他的詳細證明過程 ， 而再開始證明前 , 你還需要知道雙曲函數的微分以及一些不等式 ，我再下面都會一一說明">
+  <link rel="canonical" href="http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html">
   <link rel="alternate" type="application/rss+xml" title="通訊雜記" href="http://localhost:4000/feed.xml" />
 
   <link rel="stylesheet" href="/lib/materialize/css/materialize.min.css">
@@ -150,7 +150,7 @@
     </p>
 
     <div class="post-header">
-      <h1 class="post-title">反三角函數的微分</h1>
+      <h1 class="post-title">反雙曲函數的微分</h1>
 
       
         <i class="post-tag mdi mdi-tag-multiple waves-effect waves-light"></i>
@@ -159,154 +159,78 @@
     </div>
 
     <article class="post-content">
-      <p>以下要介紹常見的反三角函數的微分方法 (導函數) , 並會仔細撰寫其詳細過程 , 而再開始證明之前 , 你還需要先知道三角函數的微分以及一些常用的三角不等式 , 我再下面都會一一說明</p>
+      <p>以下要介紹常見的反雙曲函數的微分方法 (導函數) , 我會仔細撰寫他的詳細證明過程 ， 而再開始證明前 , 你還需要知道雙曲函數的微分以及一些不等式 ，我再下面都會一一說明</p>
 
 <p><br /></p>
 
 <h3 id="你必須先知道的">你必須先知道的</h3>
 
-<h4 id="三角函數的微分">三角函數的微分</h4>
+<h4 id="雙曲函數的微分">雙曲函數的微分</h4>
 
 <ul>
   <li>
-    <p>$\frac{d}{dx}(sin(x))=cos(x)$</p>
+    <p>$\frac{d}{dx}(sinh(x))=cosh(x)$</p>
   </li>
   <li>
-    <p>$\frac{d}{dx}(cos(x))=-sin(x)$</p>
+    <p>$\frac{d}{dx}(cosh(x))=sinh(x)$</p>
   </li>
   <li>
-    <p>$\frac{d}{dx}(tan(x))=sec^2(x)$</p>
+    <p>$\frac{d}{dx}(tanh(x))=sech^2(x)$</p>
   </li>
   <li>
-    <p>$\frac{d}{dx}(cot(x))=-csc^2(x)$</p>
+    <p>$\frac{d}{dx}(sech(x))=-sech(x)tanh(x)$</p>
   </li>
   <li>
-    <p>$\frac{d}{dx}(sec(x))=sec(x)tan(x)$</p>
+    <p>$\frac{d}{dx}(csch(x))=-csch(x)coth(x)$</p>
   </li>
   <li>
-    <p>$\frac{d}{dx}(csc(x))=-csc(x)cot(x)$</p>
+    <p>$\frac{d}{dx}(coth(x))=-csch^2(x)$</p>
   </li>
 </ul>
 
 <p><br /></p>
 
-<h4 id="三角恆等式">三角恆等式</h4>
+<h4 id="雙曲函數恆等式">雙曲函數恆等式</h4>
 
 <ul>
-  <li>
-    <p>$sin^2(x)+cos^2(x)=1$</p>
-  </li>
-  <li>
-    <p>$tan^2(x)+1=sec^2(x)$</p>
-  </li>
-  <li>
-    <p>$1+cot^2(x)=csc^2(x)$</p>
-  </li>
+  <li>$cosh^2(x)-sinh^2(x)=1$</li>
 </ul>
 
-<blockquote>
-  <p>上面的三角函數微分和三角恆等式是身為通訊人一定要背的滾瓜爛熟的式子 , 只要常用就一定會記得了</p>
-</blockquote>
+<p><br /></p>
+
+<h3 id="反雙曲函數詳細微分過程">反雙曲函數詳細微分過程</h3>
+
+<h4 id="1-sinh-1x-的微分">1. $sinh^{-1}(x)$ 的微分</h4>
+
+<p>令 $y=sinh^{-1}(x)\Rightarrow sinh(y)=x$</p>
+
+<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{cosh(y)}$</p>
+
+<p>$\because cosh(x)=\sqrt{1+sinh^2(y)}$</p>
+
+<p>$\therefore \frac{1}{cosh(y)}=\frac{1}{\sqrt{1+sinh^2(y)}}$</p>
+
+<p>最後再將 $x$ 代入 , 可得 $\frac{1}{\sqrt{1+x^2}}$</p>
+
+<p>得證 $\Rightarrow \frac{d}{dx}(sinh^{-1}(x))=\frac{1}{\sqrt{1+x^2}}$</p>
 
 <p><br /></p>
 
-<h3 id="反三角函數詳細微分過程">反三角函數詳細微分過程</h3>
+<h4 id="2-cosh-1x-的微分">2. $cosh^{-1}(x)$ 的微分</h4>
 
-<h4 id="1-sin-1x-的微分">1. $sin^{-1}(x)$ 的微分</h4>
+<p>令 $y=cosh^{-1}(x)\Rightarrow cosh(y)=x$</p>
 
-<p>令 $y=sin^{-1}(x)\Rightarrow sin(y)=x$</p>
+<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{sinh(y)}$</p>
 
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{cos(y)}$</p>
+<p>$\because sinh(y)=\sqrt{cosh^2(y)-1}$</p>
 
-<p>$\because cos(y)=\sqrt{1-sin^2(y)}$</p>
+<p>$\therefore \frac{1}{sinh(y)}=\frac{1}{\sqrt{cosh^2(y)-1}}$</p>
 
-<p>$\therefore \frac{1}{cos(y)}=\frac{1}{\sqrt{1-sin^2(y)}}$</p>
+<p>最後再將 $x$ 代入 , 可得 $\frac{1}{\sqrt{x^2-1}}$</p>
 
-<p>最後再將 $x$ 代入 , 可得 $\frac{1}{\sqrt{1-x^2}}$</p>
+<p>得證 $\Rightarrow \frac{d}{dx}(cosh^{-1}(x))=\frac{1}{\sqrt{x^2-1}}$</p>
 
-<p>得證 $\Rightarrow \frac{d}{dx}{sin^{-1}(x)}=\frac{1}{\sqrt{1-x^2}}$</p>
-
-<p><br /></p>
-
-<h4 id="2-cos-1x-的微分">2. $cos^{-1}(x)$ 的微分</h4>
-
-<p>令 $y=cos^{-1}(x)\Rightarrow cos(y)=x$</p>
-
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{-sin(y)}$</p>
-
-<p>$\because sin(y)=-\sqrt{1-cos^2(y)}$</p>
-
-<p>$\therefore \frac{1}{-sin(y)}=\frac{-1}{\sqrt{1-cos^2(y)}}$</p>
-
-<p>最後再將 $x$ 代入 , 可得 $\frac{-1}{\sqrt{1-x^2}}$</p>
-
-<p>得證 $\Rightarrow \frac{d}{dx}{cos^{-1}(x)}=\frac{-1}{\sqrt{1-x^2}}$</p>
-
-<p><br /></p>
-
-<h4 id="3-tan-1x-的微分">3. $tan^{-1}(x)$ 的微分</h4>
-
-<p>令 $y=tan^{-1}(x)\Rightarrow tan(y)=x$</p>
-
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{sec^2(y)}$</p>
-
-<p>$\because sec^2(y)=1+tan^2(y)$</p>
-
-<p>$\therefore \frac{1}{sec^2(y)}=\frac{1}{1+tan^2(y)}$</p>
-
-<p>最後再將 $x$ 代入 , 可得 $\frac{1}{1+x^2}$</p>
-
-<p>得證 $\Rightarrow \frac{d}{dx}{tan^{-1}(x)}=\frac{1}{1+x^2}$</p>
-
-<p><br /></p>
-
-<h4 id="4-cot-1x-的微分">4. $cot^{-1}(x)$ 的微分</h4>
-
-<p>令 $y=cot^{-1}(x)\Rightarrow cot(y)=x$</p>
-
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{-csc^2(y)}$</p>
-
-<p>$\because csc^2(y)=1+cot^2(y)$</p>
-
-<p>$\therefore \frac{1}{-csc^2(y)}=\frac{-1}{1+cot^2(y)}$</p>
-
-<p>最後再將 $x$ 代入 , 可得 $\frac{-1}{1+x^2}$</p>
-
-<p>得證 $\Rightarrow \frac{d}{dx}{cot^{-1}(x)} =\frac{-1}{1+x^2}$</p>
-
-<p><br /></p>
-
-<h4 id="5-sec-1x-的微分">5. $sec^{-1}(x)$ 的微分</h4>
-
-<p>令 $y=sec^{-1}(x)\Rightarrow sec(y)=x$</p>
-
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{sec(y)tan(y)}$</p>
-
-<p>$\because tan(y)=\sqrt{sec^2(y)-1}$</p>
-
-<p>$\therefore \frac{1}{sec(y)tan(y)}=\frac{1}{sec(y)\sqrt{(sec^2(y)-1)}}$</p>
-
-<p>最後再將 $x$ 代入 , 可得 $\frac{1}{x\sqrt{x^2-1}}$</p>
-
-<p>得證 $\Rightarrow \frac{d}{dx}{sec^{-1}(x)}=\frac{1}{x\sqrt{x^2-1}}$</p>
-
-<p><br /></p>
-
-<h4 id="6-csc-1x-的微分">6. $csc^{-1}(x)$ 的微分</h4>
-
-<p>令 $y=csc^{-1}(x)\Rightarrow csc(y)=x$</p>
-
-<p>$\frac{dy}{dx}=\frac{1}{\frac{dx}{dy}}=\frac{1}{-csc(y)cot(y)}$</p>
-
-<p>$\because cot(y)=\sqrt{(csc^2(y)-1)}$</p>
-
-<p>$\therefore \frac{1}{-csc(y)cot(y)}=\frac{-1}{x\sqrt{x^2-1}}$</p>
-
-<p>得證 $\Rightarrow \frac{d}{dx}{csc^{-1}(x)}=\frac{-1}{x\sqrt{x^2-1}}$</p>
-
-<blockquote>
-  <p>把上面證明學會後 , 就算考試時忘記 , 也可以在現場快速的推導出來哦~</p>
-</blockquote>
+<p>未完待續…</p>
 
     </article>
 
@@ -316,18 +240,18 @@
 <div class="hide-on-small-only">
   <i class="mdi mdi-share-variant material-icons small grey-text waves-effect waves-light"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=反三角函數的微分&url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Google+"><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=反雙曲函數的微分&url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html&via=&related=" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Twitter"><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html" class="waves-effect waves-light btn pink tooltipped" data-position="bottom" data-delay="20" data-tooltip="Share on Facebook"><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 <!-- small screen device -->
 <div class="hide-on-med-and-up">
   <i class="mdi mdi-share-variant waves-effect waves-light small tooltipped grey-text" data-position="bottom" data-delay="50" data-tooltip="Share"></i>
 
-  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
-  <a href="https://twitter.com/intent/tweet?text=反三角函數的微分&url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
-  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-inverse-trigonometric-function.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
+  <a href="https://plus.google.com/share?url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-google-plus white-text"></i></a>
+  <a href="https://twitter.com/intent/tweet?text=反雙曲函數的微分&url=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html&via=&related=" class="waves-effect waves-light btn-floating "><i class="mdi mdi-twitter white-text"></i></a>
+  <a href="https://facebook.com/sharer.php?u=http://localhost:4000/posts/%E5%BE%AE%E7%A9%8D%E5%88%86/differential-of-hyperbolic-function.html" class="waves-effect waves-light btn-floating "><i class="mdi mdi-facebook white-text"></i></a>
 </div>
 
 </div>

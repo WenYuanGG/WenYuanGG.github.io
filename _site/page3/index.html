@@ -145,6 +145,28 @@
     <!-- This loops through the paginated posts -->
     
       <li class="card-panel hoverable">
+        <span class="grey-text right">Jun 5, 2018</span>
+        <a class="post-link" href="/posts/linux/programming-notice.html">在 Linux 上寫 C 語言該注意的事</a>
+
+        <button data-target="_posts_linux_programming-notice" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
+
+        <div id="_posts_linux_programming-notice" class="modal modal-fixed-footer">
+          <div class="modal-content">
+            <h4>在 Linux 上寫 C 語言該注意的事</h4>
+            <p><blockquote>
+  <p>我將告訴你 - 在 Linux 上寫 C 語言該注意的事</p>
+</blockquote>
+
+</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/posts/linux/programming-notice.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
+            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
+          </div>
+        </div>
+      </li>
+    
+      <li class="card-panel hoverable">
         <span class="grey-text right">Mar 4, 2018</span>
         <a class="post-link" href="/posts/machinelearning/python-knn.html">[Python] 練習通用的機器學習法</a>
 
@@ -903,315 +925,6 @@ dmesg</code></pre></figure>
         </div>
       </li>
     
-      <li class="card-panel hoverable">
-        <span class="grey-text right">May 4, 2017</span>
-        <a class="post-link" href="/posts/linux/linux-add-system-call.html">增加一個 System Call 到 Linux Kernel (v4.x)</a>
-
-        <button data-target="_posts_linux_linux-add-system-call" class="waves-effect waves-light btn modal-trigger" style="padding: 0 1.2rem;">overview<i class="mdi mdi-send right"></i></button>
-
-        <div id="_posts_linux_linux-add-system-call" class="modal modal-fixed-footer">
-          <div class="modal-content">
-            <h4>增加一個 System Call 到 Linux Kernel (v4.x)</h4>
-            <p><h4 style="color:MediumSeaGreen;" id="我的系統環境">我的系統環境</h4>
-
-<ul>
-  <li><strong>作業系統：</strong> Lubuntu 16.04</li>
-  <li><strong>Kernel 版本：</strong> 4.8.0-49-generic</li>
-</ul>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="更新系統">更新系統</h4>
-
-<ul>
-  <li>更新</li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get update
-<span class="nb">sudo </span>apt-get upgrade</code></pre></figure>
-
-<ul>
-  <li>查看你當前的 <strong>Kernel 版本</strong></li>
-</ul>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">uname</span> <span class="nt">-r</span></code></pre></figure>
-
-<p><img src="https://2.bp.blogspot.com/-0k5fdklzdWQ/WQs1A8MV9cI/AAAAAAAAAKM/jGcdqvzht78HSXmFJFVNPMqjbZwHouTyQCLcB/s1600/1.JPG" alt="picture01" /></p>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="下載-kernel-source">下載 Kernel Source</h4>
-
-<p>到 <a href="https://www.kernel.org/">Kernel Archive</a> 下載 kernel source
-我下載的是當時較為穩定的 “ 4.10.14 “ kernel
-你可以選擇你自己要的 kernel , 不一定要跟我一樣</p>
-
-<p><img src="https://3.bp.blogspot.com/-TUBrR9gACv8/WQs2XHirWdI/AAAAAAAAAKY/6pKH6joaK50n7fg62POYuE44oS3RqzIIwCLcB/s1600/2.JPG" alt="image" /></p>
-
-<p><br /></p>
-
-<p>下載完後請進行<strong>解壓縮</strong></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 進入 root 模式
-</span>
-<span class="nb">sudo </span>su
-
-<span class="c"># 把檔案解壓縮到 /usr/src 目錄底下
-</span>
-<span class="nb">tar</span> <span class="nt">-xvf</span> linux-4.10.5.tar.xz <span class="nt">-C</span> /usr/src</code></pre></figure>
-
-<p><br /></p>
-
-<p>建立資料夾</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 把目錄轉到剛剛下載下來的 kernel 檔案夾
-</span>
-<span class="nb">cd</span> /usr/src/linux-4.10.14
-
-<span class="c"># 在裡面創建一個名叫 hello 的資料夾
-</span>
-<span class="nb">mkdir </span>hello
-
-<span class="c"># 把目錄轉到 hello 資料夾
-</span>
-<span class="nb">cd </span>hello</code></pre></figure>
-
-<p><br /></p>
-
-<p>建立一個 <code class="highlighter-rouge">hello.c</code></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim hello.c</code></pre></figure>
-
-<p><code class="highlighter-rouge">hello.c 的內容</code></p>
-
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* hello.c */</span>
-<span class="cp">#inlcude &lt;linux/kernel.h&gt;
-</span><span class="n">asmlinkage</span> <span class="kt">long</span> <span class="n">sys_hello</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span>
-    <span class="n">printk</span><span class="p">(</span><span class="s">"Hello world!</span><span class="se">\n</span><span class="s">"</span><span class="p">);</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-<p><br /></p>
-
-<p>於同一個下再建立一個 <code class="highlighter-rouge">Makefile</code></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">vim Makefile</code></pre></figure>
-
-<p><code class="highlighter-rouge">Makefile</code> 的內容</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">obj-y :<span class="o">=</span> hello.o</code></pre></figure>
-
-<p><br /></p>
-
-<p>接著在 linux-4.10.14 目錄下改 Makefile
-告訴你的 compiler ，新的 system call 可以在 hello 目錄中找到</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 把目錄轉回去
-</span>
-<span class="nb">cd</span> /usr/src/linux-4.10.14
-
-<span class="c"># 打開此目錄下的 Makefile
-</span>
-vim Makefile</code></pre></figure>
-
-<p>你可以在裡面找到一行, 如下<strong>我括起來的地方</strong></p>
-
-<p><img src="https://3.bp.blogspot.com/-4r1MUjs4py8/WQs976nVflI/AAAAAAAAALA/t0-N0ymHUiU-pHWQubTA0y0UjjhdwfbcQCLcB/s1600/3.JPG" alt="image alt" /></p>
-
-<p>請你在<strong>後面補上 hello</strong>
-這樣 kernel 在編譯時才會到你的 hello 目錄
-改成下面這樣</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">core-y +<span class="o">=</span> kernel/ certs/ mm/ fs/ ipc/ security/ crypto/ block/ hello/</code></pre></figure>
-
-<p><br /></p>
-
-<p>接著因為我的系統是 <strong>64 位元</strong>的 ((我想大部分的人都是))
-所以我要<strong>去修改 syscall_64.tbl 檔</strong></p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd arch</span>/x86/entry/syscalls
-vim syscall_64.tbl</code></pre></figure>
-
-<p>請你在最後一行添加上你的 system call
-然後請把編號記住, 等一下會用</p>
-
-<blockquote>
-  <p>註：你會發現下面突然跳到500多號，那是放x32的東西，我們要擺在300多號那邊</p>
-</blockquote>
-
-<p><img src="https://4.bp.blogspot.com/-n-VtlCq7hdQ/WQtASqkGWrI/AAAAAAAAALY/mjNroCyqaeAKNXvu39fJViYxiWuxCCPMgCLcB/s1600/4.JPG" alt="image alt" /></p>
-
-<p><br /></p>
-
-<p>接著編輯 syscalls.h 檔
-將我們 syscall 的原型添加進檔案的最後一行 (#endif之前)</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 把目錄轉回去
-</span>
-<span class="nb">cd</span> /usr/src/linux-4.10.14
-
-<span class="nb">cd </span>include/linux
-vim syscalls.h</code></pre></figure>
-
-<p><img src="https://2.bp.blogspot.com/-1RLBFOHlSdg/WQtCSGXBBgI/AAAAAAAAALo/GZ6fhFQlQLUBzWbZq28QndS7lk8TlYPcQCLcB/s1600/5.JPG" alt="image" /></p>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="編譯-kernel">編譯 kernel</h4>
-
-<p>先把會用到的套件安裝好</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 這個套件可以幫我們 build 出 kernel-pakage
-</span>
-<span class="nb">sudo </span>apt-get <span class="nb">install </span>fakeroot build-essential kernel-package libncurses5 libncurses5-dev</code></pre></figure>
-
-<p><img src="https://1.bp.blogspot.com/-Ba1CeFDl218/WQtG0alzuvI/AAAAAAAAAMM/Fl7zWf7UCXsxGK9tCx26x34RXV9wxz2NQCLcB/s1600/6.JPG" alt="image alt" /></p>
-
-<blockquote>
-  <p>選擇第二個，<strong>保持本地版本</strong>就好</p>
-</blockquote>
-
-<p><br /></p>
-
-<p>把 kernel 的 config <strong>複製</strong>出來</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 把目錄轉回去
-</span>
-<span class="nb">cd</span> /usr/src/linux-4.10.14
-
-<span class="nb">cp</span> /boot/config-<span class="sb">`</span><span class="nb">uname</span> <span class="nt">-r</span><span class="sb">`</span> ./.config</code></pre></figure>
-
-<p>然後用 <code class="highlighter-rouge">make menuconfig</code> 來設定組態</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">make menuconfig</code></pre></figure>
-
-<p>會跑出以下畫面讓你<strong>設定 configuration</strong></p>
-
-<p><img src="https://2.bp.blogspot.com/-xHRva45jLmY/WQtg0SyLZnI/AAAAAAAAAM4/gQ0CKYKYCDgMYnQervk1JXuP51s8knvWACLcB/s1600/7.JPG" alt="image alt" /></p>
-
-<p>但是我的目的只是要加一個 system call
-所以我直接 <strong>“按兩下 ESC 離開”</strong>
-如果你有要做其他設定再自行添加</p>
-
-<p><br /></p>
-
-<p>然後就可以 compile 你的 kernel 了</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 清理殘留的 pakage
-</span>
-make-kpkg clean
-
-<span class="c"># 編譯 kernel
-</span>
-fakeroot make-kpkg <span class="nt">-j</span> 4 <span class="nt">--initrd</span> kernel_image kernel_headers
-<span class="c"># 等編譯完後會產生 kernel 的 image 和 headers</span></code></pre></figure>
-
-<p><br /></p>
-
-<blockquote>
-  <p>如果你在編譯的時候出現 <code class="highlighter-rouge">"fatal error: openssl/opensslv.h: No such file or directory"</code> 錯誤訊息的話，表示你的 <strong>SSL 庫有缺失</strong>，請你先安裝下面套件後再重新編譯</p>
-</blockquote>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">sudo </span>apt-get <span class="nb">install </span>python-pip python-dev libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev
-
-<span class="c"># 再重新下指令編譯
-</span>
-fakeroot make-kpkg <span class="nt">-j</span> 4 <span class="nt">--initrd</span> kernel_image kernel_headers</code></pre></figure>
-
-<h4 style="color:MediumSeaGreen;" id="編譯完成">編譯完成</h4>
-
-<p>編譯完成後會在 <code class="highlighter-rouge">/usr/src</code> 路徑下產生了這個 kernel 的 <strong>image 和 headers</strong> ，我們要用指令安裝他們</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 轉目錄
-</span>
-<span class="nb">cd</span> /usr/src
-
-<span class="c"># 安裝 kernel image
-</span>
-<span class="nb">sudo </span>dpkg <span class="nt">-i</span> linux-image-4.10.14_4.10.14-10.00.Custom_amd64.deb
-
-<span class="c"># 安裝 kernel headers
-</span>
-<span class="nb">sudo </span>dpkg <span class="nt">-i</span> linux-headers-4.10.14_4.10.14-10.00.Custom_amd64.deb
-
-<span class="c"># 安裝完後就重開機
-</span>
-reboot</code></pre></figure>
-
-<p><br /></p>
-
-<p>重開機後再看看你的 kernel 版本有沒有變新</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 查看 kernel version
-</span>
-<span class="nb">uname</span> <span class="nt">-r</span></code></pre></figure>
-
-<p><img src="https://1.bp.blogspot.com/-s7kDQlzSFxQ/WQt1e60FoGI/AAAAAAAAANU/jnLPgz2DcacW4HUTfUAr8yJl-K01BDv5gCLcB/s1600/9.JPG" alt="image alt" /></p>
-
-<p><br /></p>
-
-<h4 style="color:MediumSeaGreen;" id="測試-system-call">測試 system call</h4>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 建一個 hello.c
-</span>
-vim hello.c</code></pre></figure>
-
-<p><code class="highlighter-rouge">hello.c</code> 的內容如下</p>
-
-<figure class="highlight"><pre><code class="language-cpp" data-lang="cpp"><span class="cm">/* hello.c */</span>
-<span class="cp">#include &lt;linux/kernel.h&gt;
-#include &lt;unistd.h&gt;
-#include &lt;sys/syscall.h&gt;
-#include &lt;stdio.h&gt;
-</span>
-<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
-    <span class="cm">/* 使用我們剛剛新增的 system call */</span>
-    <span class="kt">long</span> <span class="kt">int</span> <span class="n">sys</span> <span class="o">=</span> <span class="n">syscall</span><span class="p">(</span><span class="mi">332</span><span class="p">);</span>
-    
-    <span class="cm">/* print 出 syscall 的回傳值, 若為 0 則代表成功 */</span>
-    <span class="n">printf</span><span class="p">(</span><span class="s">"sys_hello returned %ld</span><span class="se">\\</span><span class="s">n"</span><span class="p">,</span> <span class="n">sys</span><span class="p">);</span>
-    
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># 編譯 hello.c
-</span>
-gcc <span class="nt">-g</span> <span class="nt">-Wall</span> hello.c <span class="nt">-o</span> hello
-
-<span class="c"># 執行
-</span>
-./hello</code></pre></figure>
-
-<p><img src="https://4.bp.blogspot.com/-TjO-uSiLoVo/WQt22_g8seI/AAAAAAAAANg/OVEZLlaFIHQSubkd_K8tXjh6eLr1aXxTQCLcB/s1600/10.JPG" alt="image alt" /></p>
-
-<blockquote>
-  <p>看到<strong>回傳 0</strong> 則代表成功囉</p>
-</blockquote>
-
-<p><br /></p>
-
-<p>使用 <code class="highlighter-rouge">dmesg</code> 來查看 kernel 內的訊息</p>
-
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash">dmesg</code></pre></figure>
-
-<p><img src="https://4.bp.blogspot.com/-aXj7BIZrkf4/WQt3V0sPMTI/AAAAAAAAANk/0ji34DBmIQYI6GvlUQfYRoXFx_YSx8OxgCLcB/s1600/11.JPG" alt="image alt" /></p>
-
-<blockquote>
-  <p>你會看到 kernel 裡面成功 printk 出了 Hello World! 字串</p>
-</blockquote>
-
-<p><br /></p>
-
-<hr />
-</p>
-          </div>
-          <div class="modal-footer">
-            <a href="/posts/linux/linux-add-system-call.html" class="waves-effect btn-flat grey-text text-darken-4 right">read more</a>
-            <a class="modal-action modal-close waves-effect btn-flat grey-text text-darken-4 left">close</a>
-          </div>
-        </div>
-      </li>
-    
   </ul>
 
   <!-- Pagination links -->
@@ -1220,10 +933,10 @@ gcc <span class="nt">-g</span> <span class="nt">-Wall</span> hello.c <span class
     <a href="/page2" class="waves-effect waves-light btn cyan left"><i class="mdi mdi-chevron-left white-text"></i></a>
     
 
-    <div class="waves-effect btn-flat lower-case page">Page: <span class="pink-text">3</span> of 3</div>
+    <div class="waves-effect btn-flat lower-case page">Page: <span class="pink-text">3</span> of 4</div>
 
     
-    <span class="btn disabled right"><i class="mdi mdi-chevron-right white-text"></i></a></li>
+    <a href="/page4" class="waves-effect waves-light btn cyan right"><i class="mdi mdi-chevron-right white-text"></i></a>
     
   </div>
 
